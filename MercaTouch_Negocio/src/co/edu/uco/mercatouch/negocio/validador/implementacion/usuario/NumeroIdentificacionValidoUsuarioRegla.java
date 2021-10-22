@@ -1,26 +1,26 @@
-package co.edu.uco.mercatouch.negocio.validador.implementacion.administrador;
+package co.edu.uco.mercatouch.negocio.validador.implementacion.usuario;
 
-import co.edu.uco.mercatouch.negocio.dominio.AdministradorDominio;
+import co.edu.uco.mercatouch.negocio.dominio.UsuarioDominio;
 import co.edu.uco.mercatouch.negocio.validador.regla.Regla;
 import co.edu.uco.mercatouch.transversal.excepcion.MercaTouchNegocioExcepcion;
 import co.edu.uco.mercatouch.transversal.utilitario.UtilNumero;
 
-public class NumeroIdentificacionValidoRegla implements Regla<AdministradorDominio>
+public class NumeroIdentificacionValidoUsuarioRegla implements Regla<UsuarioDominio>
 {
-	private static final Regla<AdministradorDominio> INSTANCIA = new NumeroIdentificacionValidoRegla();
+	private static final Regla<UsuarioDominio> INSTANCIA = new NumeroIdentificacionValidoUsuarioRegla();
 	
-	private NumeroIdentificacionValidoRegla()
+	private NumeroIdentificacionValidoUsuarioRegla()
 	{
 		super();
 	}
 	
-	public static Regla<AdministradorDominio> obtenerInstancia()
+	public static Regla<UsuarioDominio> obtenerInstancia()
 	{
 		return INSTANCIA;
 	}
 	
 	@Override
-	public void validar(AdministradorDominio dato) 
+	public void validar(UsuarioDominio dato) 
 	{
 		validarCodigoEsMayorQueCero(dato.getNumeroIdentificacion());
 	}

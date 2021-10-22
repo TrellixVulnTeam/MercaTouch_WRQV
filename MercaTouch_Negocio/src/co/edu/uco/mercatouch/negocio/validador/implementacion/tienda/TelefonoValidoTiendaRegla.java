@@ -5,11 +5,11 @@ import co.edu.uco.mercatouch.negocio.validador.regla.Regla;
 import co.edu.uco.mercatouch.transversal.excepcion.MercaTouchNegocioExcepcion;
 import co.edu.uco.mercatouch.transversal.utilitario.UtilNumero;
 
-public class CodigoValidoTiendaRegla implements Regla<TiendaDominio> 
+public class TelefonoValidoTiendaRegla implements Regla<TiendaDominio>
 {
-	private static final Regla<TiendaDominio> INSTANCIA = new CodigoValidoTiendaRegla();
+	private static final Regla<TiendaDominio> INSTANCIA = new TelefonoValidoTiendaRegla();
 	
-	private CodigoValidoTiendaRegla()
+	private TelefonoValidoTiendaRegla()
 	{
 		super();
 	}
@@ -22,14 +22,14 @@ public class CodigoValidoTiendaRegla implements Regla<TiendaDominio>
 	@Override
 	public void validar(TiendaDominio dato) 
 	{
-		validarCodigoEsMayorQueCero(dato.getCodigo());
+		validarTelefonoEsMayorQueCero(dato.getTelefono());
 	}
 	
-	private void validarCodigoEsMayorQueCero(int codigo)
+	private void validarTelefonoEsMayorQueCero(long telefono)
 	{
-		if(UtilNumero.numeroEsMenorOIgual(codigo, 0))
+		if(UtilNumero.numeroEsMenorOIgual(telefono, 0))
 		{
-			throw new MercaTouchNegocioExcepcion("El codigo de una tienda no puede ser menor o igual que cero");
+			throw new MercaTouchNegocioExcepcion("El numero de una tienda no puede ser menor o igual que cero");
 		}
 	}
 }
