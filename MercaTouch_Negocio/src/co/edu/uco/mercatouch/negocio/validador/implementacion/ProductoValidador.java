@@ -3,9 +3,14 @@ package co.edu.uco.mercatouch.negocio.validador.implementacion;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
+
 import co.edu.uco.mercatouch.negocio.dominio.ProductoDominio;
 import co.edu.uco.mercatouch.negocio.validador.Validador;
 import co.edu.uco.mercatouch.negocio.validador.enumerador.TipoValidacion;
+import co.edu.uco.mercatouch.negocio.validador.implementacion.producto.CodigoValidoProductoRegla;
+import co.edu.uco.mercatouch.negocio.validador.implementacion.producto.DescripcionValidoProductoRegla;
+import co.edu.uco.mercatouch.negocio.validador.implementacion.producto.NombreValidoProductoRegla;
+import co.edu.uco.mercatouch.negocio.validador.implementacion.producto.PrecioValidoProductoRegla;
 import co.edu.uco.mercatouch.negocio.validador.regla.Regla;
 import co.edu.uco.mercatouch.transversal.excepcion.MercaTouchNegocioExcepcion;
 
@@ -48,6 +53,10 @@ public class ProductoValidador implements Validador<ProductoDominio>
 	private List<Regla<ProductoDominio>> obtenerReglasCreacion()
 	{
 		List<Regla<ProductoDominio>> listadoReglas = new ArrayList<>();
+		
+		listadoReglas.add(NombreValidoProductoRegla.obtenerInstancia());
+		listadoReglas.add(DescripcionValidoProductoRegla.obtenerInstancia());
+		listadoReglas.add(PrecioValidoProductoRegla.obtenerInstancia());
 			
 		return listadoReglas;
 	}
@@ -55,6 +64,11 @@ public class ProductoValidador implements Validador<ProductoDominio>
 	private List<Regla<ProductoDominio>> obtenerReglasActualizacion()
 	{
 		List<Regla<ProductoDominio>> listadoReglas = new ArrayList<>();
+		
+		listadoReglas.add(CodigoValidoProductoRegla.obtenerInstancia());
+		listadoReglas.add(NombreValidoProductoRegla.obtenerInstancia());
+		listadoReglas.add(DescripcionValidoProductoRegla.obtenerInstancia());
+		listadoReglas.add(PrecioValidoProductoRegla.obtenerInstancia());
 			
 		return listadoReglas;
 	}
@@ -62,6 +76,8 @@ public class ProductoValidador implements Validador<ProductoDominio>
 	private List<Regla<ProductoDominio>> obtenerReglasEliminacion()
 	{
 		List<Regla<ProductoDominio>> listadoReglas = new ArrayList<>();
+		
+		listadoReglas.add(CodigoValidoProductoRegla.obtenerInstancia());
 
 		return listadoReglas;
 	}

@@ -3,9 +3,17 @@ package co.edu.uco.mercatouch.negocio.validador.implementacion;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
+
 import co.edu.uco.mercatouch.negocio.dominio.UsuarioDominio;
 import co.edu.uco.mercatouch.negocio.validador.Validador;
 import co.edu.uco.mercatouch.negocio.validador.enumerador.TipoValidacion;
+import co.edu.uco.mercatouch.negocio.validador.implementacion.usuario.ApellidosValidoUsuarioRegla;
+import co.edu.uco.mercatouch.negocio.validador.implementacion.usuario.ClaveValidoUsuarioRegla;
+import co.edu.uco.mercatouch.negocio.validador.implementacion.usuario.CodigoValidoUsuarioRegla;
+import co.edu.uco.mercatouch.negocio.validador.implementacion.usuario.CorreoValidoUsuarioRegla;
+import co.edu.uco.mercatouch.negocio.validador.implementacion.usuario.NombreValidoUsuarioRegla;
+import co.edu.uco.mercatouch.negocio.validador.implementacion.usuario.NumeroIdentificacionValidoUsuarioRegla;
+import co.edu.uco.mercatouch.negocio.validador.implementacion.usuario.TelefonoValidoUsuarioRegla;
 import co.edu.uco.mercatouch.negocio.validador.regla.Regla;
 import co.edu.uco.mercatouch.transversal.excepcion.MercaTouchNegocioExcepcion;
 
@@ -48,6 +56,13 @@ public class UsuarioValidador implements Validador<UsuarioDominio>
 	private List<Regla<UsuarioDominio>> obtenerReglasCreacion()
 	{
 		List<Regla<UsuarioDominio>> listadoReglas = new ArrayList<>();
+		
+		listadoReglas.add(NombreValidoUsuarioRegla.obtenerInstancia());
+		listadoReglas.add(ApellidosValidoUsuarioRegla.obtenerInstancia());
+		listadoReglas.add(NumeroIdentificacionValidoUsuarioRegla.obtenerInstancia());
+		listadoReglas.add(TelefonoValidoUsuarioRegla.obtenerInstancia());
+		listadoReglas.add(CorreoValidoUsuarioRegla.obtenerInstancia());
+		listadoReglas.add(ClaveValidoUsuarioRegla.obtenerInstancia());
 			
 		return listadoReglas;
 	}
@@ -55,6 +70,14 @@ public class UsuarioValidador implements Validador<UsuarioDominio>
 	private List<Regla<UsuarioDominio>> obtenerReglasActualizacion()
 	{
 		List<Regla<UsuarioDominio>> listadoReglas = new ArrayList<>();
+		
+		listadoReglas.add(CodigoValidoUsuarioRegla.obtenerInstancia());
+		listadoReglas.add(NombreValidoUsuarioRegla.obtenerInstancia());
+		listadoReglas.add(ApellidosValidoUsuarioRegla.obtenerInstancia());
+		listadoReglas.add(NumeroIdentificacionValidoUsuarioRegla.obtenerInstancia());
+		listadoReglas.add(TelefonoValidoUsuarioRegla.obtenerInstancia());
+		listadoReglas.add(CorreoValidoUsuarioRegla.obtenerInstancia());
+		listadoReglas.add(ClaveValidoUsuarioRegla.obtenerInstancia());
 			
 		return listadoReglas;
 	}
@@ -62,6 +85,8 @@ public class UsuarioValidador implements Validador<UsuarioDominio>
 	private List<Regla<UsuarioDominio>> obtenerReglasEliminacion()
 	{
 		List<Regla<UsuarioDominio>> listadoReglas = new ArrayList<>();
+		
+		listadoReglas.add(CodigoValidoUsuarioRegla.obtenerInstancia());
 
 		return listadoReglas;
 	}

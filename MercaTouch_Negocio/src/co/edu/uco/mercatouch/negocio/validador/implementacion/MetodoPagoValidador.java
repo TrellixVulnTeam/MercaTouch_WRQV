@@ -3,9 +3,12 @@ package co.edu.uco.mercatouch.negocio.validador.implementacion;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
+
 import co.edu.uco.mercatouch.negocio.dominio.MetodoPagoDominio;
 import co.edu.uco.mercatouch.negocio.validador.Validador;
 import co.edu.uco.mercatouch.negocio.validador.enumerador.TipoValidacion;
+import co.edu.uco.mercatouch.negocio.validador.implementacion.metodopago.CodigoValidoMetodoPagoRegla;
+import co.edu.uco.mercatouch.negocio.validador.implementacion.metodopago.NombreValidoMetodoPagoRegla;
 import co.edu.uco.mercatouch.negocio.validador.regla.Regla;
 import co.edu.uco.mercatouch.transversal.excepcion.MercaTouchNegocioExcepcion;
 
@@ -48,6 +51,8 @@ public class MetodoPagoValidador implements Validador<MetodoPagoDominio>
 	private List<Regla<MetodoPagoDominio>> obtenerReglasCreacion()
 	{
 		List<Regla<MetodoPagoDominio>> listadoReglas = new ArrayList<>();
+		
+		listadoReglas.add(NombreValidoMetodoPagoRegla.obtenerInstancia());
 			
 		return listadoReglas;
 	}
@@ -55,6 +60,9 @@ public class MetodoPagoValidador implements Validador<MetodoPagoDominio>
 	private List<Regla<MetodoPagoDominio>> obtenerReglasActualizacion()
 	{
 		List<Regla<MetodoPagoDominio>> listadoReglas = new ArrayList<>();
+		
+		listadoReglas.add(CodigoValidoMetodoPagoRegla.obtenerInstancia());
+		listadoReglas.add(NombreValidoMetodoPagoRegla.obtenerInstancia());
 			
 		return listadoReglas;
 	}
@@ -62,6 +70,8 @@ public class MetodoPagoValidador implements Validador<MetodoPagoDominio>
 	private List<Regla<MetodoPagoDominio>> obtenerReglasEliminacion()
 	{
 		List<Regla<MetodoPagoDominio>> listadoReglas = new ArrayList<>();
+		
+		listadoReglas.add(CodigoValidoMetodoPagoRegla.obtenerInstancia());
 
 		return listadoReglas;
 	}

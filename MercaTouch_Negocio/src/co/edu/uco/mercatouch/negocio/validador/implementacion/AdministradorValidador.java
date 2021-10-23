@@ -3,9 +3,17 @@ package co.edu.uco.mercatouch.negocio.validador.implementacion;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
+
 import co.edu.uco.mercatouch.negocio.dominio.AdministradorDominio;
 import co.edu.uco.mercatouch.negocio.validador.Validador;
 import co.edu.uco.mercatouch.negocio.validador.enumerador.TipoValidacion;
+import co.edu.uco.mercatouch.negocio.validador.implementacion.administrador.ApellidosValidoAdministradorRegla;
+import co.edu.uco.mercatouch.negocio.validador.implementacion.administrador.ClaveValidoAdministradorRegla;
+import co.edu.uco.mercatouch.negocio.validador.implementacion.administrador.CodigoValidoAdministradorRegla;
+import co.edu.uco.mercatouch.negocio.validador.implementacion.administrador.CorreoValidoAdministradorRegla;
+import co.edu.uco.mercatouch.negocio.validador.implementacion.administrador.NombreValidoAdministradorRegla;
+import co.edu.uco.mercatouch.negocio.validador.implementacion.administrador.NumeroIdentificacionValidoAdministradorRegla;
+import co.edu.uco.mercatouch.negocio.validador.implementacion.administrador.TelefonoValidoAdministradorRegla;
 import co.edu.uco.mercatouch.negocio.validador.regla.Regla;
 import co.edu.uco.mercatouch.transversal.excepcion.MercaTouchNegocioExcepcion;
 
@@ -48,6 +56,14 @@ public class AdministradorValidador implements Validador<AdministradorDominio>
 	private List<Regla<AdministradorDominio>> obtenerReglasCreacion()
 	{
 		List<Regla<AdministradorDominio>> listadoReglas = new ArrayList<>();
+		
+		listadoReglas.add(NombreValidoAdministradorRegla.obtenerInstancia());
+		listadoReglas.add(ApellidosValidoAdministradorRegla.obtenerInstancia());
+		listadoReglas.add(NumeroIdentificacionValidoAdministradorRegla.obtenerInstancia());
+		listadoReglas.add(TelefonoValidoAdministradorRegla.obtenerInstancia());
+		listadoReglas.add(CorreoValidoAdministradorRegla.obtenerInstancia());
+		listadoReglas.add(ClaveValidoAdministradorRegla.obtenerInstancia());
+		
 			
 		return listadoReglas;
 	}
@@ -55,6 +71,14 @@ public class AdministradorValidador implements Validador<AdministradorDominio>
 	private List<Regla<AdministradorDominio>> obtenerReglasActualizacion()
 	{
 		List<Regla<AdministradorDominio>> listadoReglas = new ArrayList<>();
+		
+		listadoReglas.add(CodigoValidoAdministradorRegla.obtenerInstancia());
+		listadoReglas.add(NombreValidoAdministradorRegla.obtenerInstancia());
+		listadoReglas.add(ApellidosValidoAdministradorRegla.obtenerInstancia());
+		listadoReglas.add(NumeroIdentificacionValidoAdministradorRegla.obtenerInstancia());
+		listadoReglas.add(TelefonoValidoAdministradorRegla.obtenerInstancia());
+		listadoReglas.add(CorreoValidoAdministradorRegla.obtenerInstancia());
+		listadoReglas.add(ClaveValidoAdministradorRegla.obtenerInstancia());
 			
 		return listadoReglas;
 	}
@@ -62,6 +86,8 @@ public class AdministradorValidador implements Validador<AdministradorDominio>
 	private List<Regla<AdministradorDominio>> obtenerReglasEliminacion()
 	{
 		List<Regla<AdministradorDominio>> listadoReglas = new ArrayList<>();
+		
+		listadoReglas.add(CodigoValidoAdministradorRegla.obtenerInstancia());
 
 		return listadoReglas;
 	}

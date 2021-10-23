@@ -3,9 +3,17 @@ package co.edu.uco.mercatouch.negocio.validador.implementacion;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
+
 import co.edu.uco.mercatouch.negocio.dominio.DomiciliarioDominio;
 import co.edu.uco.mercatouch.negocio.validador.Validador;
 import co.edu.uco.mercatouch.negocio.validador.enumerador.TipoValidacion;
+import co.edu.uco.mercatouch.negocio.validador.implementacion.domiciliario.ApellidosValidoDomiciliarioRegla;
+import co.edu.uco.mercatouch.negocio.validador.implementacion.domiciliario.ClaveValidoDomiciliarioRegla;
+import co.edu.uco.mercatouch.negocio.validador.implementacion.domiciliario.CodigoValidoDomiciliarioRegla;
+import co.edu.uco.mercatouch.negocio.validador.implementacion.domiciliario.CorreoValidoDomiciliarioRegla;
+import co.edu.uco.mercatouch.negocio.validador.implementacion.domiciliario.NombreValidoDomiciliarioRegla;
+import co.edu.uco.mercatouch.negocio.validador.implementacion.domiciliario.NumeroIdentificacionValidoDomiciliarioRegla;
+import co.edu.uco.mercatouch.negocio.validador.implementacion.domiciliario.TelefonoValidoDomiciliarioRegla;
 import co.edu.uco.mercatouch.negocio.validador.regla.Regla;
 import co.edu.uco.mercatouch.transversal.excepcion.MercaTouchNegocioExcepcion;
 
@@ -48,6 +56,13 @@ public class DomiciliarioValidador implements Validador<DomiciliarioDominio>
 	private List<Regla<DomiciliarioDominio>> obtenerReglasCreacion()
 	{
 		List<Regla<DomiciliarioDominio>> listadoReglas = new ArrayList<>();
+		
+		listadoReglas.add(NombreValidoDomiciliarioRegla.obtenerInstancia());
+		listadoReglas.add(ApellidosValidoDomiciliarioRegla.obtenerInstancia());
+		listadoReglas.add(NumeroIdentificacionValidoDomiciliarioRegla.obtenerInstancia());
+		listadoReglas.add(TelefonoValidoDomiciliarioRegla.obtenerInstancia());
+		listadoReglas.add(CorreoValidoDomiciliarioRegla.obtenerInstancia());
+		listadoReglas.add(ClaveValidoDomiciliarioRegla.obtenerInstancia());
 			
 		return listadoReglas;
 	}
@@ -55,6 +70,14 @@ public class DomiciliarioValidador implements Validador<DomiciliarioDominio>
 	private List<Regla<DomiciliarioDominio>> obtenerReglasActualizacion()
 	{
 		List<Regla<DomiciliarioDominio>> listadoReglas = new ArrayList<>();
+		
+		listadoReglas.add(CodigoValidoDomiciliarioRegla.obtenerInstancia());
+		listadoReglas.add(NombreValidoDomiciliarioRegla.obtenerInstancia());
+		listadoReglas.add(ApellidosValidoDomiciliarioRegla.obtenerInstancia());
+		listadoReglas.add(NumeroIdentificacionValidoDomiciliarioRegla.obtenerInstancia());
+		listadoReglas.add(TelefonoValidoDomiciliarioRegla.obtenerInstancia());
+		listadoReglas.add(CorreoValidoDomiciliarioRegla.obtenerInstancia());
+		listadoReglas.add(ClaveValidoDomiciliarioRegla.obtenerInstancia());
 			
 		return listadoReglas;
 	}
@@ -62,6 +85,8 @@ public class DomiciliarioValidador implements Validador<DomiciliarioDominio>
 	private List<Regla<DomiciliarioDominio>> obtenerReglasEliminacion()
 	{
 		List<Regla<DomiciliarioDominio>> listadoReglas = new ArrayList<>();
+		
+		listadoReglas.add(CodigoValidoDomiciliarioRegla.obtenerInstancia());
 
 		return listadoReglas;
 	}

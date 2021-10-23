@@ -3,9 +3,13 @@ package co.edu.uco.mercatouch.negocio.validador.implementacion;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
+
 import co.edu.uco.mercatouch.negocio.dominio.CategoriaDominio;
 import co.edu.uco.mercatouch.negocio.validador.Validador;
 import co.edu.uco.mercatouch.negocio.validador.enumerador.TipoValidacion;
+import co.edu.uco.mercatouch.negocio.validador.implementacion.categoria.CodigoValidoCategoriaRegla;
+import co.edu.uco.mercatouch.negocio.validador.implementacion.categoria.DescripcionValidoCategoriaRegla;
+import co.edu.uco.mercatouch.negocio.validador.implementacion.categoria.NombreValidoCategoriaRegla;
 import co.edu.uco.mercatouch.negocio.validador.regla.Regla;
 import co.edu.uco.mercatouch.transversal.excepcion.MercaTouchNegocioExcepcion;
 
@@ -48,6 +52,9 @@ public class CategoriaValidador implements Validador<CategoriaDominio>
 	private List<Regla<CategoriaDominio>> obtenerReglasCreacion()
 	{
 		List<Regla<CategoriaDominio>> listadoReglas = new ArrayList<>();
+		
+		listadoReglas.add(NombreValidoCategoriaRegla.obtenerInstancia());
+		listadoReglas.add(DescripcionValidoCategoriaRegla.obtenerInstancia());
 			
 		return listadoReglas;
 	}
@@ -55,6 +62,10 @@ public class CategoriaValidador implements Validador<CategoriaDominio>
 	private List<Regla<CategoriaDominio>> obtenerReglasActualizacion()
 	{
 		List<Regla<CategoriaDominio>> listadoReglas = new ArrayList<>();
+		
+		listadoReglas.add(CodigoValidoCategoriaRegla.obtenerInstancia());
+		listadoReglas.add(NombreValidoCategoriaRegla.obtenerInstancia());
+		listadoReglas.add(DescripcionValidoCategoriaRegla.obtenerInstancia());
 			
 		return listadoReglas;
 	}
@@ -62,6 +73,8 @@ public class CategoriaValidador implements Validador<CategoriaDominio>
 	private List<Regla<CategoriaDominio>> obtenerReglasEliminacion()
 	{
 		List<Regla<CategoriaDominio>> listadoReglas = new ArrayList<>();
+		
+		listadoReglas.add(CodigoValidoCategoriaRegla.obtenerInstancia());
 
 		return listadoReglas;
 	}

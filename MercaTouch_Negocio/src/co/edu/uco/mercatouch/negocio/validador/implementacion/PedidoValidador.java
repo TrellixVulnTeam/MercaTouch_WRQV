@@ -3,9 +3,11 @@ package co.edu.uco.mercatouch.negocio.validador.implementacion;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
+
 import co.edu.uco.mercatouch.negocio.dominio.PedidoDominio;
 import co.edu.uco.mercatouch.negocio.validador.Validador;
 import co.edu.uco.mercatouch.negocio.validador.enumerador.TipoValidacion;
+import co.edu.uco.mercatouch.negocio.validador.implementacion.pedido.CodigoValidoPedidoRegla;
 import co.edu.uco.mercatouch.negocio.validador.regla.Regla;
 import co.edu.uco.mercatouch.transversal.excepcion.MercaTouchNegocioExcepcion;
 
@@ -46,15 +48,15 @@ public class PedidoValidador implements Validador<PedidoDominio>
 	}
 	
 	private List<Regla<PedidoDominio>> obtenerReglasCreacion()
-	{
-		List<Regla<PedidoDominio>> listadoReglas = new ArrayList<>();
-			
-		return listadoReglas;
+	{	
+		return new ArrayList<>();
 	}
 		
 	private List<Regla<PedidoDominio>> obtenerReglasActualizacion()
 	{
 		List<Regla<PedidoDominio>> listadoReglas = new ArrayList<>();
+		
+		listadoReglas.add(CodigoValidoPedidoRegla.obtenerInstancia());
 			
 		return listadoReglas;
 	}
@@ -62,6 +64,8 @@ public class PedidoValidador implements Validador<PedidoDominio>
 	private List<Regla<PedidoDominio>> obtenerReglasEliminacion()
 	{
 		List<Regla<PedidoDominio>> listadoReglas = new ArrayList<>();
+		
+		listadoReglas.add(CodigoValidoPedidoRegla.obtenerInstancia());
 
 		return listadoReglas;
 	}

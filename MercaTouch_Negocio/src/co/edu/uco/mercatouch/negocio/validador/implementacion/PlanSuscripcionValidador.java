@@ -3,9 +3,14 @@ package co.edu.uco.mercatouch.negocio.validador.implementacion;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
+
 import co.edu.uco.mercatouch.negocio.dominio.PlanSuscripcionDominio;
 import co.edu.uco.mercatouch.negocio.validador.Validador;
 import co.edu.uco.mercatouch.negocio.validador.enumerador.TipoValidacion;
+import co.edu.uco.mercatouch.negocio.validador.implementacion.plansuscripcion.CodigoValidoPlanSuscripcionRegla;
+import co.edu.uco.mercatouch.negocio.validador.implementacion.plansuscripcion.DescripcionValidoPlanSuscripcionRegla;
+import co.edu.uco.mercatouch.negocio.validador.implementacion.plansuscripcion.NombreValidoPlanSuscripcionRegla;
+import co.edu.uco.mercatouch.negocio.validador.implementacion.plansuscripcion.TiempoSuscripcionValidoPlanSuscripcionRegla;
 import co.edu.uco.mercatouch.negocio.validador.regla.Regla;
 import co.edu.uco.mercatouch.transversal.excepcion.MercaTouchNegocioExcepcion;
 
@@ -48,6 +53,10 @@ public class PlanSuscripcionValidador implements Validador<PlanSuscripcionDomini
 	private List<Regla<PlanSuscripcionDominio>> obtenerReglasCreacion()
 	{
 		List<Regla<PlanSuscripcionDominio>> listadoReglas = new ArrayList<>();
+		
+		listadoReglas.add(NombreValidoPlanSuscripcionRegla.obtenerInstancia());
+		listadoReglas.add(DescripcionValidoPlanSuscripcionRegla.obtenerInstancia());
+		listadoReglas.add(TiempoSuscripcionValidoPlanSuscripcionRegla.obtenerInstancia());
 			
 		return listadoReglas;
 	}
@@ -55,6 +64,11 @@ public class PlanSuscripcionValidador implements Validador<PlanSuscripcionDomini
 	private List<Regla<PlanSuscripcionDominio>> obtenerReglasActualizacion()
 	{
 		List<Regla<PlanSuscripcionDominio>> listadoReglas = new ArrayList<>();
+		
+		listadoReglas.add(CodigoValidoPlanSuscripcionRegla.obtenerInstancia());
+		listadoReglas.add(NombreValidoPlanSuscripcionRegla.obtenerInstancia());
+		listadoReglas.add(DescripcionValidoPlanSuscripcionRegla.obtenerInstancia());
+		listadoReglas.add(TiempoSuscripcionValidoPlanSuscripcionRegla.obtenerInstancia());
 			
 		return listadoReglas;
 	}
@@ -62,6 +76,8 @@ public class PlanSuscripcionValidador implements Validador<PlanSuscripcionDomini
 	private List<Regla<PlanSuscripcionDominio>> obtenerReglasEliminacion()
 	{
 		List<Regla<PlanSuscripcionDominio>> listadoReglas = new ArrayList<>();
+		
+		listadoReglas.add(CodigoValidoPlanSuscripcionRegla.obtenerInstancia());
 
 		return listadoReglas;
 	}
