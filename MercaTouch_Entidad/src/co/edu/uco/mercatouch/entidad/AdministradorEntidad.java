@@ -2,17 +2,37 @@ package co.edu.uco.mercatouch.entidad;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import co.edu.uco.mercatouch.transversal.utilitario.UtilTexto;
 
+@Entity
+@Table(name = "administrador")
 public class AdministradorEntidad 
 {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	int codigo;
+	@Column
 	String nombre;
+	@Column
 	String apellidos;
+	@Column
 	long numeroIdentificacion;
+	@Column
 	long telefono;
+	@Column
 	String correo;
+	@Column
 	String clave;
+	@OneToMany
 	List<TiendaEntidad> tiendas;
 	
 	private AdministradorEntidad(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, List<TiendaEntidad> tiendas) 

@@ -1,11 +1,24 @@
 package co.edu.uco.mercatouch.entidad;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import co.edu.uco.mercatouch.transversal.utilitario.UtilTexto;
 
+@Entity
+@Table(name = "metodopago")
 public class MetodoPagoEntidad 
 {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	int codigo;
+	@Column
 	String nombre;
+	@Column
 	boolean incluyeDomicilio;
 	
 	private MetodoPagoEntidad(int codigo, String nombre, boolean incluyeDomicilio) 

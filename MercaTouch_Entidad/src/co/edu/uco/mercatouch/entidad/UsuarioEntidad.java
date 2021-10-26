@@ -1,17 +1,36 @@
 package co.edu.uco.mercatouch.entidad;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import co.edu.uco.mercatouch.transversal.utilitario.UtilTexto;
 
+@Entity
+@Table(name = "usuario")
 public class UsuarioEntidad 
 {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	int codigo;
+	@Column
 	String nombre;
+	@Column
 	String apellidos;
+	@Column
 	long numeroIdentificacion;
+	@Column
 	long telefono;
+	@Column
 	String correo;
+	@Column
 	String clave;
+	@Column
 	int puntuacion;
+	@OneToOne
 	PedidoEntidad pedido;
 	
 	private UsuarioEntidad(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, int puntuacion, PedidoEntidad pedido) 

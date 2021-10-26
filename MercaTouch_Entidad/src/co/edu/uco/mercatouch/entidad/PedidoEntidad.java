@@ -3,13 +3,31 @@ package co.edu.uco.mercatouch.entidad;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "pedido")
 public class PedidoEntidad 
 {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	int codigo;
+	@Column
 	double pagoTotal;
+	@Column
 	double descuento;
+	@OneToOne
 	TiendaEntidad tienda;
+	@OneToOne
 	MetodoPagoEntidad metodoPago;
+	@OneToMany
 	List<ProductoEntidad> productosPedidos;
 	
 	private PedidoEntidad(int codigo, double pagoTotal, double descuento, TiendaEntidad tienda, MetodoPagoEntidad metodoPago, List<ProductoEntidad> productosPedidos) 
