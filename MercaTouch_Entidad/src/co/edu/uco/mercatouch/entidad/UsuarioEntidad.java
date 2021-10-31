@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import co.edu.uco.mercatouch.transversal.utilitario.UtilTexto;
 
@@ -14,7 +14,9 @@ import co.edu.uco.mercatouch.transversal.utilitario.UtilTexto;
 public class UsuarioEntidad 
 {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator="usuario_codigo_seq")
+	@SequenceGenerator(name="usuario_codigo_seq", sequenceName="usuario_codigo_seq", allocationSize=1)
+    @Column(name = "codigo")
 	int codigo;
 	@Column
 	String nombre;
@@ -30,10 +32,8 @@ public class UsuarioEntidad
 	String clave;
 	@Column
 	int puntuacion;
-	@OneToOne
-	PedidoEntidad pedido;
 	
-	private UsuarioEntidad(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, int puntuacion, PedidoEntidad pedido) 
+	private UsuarioEntidad(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, int puntuacion) 
 	{
 		setCodigo(codigo);
 		setNombre(nombre);
@@ -43,17 +43,16 @@ public class UsuarioEntidad
 		setCorreo(correo);
 		setClave(clave);
 		setPuntuacion(puntuacion);
-		setPedido(pedido);
 	}
 	
-	public static UsuarioEntidad crear(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, int puntuacion, PedidoEntidad pedido)
+	public static UsuarioEntidad crear(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, int puntuacion)
 	{
-		return new UsuarioEntidad(codigo, nombre, apellidos, numeroIdentificacion, telefono, correo, clave, puntuacion, pedido);
+		return new UsuarioEntidad(codigo, nombre, apellidos, numeroIdentificacion, telefono, correo, clave, puntuacion);
 	}
 	
 	public static UsuarioEntidad crear()
 	{
-		return new UsuarioEntidad(0, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, 0, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, PedidoEntidad.crear());
+		return new UsuarioEntidad(0, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, 0, UtilTexto.BLANCO, UtilTexto.BLANCO, 0);
 	}
 
 	public int getCodigo() 
@@ -141,17 +140,6 @@ public class UsuarioEntidad
 	public UsuarioEntidad setPuntuacion(int puntuacion) 
 	{
 		this.puntuacion = puntuacion;
-		return this;
-	}
-
-	public PedidoEntidad getPedido() 
-	{
-		return pedido;
-	}
-
-	public UsuarioEntidad setPedido(PedidoEntidad pedido) 
-	{
-		this.pedido = pedido;
 		return this;
 	}
 }

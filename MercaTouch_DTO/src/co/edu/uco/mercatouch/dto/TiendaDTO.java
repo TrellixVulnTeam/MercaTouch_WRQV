@@ -1,7 +1,5 @@
 package co.edu.uco.mercatouch.dto;
 
-import java.util.ArrayList;
-import java.util.List;
 import co.edu.uco.mercatouch.transversal.utilitario.UtilTexto;
 
 public class TiendaDTO 
@@ -14,12 +12,8 @@ public class TiendaDTO
 	String departamento;
 	long telefono;
 	int calificacion;
-	AdministradorDTO administrador;
-	List<DomiciliarioDTO> domiciliarios;
-	List<ProductoDTO> productos;
-	List<PedidoDTO> pedidos;
 	
-	private TiendaDTO(int codigo, String nombre, String rutaLogo, String direccion, String ciudad, String departamento, long telefono, int calificacion, AdministradorDTO administrador, List<DomiciliarioDTO> domiciliarios, List<ProductoDTO> productos, List<PedidoDTO> pedidos) 
+	private TiendaDTO(int codigo, String nombre, String rutaLogo, String direccion, String ciudad, String departamento, long telefono, int calificacion) 
 	{
 		setCodigo(codigo);
 		setNombre(nombre);
@@ -29,20 +23,16 @@ public class TiendaDTO
 		setDepartamento(departamento);
 		setTelefono(telefono);
 		setCalificacion(calificacion);
-		setAdministrador(administrador);
-		setDomiciliarios(domiciliarios);
-		setProductos(productos);
-		setPedidos(pedidos);
 	}
 	
-	public static TiendaDTO crear(int codigo, String nombre, String rutaLogo, String direccion, String ciudad, String departamento, long telefono, int calificacion, AdministradorDTO administrador, List<DomiciliarioDTO> domiciliarios, List<ProductoDTO> productos, List<PedidoDTO> pedidos)
+	public static TiendaDTO crear(int codigo, String nombre, String rutaLogo, String direccion, String ciudad, String departamento, long telefono, int calificacion)
 	{
-		return new TiendaDTO(codigo, nombre, rutaLogo, direccion, ciudad, departamento, telefono, calificacion, administrador, domiciliarios, productos, pedidos);
+		return new TiendaDTO(codigo, nombre, rutaLogo, direccion, ciudad, departamento, telefono, calificacion);
 	}
 	
 	public static TiendaDTO crear()
 	{
-		return new TiendaDTO(0, UtilTexto.BLANCO, UtilTexto.BLANCO, UtilTexto.BLANCO, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, 0, AdministradorDTO.crear(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+		return new TiendaDTO(0, UtilTexto.BLANCO, UtilTexto.BLANCO, UtilTexto.BLANCO, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, 0);
 	}
 
 	public int getCodigo() 
@@ -130,50 +120,6 @@ public class TiendaDTO
 	public TiendaDTO setCalificacion(int calificacion) 
 	{
 		this.calificacion = calificacion;
-		return this;
-	}
-
-	public AdministradorDTO getAdministrador() 
-	{
-		return administrador;
-	}
-
-	public TiendaDTO setAdministrador(AdministradorDTO administrador) 
-	{
-		this.administrador = administrador;
-		return this;
-	}
-
-	public List<DomiciliarioDTO> getDomiciliarios() 
-	{
-		return domiciliarios;
-	}
-
-	public TiendaDTO setDomiciliarios(List<DomiciliarioDTO> domiciliarios) 
-	{
-		this.domiciliarios = domiciliarios;
-		return this;
-	}
-
-	public List<ProductoDTO> getProductos() 
-	{
-		return productos;
-	}
-
-	public TiendaDTO setProductos(List<ProductoDTO> productos) 
-	{
-		this.productos = productos;
-		return this;
-	}
-
-	public List<PedidoDTO> getPedidos() 
-	{
-		return pedidos;
-	}
-
-	public TiendaDTO setPedidos(List<PedidoDTO> pedidos) 
-	{
-		this.pedidos = pedidos;
 		return this;
 	}
 }

@@ -1,7 +1,5 @@
 package co.edu.uco.mercatouch.dto;
 
-import java.util.ArrayList;
-import java.util.List;
 import co.edu.uco.mercatouch.transversal.utilitario.UtilTexto;
 
 public class AdministradorDTO 
@@ -13,9 +11,14 @@ public class AdministradorDTO
 	long telefono;
 	String correo;
 	String clave;
-	List<TiendaDTO> tiendas;
+	TiendaDTO tienda;
 	
-	private AdministradorDTO(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, List<TiendaDTO> tiendas) 
+	public AdministradorDTO()
+	{
+		
+	}
+	
+	private AdministradorDTO(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, TiendaDTO tienda) 
 	{
 		setCodigo(codigo);
 		setNombre(nombre);
@@ -24,17 +27,17 @@ public class AdministradorDTO
 		setTelefono(telefono);
 		setCorreo(correo);
 		setClave(clave);
-		setTiendas(tiendas);
+		setTiendas(tienda);
 	}
 	
-	public static AdministradorDTO crear(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, List<TiendaDTO> tiendas)
+	public static AdministradorDTO crear(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, TiendaDTO tienda)
 	{
-		return new AdministradorDTO(codigo, nombre, apellidos, numeroIdentificacion, telefono, correo, clave, tiendas);
+		return new AdministradorDTO(codigo, nombre, apellidos, numeroIdentificacion, telefono, correo, clave, tienda);
 	}
 	
 	public static AdministradorDTO crear()
 	{
-		return new AdministradorDTO(0, UtilTexto.BLANCO,  UtilTexto.BLANCO, 0, 0,  UtilTexto.BLANCO,  UtilTexto.BLANCO, new ArrayList<>());
+		return new AdministradorDTO(0, UtilTexto.BLANCO,  UtilTexto.BLANCO, 0, 0,  UtilTexto.BLANCO,  UtilTexto.BLANCO, TiendaDTO.crear());
 	}
 	
 	public int getCodigo() 
@@ -113,14 +116,14 @@ public class AdministradorDTO
 		return this;
 	}
 	
-	public List<TiendaDTO> getTiendas() 
+	public TiendaDTO getTienda() 
 	{
-		return tiendas;
+		return tienda;
 	}
 	
-	public AdministradorDTO setTiendas(List<TiendaDTO> tiendas) 
+	public AdministradorDTO setTiendas(TiendaDTO tienda) 
 	{
-		this.tiendas = tiendas;
+		this.tienda = tienda;
 		return this;
 	}
 }

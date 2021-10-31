@@ -1,7 +1,5 @@
 package co.edu.uco.mercatouch.negocio.dominio;
 
-import java.util.ArrayList;
-import java.util.List;
 import co.edu.uco.mercatouch.transversal.utilitario.UtilTexto;
 
 public class AdministradorDominio 
@@ -13,9 +11,9 @@ public class AdministradorDominio
 	long telefono;
 	String correo;
 	String clave;
-	List<TiendaDominio> tiendas;
+	TiendaDominio tienda;
 	
-	private AdministradorDominio(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, List<TiendaDominio> tiendas) 
+	private AdministradorDominio(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, TiendaDominio tienda) 
 	{
 		setCodigo(codigo);
 		setNombre(nombre);
@@ -24,17 +22,17 @@ public class AdministradorDominio
 		setTelefono(telefono);
 		setCorreo(correo);
 		setClave(clave);
-		setTiendas(tiendas);
+		setTienda(tienda);
 	}
 	
-	public static AdministradorDominio crear(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, List<TiendaDominio> tiendas)
+	public static AdministradorDominio crear(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, TiendaDominio tienda)
 	{
-		return new AdministradorDominio(codigo, nombre, apellidos, numeroIdentificacion, telefono, correo, clave, tiendas);
+		return new AdministradorDominio(codigo, nombre, apellidos, numeroIdentificacion, telefono, correo, clave, tienda);
 	}
 	
 	public static AdministradorDominio crear()
 	{
-		return new AdministradorDominio(0, UtilTexto.BLANCO,  UtilTexto.BLANCO, 0, 0,  UtilTexto.BLANCO,  UtilTexto.BLANCO, new ArrayList<>());
+		return new AdministradorDominio(0, UtilTexto.BLANCO,  UtilTexto.BLANCO, 0, 0,  UtilTexto.BLANCO,  UtilTexto.BLANCO, TiendaDominio.crear());
 	}
 	
 	public int getCodigo() 
@@ -113,14 +111,14 @@ public class AdministradorDominio
 		return this;
 	}
 	
-	public List<TiendaDominio> getTiendas() 
+	public TiendaDominio getTienda() 
 	{
-		return tiendas;
+		return tienda;
 	}
 	
-	public AdministradorDominio setTiendas(List<TiendaDominio> tiendas) 
+	public AdministradorDominio setTienda(TiendaDominio tienda) 
 	{
-		this.tiendas = tiendas;
+		this.tienda = tienda;
 		return this;
 	}
 }

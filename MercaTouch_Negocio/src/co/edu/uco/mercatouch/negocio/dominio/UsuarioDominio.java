@@ -12,9 +12,8 @@ public class UsuarioDominio
 	String correo;
 	String clave;
 	int puntuacion;
-	PedidoDominio pedido;
 	
-	private UsuarioDominio(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, int puntuacion, PedidoDominio pedido) 
+	private UsuarioDominio(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, int puntuacion) 
 	{
 		setCodigo(codigo);
 		setNombre(nombre);
@@ -24,17 +23,16 @@ public class UsuarioDominio
 		setCorreo(correo);
 		setClave(clave);
 		setPuntuacion(puntuacion);
-		setPedido(pedido);
 	}
 	
-	public static UsuarioDominio crear(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, int puntuacion, PedidoDominio pedido)
+	public static UsuarioDominio crear(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, int puntuacion)
 	{
-		return new UsuarioDominio(codigo, nombre, apellidos, numeroIdentificacion, telefono, correo, clave, puntuacion, pedido);
+		return new UsuarioDominio(codigo, nombre, apellidos, numeroIdentificacion, telefono, correo, clave, puntuacion);
 	}
 	
 	public static UsuarioDominio crear()
 	{
-		return new UsuarioDominio(0, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, 0, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, PedidoDominio.crear());
+		return new UsuarioDominio(0, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, 0, UtilTexto.BLANCO, UtilTexto.BLANCO, 0);
 	}
 
 	public int getCodigo() 
@@ -122,17 +120,6 @@ public class UsuarioDominio
 	public UsuarioDominio setPuntuacion(int puntuacion) 
 	{
 		this.puntuacion = puntuacion;
-		return this;
-	}
-
-	public PedidoDominio getPedido() 
-	{
-		return pedido;
-	}
-
-	public UsuarioDominio setPedido(PedidoDominio pedido) 
-	{
-		this.pedido = pedido;
 		return this;
 	}
 }

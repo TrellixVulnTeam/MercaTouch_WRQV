@@ -12,9 +12,13 @@ public class UsuarioDTO
 	String correo;
 	String clave;
 	int puntuacion;
-	PedidoDTO pedido;
 	
-	private UsuarioDTO(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, int puntuacion, PedidoDTO pedido) 
+	public UsuarioDTO()
+	{
+		
+	}
+	
+	private UsuarioDTO(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, int puntuacion) 
 	{
 		setCodigo(codigo);
 		setNombre(nombre);
@@ -24,17 +28,16 @@ public class UsuarioDTO
 		setCorreo(correo);
 		setClave(clave);
 		setPuntuacion(puntuacion);
-		setPedido(pedido);
 	}
 	
-	public static UsuarioDTO crear(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, int puntuacion, PedidoDTO pedido)
+	public static UsuarioDTO crear(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, int puntuacion)
 	{
-		return new UsuarioDTO(codigo, nombre, apellidos, numeroIdentificacion, telefono, correo, clave, puntuacion, pedido);
+		return new UsuarioDTO(codigo, nombre, apellidos, numeroIdentificacion, telefono, correo, clave, puntuacion);
 	}
 	
 	public static UsuarioDTO crear()
 	{
-		return new UsuarioDTO(0, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, 0, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, PedidoDTO.crear());
+		return new UsuarioDTO(0, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, 0, UtilTexto.BLANCO, UtilTexto.BLANCO, 0);
 	}
 
 	public int getCodigo() 
@@ -122,17 +125,6 @@ public class UsuarioDTO
 	public UsuarioDTO setPuntuacion(int puntuacion) 
 	{
 		this.puntuacion = puntuacion;
-		return this;
-	}
-
-	public PedidoDTO getPedido() 
-	{
-		return pedido;
-	}
-
-	public UsuarioDTO setPedido(PedidoDTO pedido) 
-	{
-		this.pedido = pedido;
 		return this;
 	}
 }

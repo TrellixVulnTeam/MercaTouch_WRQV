@@ -31,7 +31,7 @@ public class AdministradorEnsambladorImpl  implements AdministradorEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar un Dominio de Administrador a partir de una entidad de un Administrador que esta nulo");
 		}
 		
-		return AdministradorDominio.crear(entidad.getCodigo(), entidad.getNombre(), entidad.getApellidos(), entidad.getNumeroIdentificacion(), entidad.getTelefono(), entidad.getCorreo(), entidad.getClave(), TiendaEnsambladorImpl.obtenerTiendaEnsamblador().ensamblarDominiosDesdeEntidad(entidad.getTiendas()));
+		return AdministradorDominio.crear(entidad.getCodigo(), entidad.getNombre(), entidad.getApellidos(), entidad.getNumeroIdentificacion(), entidad.getTelefono(), entidad.getCorreo(), entidad.getClave(), TiendaEnsambladorImpl.obtenerTiendaEnsamblador().ensamblarDominioDesdeEntidad(entidad.getTienda()));
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class AdministradorEnsambladorImpl  implements AdministradorEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar una Entidad de Administrador a partir de un dominio de un Administrador que esta nulo");
 		}
 		
-		return AdministradorEntidad.crear(dominio.getCodigo(), dominio.getNombre(), dominio.getApellidos(), dominio.getNumeroIdentificacion(), dominio.getTelefono(), dominio.getCorreo(), dominio.getClave(), TiendaEnsambladorImpl.obtenerTiendaEnsamblador().ensamblarEntidadesDesdeDominio(dominio.getTiendas()));
+		return AdministradorEntidad.crear(dominio.getCodigo(), dominio.getNombre(), dominio.getApellidos(), dominio.getNumeroIdentificacion(), dominio.getTelefono(), dominio.getCorreo(), dominio.getClave(), TiendaEnsambladorImpl.obtenerTiendaEnsamblador().ensamblarEntidadDesdeDominio(dominio.getTienda()));
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class AdministradorEnsambladorImpl  implements AdministradorEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar un Dominio de Administrador a partir de un DTO de un Administrador que esta nulo");
 		}
 		
-		return AdministradorDominio.crear(dto.getCodigo(), dto.getNombre(), dto.getApellidos(), dto.getNumeroIdentificacion(), dto.getTelefono(), dto.getCorreo(), dto.getClave(), TiendaEnsambladorImpl.obtenerTiendaEnsamblador().ensamblarDominiosDesdeDTO(dto.getTiendas()));
+		return AdministradorDominio.crear(dto.getCodigo(), dto.getNombre(), dto.getApellidos(), dto.getNumeroIdentificacion(), dto.getTelefono(), dto.getCorreo(), dto.getClave(), TiendaEnsambladorImpl.obtenerTiendaEnsamblador().ensamblarDominioDesdeDTO(dto.getTienda()));
 	}
 
 	@Override
@@ -82,7 +82,7 @@ public class AdministradorEnsambladorImpl  implements AdministradorEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar un DTO de Administrador a partir de un Dominio de un Administrador que esta nulo");
 		}
 		
-		return AdministradorDTO.crear(dominio.getCodigo(), dominio.getNombre(), dominio.getApellidos(), dominio.getNumeroIdentificacion(), dominio.getTelefono(), dominio.getCorreo(), dominio.getClave(), TiendaEnsambladorImpl.obtenerTiendaEnsamblador().ensamblarDTOsDesdeDominio(dominio.getTiendas()));
+		return AdministradorDTO.crear(dominio.getCodigo(), dominio.getNombre(), dominio.getApellidos(), dominio.getNumeroIdentificacion(), dominio.getTelefono(), dominio.getCorreo(), dominio.getClave(), TiendaEnsambladorImpl.obtenerTiendaEnsamblador().ensamblarDTODesdeDominio(dominio.getTienda()));
 	}
 
 	@Override

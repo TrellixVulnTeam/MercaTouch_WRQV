@@ -31,7 +31,7 @@ public class TiendaEnsambladorImpl implements TiendaEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar un Dominio de Tienda a partir de una entidad de una Tienda que esta nulo");
 		}
 		
-		return TiendaDominio.crear(entidad.getCodigo(), entidad.getNombre(), entidad.getRutaLogo(), entidad.getDireccion(), entidad.getCiudad(), entidad.getDepartamento(), entidad.getTelefono(), entidad.getCalificacion(), AdministradorEnsambladorImpl.obtenerAdministradorEnsamblador().ensamblarDominioDesdeEntidad(entidad.getAdministrador()), DomiciliarioEnsambladorImpl.obtenerDomiciliarioEnsamblador().ensamblarDominiosDesdeEntidad(entidad.getDomiciliarios()), ProductoEnsambladorImpl.obtenerProductoEnsamblador().ensamblarDominiosDesdeEntidad(entidad.getProductos()), PedidoEnsambladorImpl.obtenerPedidoEnsamblador().ensamblarDominiosDesdeEntidad(entidad.getPedidos()));
+		return TiendaDominio.crear(entidad.getCodigo(), entidad.getNombre(), entidad.getRutaLogo(), entidad.getDireccion(), entidad.getCiudad(), entidad.getDepartamento(), entidad.getTelefono(), entidad.getCalificacion());
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class TiendaEnsambladorImpl implements TiendaEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar una Entidad de Tienda a partir de un dominio de una Tienda que esta nulo");
 		}
 		
-		return TiendaEntidad.crear(dominio.getCodigo(), dominio.getNombre(), dominio.getRutaLogo(), dominio.getDireccion(), dominio.getCiudad(), dominio.getDepartamento(), dominio.getTelefono(), dominio.getCalificacion(), AdministradorEnsambladorImpl.obtenerAdministradorEnsamblador().ensamblarEntidadDesdeDominio(dominio.getAdministrador()), DomiciliarioEnsambladorImpl.obtenerDomiciliarioEnsamblador().ensamblarEntidadesDesdeDominio(dominio.getDomiciliarios()), ProductoEnsambladorImpl.obtenerProductoEnsamblador().ensamblarEntidadesDesdeDominio(dominio.getProductos()), PedidoEnsambladorImpl.obtenerPedidoEnsamblador().ensamblarEntidadesDesdeDominio(dominio.getPedidos()));
+		return TiendaEntidad.crear(dominio.getCodigo(), dominio.getNombre(), dominio.getRutaLogo(), dominio.getDireccion(), dominio.getCiudad(), dominio.getDepartamento(), dominio.getTelefono(), dominio.getCalificacion());
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class TiendaEnsambladorImpl implements TiendaEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar un Dominio de Tienda a partir de un DTO de una Tienda que esta nulo");
 		}
 		
-		return TiendaDominio.crear(dto.getCodigo(), dto.getNombre(), dto.getRutaLogo(), dto.getDireccion(), dto.getCiudad(), dto.getDepartamento(), dto.getTelefono(), dto.getCalificacion(), AdministradorEnsambladorImpl.obtenerAdministradorEnsamblador().ensamblarDominioDesdeDTO(dto.getAdministrador()), DomiciliarioEnsambladorImpl.obtenerDomiciliarioEnsamblador().ensamblarDominiosDesdeDTO(dto.getDomiciliarios()), ProductoEnsambladorImpl.obtenerProductoEnsamblador().ensamblarDominiosDesdeDTO(dto.getProductos()), PedidoEnsambladorImpl.obtenerPedidoEnsamblador().ensamblarDominiosDesdeDTO(dto.getPedidos()));
+		return TiendaDominio.crear(dto.getCodigo(), dto.getNombre(), dto.getRutaLogo(), dto.getDireccion(), dto.getCiudad(), dto.getDepartamento(), dto.getTelefono(), dto.getCalificacion());
 	}
 
 	@Override
@@ -82,7 +82,7 @@ public class TiendaEnsambladorImpl implements TiendaEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar un DTO de Tienda a partir de un Dominio de una Tienda que esta nulo");
 		}
 		
-		return TiendaDTO.crear(dominio.getCodigo(), dominio.getNombre(), dominio.getRutaLogo(), dominio.getDireccion(), dominio.getCiudad(), dominio.getDepartamento(), dominio.getTelefono(), dominio.getCalificacion(), AdministradorEnsambladorImpl.obtenerAdministradorEnsamblador().ensamblarDTODesdeDominio(dominio.getAdministrador()), DomiciliarioEnsambladorImpl.obtenerDomiciliarioEnsamblador().ensamblarDTOsDesdeDominio(dominio.getDomiciliarios()), ProductoEnsambladorImpl.obtenerProductoEnsamblador().ensamblarDTOsDesdeDominio(dominio.getProductos()), PedidoEnsambladorImpl.obtenerPedidoEnsamblador().ensamblarDTOsDesdeDominio(dominio.getPedidos()));
+		return TiendaDTO.crear(dominio.getCodigo(), dominio.getNombre(), dominio.getRutaLogo(), dominio.getDireccion(), dominio.getCiudad(), dominio.getDepartamento(), dominio.getTelefono(), dominio.getCalificacion());
 	}
 
 	@Override

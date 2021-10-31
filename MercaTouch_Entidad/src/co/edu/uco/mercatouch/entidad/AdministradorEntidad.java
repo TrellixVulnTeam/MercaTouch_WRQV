@@ -1,16 +1,14 @@
 package co.edu.uco.mercatouch.entidad;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
 import co.edu.uco.mercatouch.transversal.utilitario.UtilTexto;
 
 @Entity
@@ -19,6 +17,8 @@ public class AdministradorEntidad
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@SequenceGenerator(name="administrador_codigo_seq", sequenceName="administrador_codigo_seq", allocationSize=1)
+    @Column(name = "codigo")
 	int codigo;
 	@Column
 	String nombre;
@@ -32,10 +32,11 @@ public class AdministradorEntidad
 	String correo;
 	@Column
 	String clave;
-	@OneToMany
-	List<TiendaEntidad> tiendas;
+	@OneToOne
+	@JoinColumn(name="administrador")
+	TiendaEntidad tienda;
 	
-	private AdministradorEntidad(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, List<TiendaEntidad> tiendas) 
+	private AdministradorEntidad(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, TiendaEntidad tienda) 
 	{
 		setCodigo(codigo);
 		setNombre(nombre);
@@ -44,17 +45,17 @@ public class AdministradorEntidad
 		setTelefono(telefono);
 		setCorreo(correo);
 		setClave(clave);
-		setTiendas(tiendas);
+		setTienda(tienda);
 	}
 	
-	public static AdministradorEntidad crear(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, List<TiendaEntidad> tiendas)
+	public static AdministradorEntidad crear(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, TiendaEntidad tienda)
 	{
-		return new AdministradorEntidad(codigo, nombre, apellidos, numeroIdentificacion, telefono, correo, clave, tiendas);
+		return new AdministradorEntidad(codigo, nombre, apellidos, numeroIdentificacion, telefono, correo, clave, tienda);
 	}
 	
 	public static AdministradorEntidad crear()
 	{
-		return new AdministradorEntidad(0, UtilTexto.BLANCO,  UtilTexto.BLANCO, 0, 0,  UtilTexto.BLANCO,  UtilTexto.BLANCO, new ArrayList<>());
+		return new AdministradorEntidad(0, UtilTexto.BLANCO,  UtilTexto.BLANCO, 0, 0,  UtilTexto.BLANCO,  UtilTexto.BLANCO, TiendaEntidad.crear());
 	}
 	
 	public int getCodigo() 
@@ -133,14 +134,14 @@ public class AdministradorEntidad
 		return this;
 	}
 	
-	public List<TiendaEntidad> getTiendas() 
+	public TiendaEntidad getTienda() 
 	{
-		return tiendas;
+		return tienda;
 	}
 	
-	public AdministradorEntidad setTiendas(List<TiendaEntidad> tiendas) 
+	public AdministradorEntidad setTienda(TiendaEntidad tienda) 
 	{
-		this.tiendas = tiendas;
+		this.tienda = tienda;
 		return this;
 	}
 }

@@ -1,15 +1,11 @@
 package co.edu.uco.mercatouch.entidad;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import co.edu.uco.mercatouch.transversal.utilitario.UtilTexto;
@@ -19,7 +15,9 @@ import co.edu.uco.mercatouch.transversal.utilitario.UtilTexto;
 public class TiendaEntidad 
 {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator="tienda_codigo_seq")
+	@SequenceGenerator(name="tienda_codigo_seq", sequenceName="tienda_codigo_seq", allocationSize=1)
+    @Column(name = "codigo")
 	int codigo;
 	@Column
 	String nombre;
@@ -35,16 +33,8 @@ public class TiendaEntidad
 	long telefono;
 	@Column
 	int calificacion;
-	@OneToOne
-	AdministradorEntidad administrador;
-	@OneToMany
-	List<DomiciliarioEntidad> domiciliarios;
-	@OneToMany
-	List<ProductoEntidad> productos;
-	@OneToMany
-	List<PedidoEntidad> pedidos;
 	
-	private TiendaEntidad(int codigo, String nombre, String rutaLogo, String direccion, String ciudad, String departamento, long telefono, int calificacion, AdministradorEntidad administrador, List<DomiciliarioEntidad> domiciliarios, List<ProductoEntidad> productos, List<PedidoEntidad> pedidos) 
+	private TiendaEntidad(int codigo, String nombre, String rutaLogo, String direccion, String ciudad, String departamento, long telefono, int calificacion) 
 	{
 		setCodigo(codigo);
 		setNombre(nombre);
@@ -54,20 +44,16 @@ public class TiendaEntidad
 		setDepartamento(departamento);
 		setTelefono(telefono);
 		setCalificacion(calificacion);
-		setAdministrador(administrador);
-		setDomiciliarios(domiciliarios);
-		setProductos(productos);
-		setPedidos(pedidos);
 	}
 	
-	public static TiendaEntidad crear(int codigo, String nombre, String rutaLogo, String direccion, String ciudad, String departamento, long telefono, int calificacion, AdministradorEntidad administrador, List<DomiciliarioEntidad> domiciliarios, List<ProductoEntidad> productos, List<PedidoEntidad> pedidos)
+	public static TiendaEntidad crear(int codigo, String nombre, String rutaLogo, String direccion, String ciudad, String departamento, long telefono, int calificacion)
 	{
-		return new TiendaEntidad(codigo, nombre, rutaLogo, direccion, ciudad, departamento, telefono, calificacion, administrador, domiciliarios, productos, pedidos);
+		return new TiendaEntidad(codigo, nombre, rutaLogo, direccion, ciudad, departamento, telefono, calificacion);
 	}
 	
 	public static TiendaEntidad crear()
 	{
-		return new TiendaEntidad(0, UtilTexto.BLANCO, UtilTexto.BLANCO, UtilTexto.BLANCO, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, 0, AdministradorEntidad.crear(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+		return new TiendaEntidad(0, UtilTexto.BLANCO, UtilTexto.BLANCO, UtilTexto.BLANCO, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, 0);
 	}
 
 	public int getCodigo() 
@@ -155,50 +141,6 @@ public class TiendaEntidad
 	public TiendaEntidad setCalificacion(int calificacion) 
 	{
 		this.calificacion = calificacion;
-		return this;
-	}
-
-	public AdministradorEntidad getAdministrador() 
-	{
-		return administrador;
-	}
-
-	public TiendaEntidad setAdministrador(AdministradorEntidad administrador) 
-	{
-		this.administrador = administrador;
-		return this;
-	}
-
-	public List<DomiciliarioEntidad> getDomiciliarios() 
-	{
-		return domiciliarios;
-	}
-
-	public TiendaEntidad setDomiciliarios(List<DomiciliarioEntidad> domiciliarios) 
-	{
-		this.domiciliarios = domiciliarios;
-		return this;
-	}
-
-	public List<ProductoEntidad> getProductos() 
-	{
-		return productos;
-	}
-
-	public TiendaEntidad setProductos(List<ProductoEntidad> productos) 
-	{
-		this.productos = productos;
-		return this;
-	}
-
-	public List<PedidoEntidad> getPedidos() 
-	{
-		return pedidos;
-	}
-
-	public TiendaEntidad setPedidos(List<PedidoEntidad> pedidos) 
-	{
-		this.pedidos = pedidos;
 		return this;
 	}
 }
