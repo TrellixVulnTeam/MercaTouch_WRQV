@@ -27,7 +27,7 @@ public class AdministradorDTO
 		setTelefono(telefono);
 		setCorreo(correo);
 		setClave(clave);
-		setTiendas(tienda);
+		setTienda(tienda);
 	}
 	
 	public static AdministradorDTO crear(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, TiendaDTO tienda)
@@ -121,7 +121,7 @@ public class AdministradorDTO
 		return tienda;
 	}
 	
-	public AdministradorDTO setTiendas(TiendaDTO tienda) 
+	public AdministradorDTO setTienda(TiendaDTO tienda) 
 	{
 		this.tienda = tienda;
 		return this;

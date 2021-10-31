@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import co.edu.uco.mercatouch.api.controlador.respuesta.Respuesta;
 import co.edu.uco.mercatouch.api.controlador.respuesta.enumerador.EstadoRespuestaEnum;
 import co.edu.uco.mercatouch.dto.AdministradorDTO;
+import co.edu.uco.mercatouch.dto.TiendaDTO;
 import co.edu.uco.mercatouch.negocio.fachada.AdministradorFachada;
+import co.edu.uco.mercatouch.negocio.fachada.TiendaFachada;
 
 @RestController
 @RequestMapping("/api/administrador")
@@ -26,6 +28,9 @@ public class AdministradorControlador
 	@Autowired
 	AdministradorFachada administradorFachada;
 	
+	@Autowired
+	TiendaFachada tiendaFachada;
+	
 	@PostMapping
 	public ResponseEntity<Respuesta<AdministradorDTO>> crear(@RequestBody AdministradorDTO administrador)
 	{
@@ -34,7 +39,13 @@ public class AdministradorControlador
 			
 		try 
 		{
-			var administradorDTO = AdministradorDTO.crear().setNombre(administrador.getNombre()).setApellidos(administrador.getApellidos()).setNumeroIdentificacion(administrador.getNumeroIdentificacion()).setCorreo(administrador.getCorreo()).setClave(administrador.getClave()).setTelefono(administrador.getTelefono());
+			tiendaFachada.registrar(administrador.getTienda());
+			
+			List<TiendaDTO> lista = tiendaFachada.consultar(TiendaDTO.crear());
+			
+			var tienda = lista.get(lista.size() - 1);
+			
+			var administradorDTO = AdministradorDTO.crear().setNombre(administrador.getNombre()).setApellidos(administrador.getApellidos()).setNumeroIdentificacion(administrador.getNumeroIdentificacion()).setCorreo(administrador.getCorreo()).setClave(administrador.getClave()).setTelefono(administrador.getTelefono()).setTienda(tienda);
 			
 			administradorFachada.registrar(administradorDTO);
 			
