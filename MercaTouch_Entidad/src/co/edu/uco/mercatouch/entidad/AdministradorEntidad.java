@@ -36,6 +36,11 @@ public class AdministradorEntidad
 	@JoinColumn(name="tienda")
 	TiendaEntidad tienda;
 	
+	public AdministradorEntidad()
+	{
+		
+	}
+	
 	private AdministradorEntidad(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, TiendaEntidad tienda) 
 	{
 		setCodigo(codigo);

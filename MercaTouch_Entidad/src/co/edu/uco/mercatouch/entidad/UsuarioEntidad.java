@@ -33,6 +33,11 @@ public class UsuarioEntidad
 	@Column
 	int puntuacion;
 	
+	public UsuarioEntidad()
+	{
+		
+	}
+	
 	private UsuarioEntidad(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, int puntuacion) 
 	{
 		setCodigo(codigo);
