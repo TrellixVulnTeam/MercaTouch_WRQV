@@ -1,0 +1,152 @@
+<main>
+    <section>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-sm-6 align-self-start">
+                    <div class="logo">
+                        <img src="../../../assets/images/Logo.png" class="img-fluid" alt="">
+                        <p class="h6">Haz tus compras cotidianas más sencillas con <strong>MercaTouch</strong>, porque mercar ahora es mucho más facil.</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 align-self-center">
+                    <div class="login">
+                        <div class="card">
+                            <div class="card-header">
+                                <p class="h6">Iniciar Sesión</p>
+                            </div>
+                            <div class="card-body">
+                                <div [formGroup]="formularioIniciarSesion">
+                                    <div class="form-floating mb-3">
+                                        <input type="email" class="form-control" id="correoLogin" placeholder="nombre@ejemplo.com" formControlName="inicioCorreo" required>
+                                        <label for="floatingInput">Correo Electronico</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="password" class="form-control" id="contraseñaLogin" placeholder="contraseña" formControlName="inicioClave" required>
+                                        <label for="floatingPassword">Contraseña</label>
+                                    </div>
+                                    <div class="alert alert-danger d-flex align-items-center" role="alert" *ngIf="confirmacionLogin">
+                                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        <div>
+                                            Correo o Contraseña Incorrectas
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-danger" (click)="onIniciarSesion()">
+                                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="confirmacionLoading"></span>
+                                        <span class="visually-hidden">Loading...</span>
+                                        Iniciar Sesión
+                                    </button> <br> <br>
+                                    <p style="text-align:center">
+                                        ¿No tienes una cuenta? <a href="#checkin" data-bs-toggle="modal" data-bs-target="#checkin" data-bs-dismiss="modal">Regístrate gratis</a> <br>
+                                        <a href="#">¿Olvidaste tu contraseña?</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="checkin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Registrase</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" [formGroup]="formularioRegistro">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="nombre" placeholder="nombre" formControlName="registroNombre" required>
+                        <label for="floatingInput">Nombre</label>
+                    </div>
+                    <div class="alert alert-warning d-flex align-items-center" role="alert" *ngIf="campoRequeridoNombre">
+                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                        <div>
+                          Este campo es obligatorio
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="apellidos" placeholder="apellidos" formControlName="registroApellidos"required>
+                        <label for="floatingInput">Apellidos</label>
+                    </div>
+                    <div class="alert alert-warning d-flex align-items-center" role="alert" *ngIf="campoRequeridoApellidos">
+                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                        <div>
+                          Este campo es obligatorio
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="number" class="form-control" id="telefono" placeholder="telefono" formControlName="registroTelefono" required>
+                        <label for="floatingInput">Telefono</label>
+                    </div>
+                    <div class="alert alert-warning d-flex align-items-center" role="alert" *ngIf="campoRequeridotelefono">
+                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                        <div>
+                          Este campo es obligatorio
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="number" class="form-control" id="numeroIdentificacion" placeholder="identificacion" formControlName="registroIdentificacion" required>
+                        <label for="floatingInput">Numero de Identificación</label>
+                    </div>
+                    <div class="alert alert-warning d-flex align-items-center" role="alert" *ngIf="campoRequeridoIdentificacion">
+                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                        <div>
+                          Este campo es obligatorio
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="correoElectronico" placeholder="nombre@ejemplo.com" formControlName="registroCorreo" required>
+                        <label for="floatingInput">Correo Electronico</label>
+                    </div>
+                    <div class="alert alert-warning d-flex align-items-center" role="alert" *ngIf="campoRequeridoCorreo">
+                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                        <div>
+                          Este campo es obligatorio
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" id="contraseña" placeholder="contraseña" formControlName="registroClave" required>
+                        <label for="floatingPassword">Contraseña</label>
+                    </div>
+                    <div class="alert alert-warning d-flex align-items-center" role="alert" *ngIf="false">
+                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                        <div>
+                          Este campo es obligatorio
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" id="confirmarContraseña" placeholder="confirmar contraseña" formControlName="registroConfirmarClave" required>
+                        <label for="floatingPassword">Confirmar Contraseña</label>
+                    </div>
+                    <div class="alert alert-danger d-flex align-items-center" role="alert" *ngIf="campoRequeridoClave">
+                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                        <div>
+                            Las contraseñas no coinciden
+                        </div>
+                    </div>
+                    <div class="alert alert-danger d-flex align-items-center" role="alert" *ngIf="confirmacionCampos">
+                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                        <div>
+                            Faltan Campos por Rellenar
+                        </div>
+                    </div>
+                    <div class="alert alert-success d-flex align-items-center" role="alert" *ngIf="confirmacionRegistro">
+                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                        <div>
+                          Se ha registrado correctamente
+                        </div>
+                      </div>
+                    <button type="submit" class="btn btn-danger mt-2" (click)="onRegistrarUsuario()">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="confirmacionLoading"></span>
+                        <span class="visually-hidden">Loading...</span>
+                        Registrarse
+                    </button> <br> <br>
+                    <p style="text-align:center">
+                        ¿Ya tienes una cuenta? <a href="#" data-bs-toggle="modal" data-bs-target="#login" data-bs-dismiss="modal">Inicia Sesion</a>
+                    </p>
+                </div>
+              </div>
+            </div>
+        </div>
+    </section>
+</main>

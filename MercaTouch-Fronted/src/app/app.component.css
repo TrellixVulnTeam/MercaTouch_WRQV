@@ -1,0 +1,11 @@
+.back
+{
+    background-image: url('../assets/images/Fondo.png');
+    height: 100vh;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+}

@@ -1,0 +1,65 @@
+*
+{
+    font-family: var(--main-font);
+}
+
+@media screen and (max-width: 700px)
+{
+    p
+    {
+        font-size:12px;
+    }
+    p.h5
+    {
+        font-size:16px!important;
+    }
+    p.h4
+    {
+        font-size:18px!important;
+    }
+    p.h3
+    {
+        font-size: 20px!important;
+    }
+    p.lead
+    {
+        font-size:12px!important;
+    }
+    h5
+    {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 400px)
+{
+    p
+    {
+        font-size:10px;
+    }
+    p.h5
+    {
+        font-size:14px!important;
+    }
+    p.h4
+    {
+        font-size:16px!important;
+    }
+    p.h3
+    {
+        font-size: 18px!important;
+    }
+    p.lead
+    {
+        font-size:10px!important;
+    }
+    h5
+    {
+        font-size: 14px;
+    }
+}
+
+.logo
+{
+    margin-left: 20vh;
+}
