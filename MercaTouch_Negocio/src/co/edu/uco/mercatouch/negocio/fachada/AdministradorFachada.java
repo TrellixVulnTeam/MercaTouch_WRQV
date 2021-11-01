@@ -11,4 +11,5 @@ public interface AdministradorFachada
 	void registrar(AdministradorDTO administradorDTO);
 	void modificar(AdministradorDTO administradorDTO);
 	void eliminar(AdministradorDTO administradorDTO);
+	boolean verificarCredenciales(AdministradorDTO administradorDTO);
 }

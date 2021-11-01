@@ -16,7 +16,7 @@ import co.edu.uco.mercatouch.transversal.utilitario.UtilTexto;
 public class AdministradorEntidad 
 {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator="administrador_codigo_seq")
 	@SequenceGenerator(name="administrador_codigo_seq", sequenceName="administrador_codigo_seq", allocationSize=1)
     @Column(name = "codigo")
 	int codigo;
@@ -24,7 +24,7 @@ public class AdministradorEntidad
 	String nombre;
 	@Column
 	String apellidos;
-	@Column
+	@Column(name="numeroidentificacion")
 	long numeroIdentificacion;
 	@Column
 	long telefono;
@@ -33,7 +33,7 @@ public class AdministradorEntidad
 	@Column
 	String clave;
 	@OneToOne
-	@JoinColumn(name="administrador")
+	@JoinColumn(name="tienda")
 	TiendaEntidad tienda;
 	
 	private AdministradorEntidad(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, TiendaEntidad tienda) 

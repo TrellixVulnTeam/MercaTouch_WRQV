@@ -11,4 +11,5 @@ public interface AdministradorNegocio
 	void registrar(AdministradorDominio administradorDominio);
 	void modificar(AdministradorDominio administradorDominio);
 	void eliminar(AdministradorDominio administradorDominio);
+	boolean verificarCredenciales(AdministradorDominio administradorDominio);
 }

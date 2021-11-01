@@ -17,6 +17,8 @@ import co.edu.uco.mercatouch.api.controlador.respuesta.Respuesta;
 import co.edu.uco.mercatouch.api.controlador.respuesta.enumerador.EstadoRespuestaEnum;
 import co.edu.uco.mercatouch.dto.UsuarioDTO;
 import co.edu.uco.mercatouch.negocio.fachada.UsuarioFachada;
+import de.mkammerer.argon2.Argon2;
+import de.mkammerer.argon2.Argon2Factory;
 
 @RestController
 @RequestMapping("/api/usuario")
@@ -35,6 +37,10 @@ public class UsuarioControlador
 		try 
 		{
 			var usuarioDTO = UsuarioDTO.crear().setNombre(usuario.getNombre()).setApellidos(usuario.getApellidos()).setNumeroIdentificacion(usuario.getNumeroIdentificacion()).setCorreo(usuario.getCorreo()).setClave(usuario.getClave()).setTelefono(usuario.getTelefono());
+			
+			Argon2 argon = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
+			String hash = argon.hash(1, 1024, 1, usuarioDTO.getClave());
+			usuarioDTO.setClave(hash);
 			
 			usuarioFachada.registrar(usuarioDTO);
 			

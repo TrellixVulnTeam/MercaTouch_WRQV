@@ -19,6 +19,8 @@ import co.edu.uco.mercatouch.dto.AdministradorDTO;
 import co.edu.uco.mercatouch.dto.TiendaDTO;
 import co.edu.uco.mercatouch.negocio.fachada.AdministradorFachada;
 import co.edu.uco.mercatouch.negocio.fachada.TiendaFachada;
+import de.mkammerer.argon2.Argon2;
+import de.mkammerer.argon2.Argon2Factory;
 
 @RestController
 @RequestMapping("/api/administrador")
@@ -46,6 +48,10 @@ public class AdministradorControlador
 			var tienda = lista.get(lista.size() - 1);
 			
 			var administradorDTO = AdministradorDTO.crear().setNombre(administrador.getNombre()).setApellidos(administrador.getApellidos()).setNumeroIdentificacion(administrador.getNumeroIdentificacion()).setCorreo(administrador.getCorreo()).setClave(administrador.getClave()).setTelefono(administrador.getTelefono()).setTienda(tienda);
+			
+			Argon2 argon = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
+			String hash = argon.hash(1, 1024, 1, administradorDTO.getClave());
+			administradorDTO.setClave(hash);
 			
 			administradorFachada.registrar(administradorDTO);
 			

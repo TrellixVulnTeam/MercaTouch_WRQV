@@ -1,5 +1,6 @@
 package co.edu.uco.mercatouch.negocio.negocio.implementacion;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,8 @@ import co.edu.uco.mercatouch.negocio.negocio.UsuarioNegocio;
 import co.edu.uco.mercatouch.negocio.validador.enumerador.TipoValidacion;
 import co.edu.uco.mercatouch.negocio.validador.implementacion.UsuarioValidador;
 import co.edu.uco.mercatouch.transversal.excepcion.MercaTouchNegocioExcepcion;
+import de.mkammerer.argon2.Argon2;
+import de.mkammerer.argon2.Argon2Factory;
 
 @Service
 public class UsuarioNegocioImpl implements UsuarioNegocio 
@@ -49,6 +52,35 @@ public class UsuarioNegocioImpl implements UsuarioNegocio
 	{
 		UsuarioValidador.obtenerInstancia().validar(usuarioDominio, TipoValidacion.ELIMINACION);
 		usuarioDAO.delete(UsuarioEnsambladorImpl.obtenerUsuarioEnsamblador().ensamblarEntidadDesdeDominio(usuarioDominio));
+	}
+	
+	@Override
+	public boolean verificarCredenciales(UsuarioDominio usuarioDominio) 
+	{
+		var usuario = UsuarioDominio.crear().setCorreo(usuarioDominio.getCorreo());
+		
+		List<UsuarioDominio> listaUsuario = consultar(usuario);
+		
+		List<UsuarioDominio> lista = new ArrayList<>();
+		
+		for(int i = 0; i < listaUsuario.size(); i ++)
+		{
+			if(usuario.getCorreo().equals(listaUsuario.get(i).getCorreo()))
+			{
+				lista.add(listaUsuario.get(i));
+			}
+		}
+		
+		if(lista.isEmpty())
+		{
+			return false;
+		}
+		
+		String claveHashed = listaUsuario.get(0).getClave();
+		
+		Argon2 argon = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
+		
+		return argon.verify(claveHashed, usuarioDominio.getClave());
 	}
 	
 	private void asegurarUsuarioNoExistaConCorreo(UsuarioDominio usuarioDominio)

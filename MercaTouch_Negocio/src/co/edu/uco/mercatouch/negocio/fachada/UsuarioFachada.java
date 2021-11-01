@@ -11,4 +11,5 @@ public interface UsuarioFachada
 	void registrar(UsuarioDTO usuarioDTO);
 	void modificar(UsuarioDTO usuarioDTO);
 	void eliminar(UsuarioDTO usuarioDTO);
+	boolean verificarCredenciales(UsuarioDTO usuarioDTO);
 }

@@ -21,7 +21,7 @@ public class TiendaEntidad
 	int codigo;
 	@Column
 	String nombre;
-	@Column
+	@Column(name="rutalogo")
 	String rutaLogo;
 	@Column
 	String direccion;
@@ -33,6 +33,11 @@ public class TiendaEntidad
 	long telefono;
 	@Column
 	int calificacion;
+	
+	public TiendaEntidad()
+	{
+		
+	}
 	
 	private TiendaEntidad(int codigo, String nombre, String rutaLogo, String direccion, String ciudad, String departamento, long telefono, int calificacion) 
 	{

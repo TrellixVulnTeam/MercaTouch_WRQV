@@ -30,6 +30,11 @@
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
   	<dependency>
+			<groupId>de.mkammerer</groupId>
+			<artifactId>argon2-jvm</artifactId>
+			<version>2.5</version>
+		</dependency>
+  	<dependency>
   		<groupId>co.edu.uco.mercatouch</groupId>
   		<artifactId>MercaTouch_DTO</artifactId>
   		<version>0.0.1-SNAPSHOT</version>

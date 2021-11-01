@@ -13,6 +13,11 @@ public class TiendaDTO
 	long telefono;
 	int calificacion;
 	
+	public TiendaDTO()
+	{
+		
+	}
+	
 	private TiendaDTO(int codigo, String nombre, String rutaLogo, String direccion, String ciudad, String departamento, long telefono, int calificacion) 
 	{
 		setCodigo(codigo);

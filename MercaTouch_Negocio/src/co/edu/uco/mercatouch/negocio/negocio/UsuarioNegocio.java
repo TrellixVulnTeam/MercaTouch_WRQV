@@ -11,4 +11,5 @@ public interface UsuarioNegocio
 	void registrar(UsuarioDominio usuarioDominio);
 	void modificar(UsuarioDominio usuarioDominio);
 	void eliminar(UsuarioDominio usuarioDominio);
+	boolean verificarCredenciales(UsuarioDominio usuarioDominio);
 }

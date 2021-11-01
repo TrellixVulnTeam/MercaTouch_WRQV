@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import co.edu.uco.mercatouch.transversal.utilitario.UtilTexto;
 
 @Entity
-@Table(name = "usuario")
+@Table(name = "usuario", schema = "public")
 public class UsuarioEntidad 
 {
 	@Id
@@ -22,7 +22,7 @@ public class UsuarioEntidad
 	String nombre;
 	@Column
 	String apellidos;
-	@Column
+	@Column(name="numeroidentificacion")
 	long numeroIdentificacion;
 	@Column
 	long telefono;

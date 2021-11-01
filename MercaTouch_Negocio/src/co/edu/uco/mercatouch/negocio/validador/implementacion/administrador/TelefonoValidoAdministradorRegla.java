@@ -22,10 +22,10 @@ public class TelefonoValidoAdministradorRegla implements Regla<AdministradorDomi
 	@Override
 	public void validar(AdministradorDominio dato) 
 	{
-		validarTelefonoEsMayorQueCero(dato.getCodigo());
+		validarTelefonoEsMayorQueCero(dato.getTelefono());
 	}
 	
-	private void validarTelefonoEsMayorQueCero(int telefono)
+	private void validarTelefonoEsMayorQueCero(long telefono)
 	{
 		if(UtilNumero.numeroEsMenorOIgual(telefono, 0))
 		{

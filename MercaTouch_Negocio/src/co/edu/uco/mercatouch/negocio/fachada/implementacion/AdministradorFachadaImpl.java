@@ -44,4 +44,11 @@ public class AdministradorFachadaImpl implements AdministradorFachada
 		AdministradorDominio administradorDominio = AdministradorEnsambladorImpl.obtenerAdministradorEnsamblador().ensamblarDominioDesdeDTO(administradorDTO);
 		administradorNegocio.eliminar(administradorDominio);
 	}
+
+	@Override
+	public boolean verificarCredenciales(AdministradorDTO administradorDTO) 
+	{
+		AdministradorDominio administradorDominio = AdministradorEnsambladorImpl.obtenerAdministradorEnsamblador().ensamblarDominioDesdeDTO(administradorDTO);
+		return administradorNegocio.verificarCredenciales(administradorDominio);
+	}
 }

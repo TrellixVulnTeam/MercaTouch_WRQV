@@ -44,4 +44,12 @@ public class UsuarioFachadaImpl implements UsuarioFachada
 		UsuarioDominio usuarioDominio = UsuarioEnsambladorImpl.obtenerUsuarioEnsamblador().ensamblarDominioDesdeDTO(usuarioDTO);
 		usuarioNegocio.eliminar(usuarioDominio);
 	}
+
+	@Override
+	public boolean verificarCredenciales(UsuarioDTO usuarioDTO) 
+	{
+		UsuarioDominio usuarioDominio = UsuarioEnsambladorImpl.obtenerUsuarioEnsamblador().ensamblarDominioDesdeDTO(usuarioDTO);
+		
+		return usuarioNegocio.verificarCredenciales(usuarioDominio);
+	}
 }
