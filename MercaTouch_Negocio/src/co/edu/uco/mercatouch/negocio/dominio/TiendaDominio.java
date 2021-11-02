@@ -6,18 +6,16 @@ public class TiendaDominio
 {
 	int codigo;
 	String nombre;
-	String rutaLogo;
 	String direccion;
 	String ciudad;
 	String departamento;
 	long telefono;
 	int calificacion;
 	
-	private TiendaDominio(int codigo, String nombre, String rutaLogo, String direccion, String ciudad, String departamento, long telefono, int calificacion) 
+	private TiendaDominio(int codigo, String nombre, String direccion, String ciudad, String departamento, long telefono, int calificacion) 
 	{
 		setCodigo(codigo);
 		setNombre(nombre);
-		setRutaLogo(rutaLogo);
 		setDireccion(direccion);
 		setCiudad(ciudad);
 		setDepartamento(departamento);
@@ -25,14 +23,14 @@ public class TiendaDominio
 		setCalificacion(calificacion);
 	}
 	
-	public static TiendaDominio crear(int codigo, String nombre, String rutaLogo, String direccion, String ciudad, String departamento, long telefono, int calificacion)
+	public static TiendaDominio crear(int codigo, String nombre, String direccion, String ciudad, String departamento, long telefono, int calificacion)
 	{
-		return new TiendaDominio(codigo, nombre, rutaLogo, direccion, ciudad, departamento, telefono, calificacion);
+		return new TiendaDominio(codigo, nombre, direccion, ciudad, departamento, telefono, calificacion);
 	}
 	
 	public static TiendaDominio crear()
 	{
-		return new TiendaDominio(0, UtilTexto.BLANCO, UtilTexto.BLANCO, UtilTexto.BLANCO, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, 0);
+		return new TiendaDominio(0, UtilTexto.BLANCO, UtilTexto.BLANCO, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, 0);
 	}
 
 	public int getCodigo() 
@@ -54,17 +52,6 @@ public class TiendaDominio
 	public TiendaDominio setNombre(String nombre) 
 	{
 		this.nombre = UtilTexto.aplicarTrim(nombre);
-		return this;
-	}
-
-	public String getRutaLogo() 
-	{
-		return rutaLogo;
-	}
-
-	public TiendaDominio setRutaLogo(String rutaLogo) 
-	{
-		this.rutaLogo = UtilTexto.aplicarTrim(rutaLogo);
 		return this;
 	}
 

@@ -21,8 +21,6 @@ public class TiendaEntidad
 	int codigo;
 	@Column
 	String nombre;
-	@Column(name="rutalogo")
-	String rutaLogo;
 	@Column
 	String direccion;
 	@Column
@@ -39,11 +37,10 @@ public class TiendaEntidad
 		
 	}
 	
-	private TiendaEntidad(int codigo, String nombre, String rutaLogo, String direccion, String ciudad, String departamento, long telefono, int calificacion) 
+	private TiendaEntidad(int codigo, String nombre, String direccion, String ciudad, String departamento, long telefono, int calificacion) 
 	{
 		setCodigo(codigo);
 		setNombre(nombre);
-		setRutaLogo(rutaLogo);
 		setDireccion(direccion);
 		setCiudad(ciudad);
 		setDepartamento(departamento);
@@ -51,14 +48,14 @@ public class TiendaEntidad
 		setCalificacion(calificacion);
 	}
 	
-	public static TiendaEntidad crear(int codigo, String nombre, String rutaLogo, String direccion, String ciudad, String departamento, long telefono, int calificacion)
+	public static TiendaEntidad crear(int codigo, String nombre, String direccion, String ciudad, String departamento, long telefono, int calificacion)
 	{
-		return new TiendaEntidad(codigo, nombre, rutaLogo, direccion, ciudad, departamento, telefono, calificacion);
+		return new TiendaEntidad(codigo, nombre, direccion, ciudad, departamento, telefono, calificacion);
 	}
 	
 	public static TiendaEntidad crear()
 	{
-		return new TiendaEntidad(0, UtilTexto.BLANCO, UtilTexto.BLANCO, UtilTexto.BLANCO, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, 0);
+		return new TiendaEntidad(0, UtilTexto.BLANCO, UtilTexto.BLANCO, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, 0);
 	}
 
 	public int getCodigo() 
@@ -80,17 +77,6 @@ public class TiendaEntidad
 	public TiendaEntidad setNombre(String nombre) 
 	{
 		this.nombre = UtilTexto.aplicarTrim(nombre);
-		return this;
-	}
-
-	public String getRutaLogo() 
-	{
-		return rutaLogo;
-	}
-
-	public TiendaEntidad setRutaLogo(String rutaLogo) 
-	{
-		this.rutaLogo = UtilTexto.aplicarTrim(rutaLogo);
 		return this;
 	}
 

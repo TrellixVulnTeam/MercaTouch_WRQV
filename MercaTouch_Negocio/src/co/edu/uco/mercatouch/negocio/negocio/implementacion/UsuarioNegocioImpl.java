@@ -12,8 +12,6 @@ import co.edu.uco.mercatouch.negocio.negocio.UsuarioNegocio;
 import co.edu.uco.mercatouch.negocio.validador.enumerador.TipoValidacion;
 import co.edu.uco.mercatouch.negocio.validador.implementacion.UsuarioValidador;
 import co.edu.uco.mercatouch.transversal.excepcion.MercaTouchNegocioExcepcion;
-import de.mkammerer.argon2.Argon2;
-import de.mkammerer.argon2.Argon2Factory;
 
 @Service
 public class UsuarioNegocioImpl implements UsuarioNegocio 
@@ -76,11 +74,7 @@ public class UsuarioNegocioImpl implements UsuarioNegocio
 			return false;
 		}
 		
-		String claveHashed = listaUsuario.get(0).getClave();
-		
-		Argon2 argon = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
-		
-		return argon.verify(claveHashed, usuarioDominio.getClave());
+		return listaUsuario.get(0).getClave().equals(usuarioDominio.getClave());
 	}
 	
 	private void asegurarUsuarioNoExistaConCorreo(UsuarioDominio usuarioDominio)

@@ -9,5 +9,5 @@ import co.edu.uco.mercatouch.entidad.UsuarioEntidad;
 @Component
 public interface UsuarioDAO extends CrudRepository<UsuarioEntidad, Integer>
 {
-
+	
 }

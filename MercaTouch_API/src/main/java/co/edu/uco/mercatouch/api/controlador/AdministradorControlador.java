@@ -192,23 +192,23 @@ public class AdministradorControlador
 		}
 			
 			return entidadRespuesta;
-		}
+	}
 		
-	@GetMapping("/{codigo}")
-	public ResponseEntity<Respuesta<AdministradorDTO>> consultar(@PathVariable int codigo) 
+	@GetMapping("/{correo}")
+	public ResponseEntity<Respuesta<AdministradorDTO>> consultar(@PathVariable String correo) 
 	{
 		ResponseEntity<Respuesta<AdministradorDTO>> entidadRespuesta;
 		Respuesta<AdministradorDTO> respuesta = new Respuesta<>();
 
 		try 
 		{
-			List<AdministradorDTO> administradores = administradorFachada.consultar(AdministradorDTO.crear().setCodigo(codigo));
+			List<AdministradorDTO> administradores = administradorFachada.consultar(AdministradorDTO.crear().setCorreo(correo));
 
 			respuesta.setDatos(administradores);
 			
 			if (respuesta.getDatos().isEmpty()) 
 			{
-				respuesta.adicionarMensaje("No exite un administrador con codigo " + codigo);
+				respuesta.adicionarMensaje("No exite un administrador con correo " + correo);
 			} 
 			else 
 			{
@@ -228,7 +228,7 @@ public class AdministradorControlador
 			excepcion.printStackTrace();
 		} catch (Exception excepcion) 
 		{
-			respuesta.adicionarMensaje("Se ha presentado un problema inesperado tratando de consultar la información del administrador " + codigo);
+			respuesta.adicionarMensaje("Se ha presentado un problema inesperado tratando de consultar la información del administrador " + correo);
 			respuesta.setEstado(EstadoRespuestaEnum.NO_EXITOSA);
 
 			entidadRespuesta = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);

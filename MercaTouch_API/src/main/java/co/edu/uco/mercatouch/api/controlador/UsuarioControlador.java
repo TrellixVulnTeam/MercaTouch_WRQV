@@ -17,8 +17,6 @@ import co.edu.uco.mercatouch.api.controlador.respuesta.Respuesta;
 import co.edu.uco.mercatouch.api.controlador.respuesta.enumerador.EstadoRespuestaEnum;
 import co.edu.uco.mercatouch.dto.UsuarioDTO;
 import co.edu.uco.mercatouch.negocio.fachada.UsuarioFachada;
-import de.mkammerer.argon2.Argon2;
-import de.mkammerer.argon2.Argon2Factory;
 
 @RestController
 @RequestMapping("/api/usuario")
@@ -38,9 +36,9 @@ public class UsuarioControlador
 		{
 			var usuarioDTO = UsuarioDTO.crear().setNombre(usuario.getNombre()).setApellidos(usuario.getApellidos()).setNumeroIdentificacion(usuario.getNumeroIdentificacion()).setCorreo(usuario.getCorreo()).setClave(usuario.getClave()).setTelefono(usuario.getTelefono());
 			
-			Argon2 argon = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
+			/*Argon2 argon = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
 			String hash = argon.hash(1, 1024, 1, usuarioDTO.getClave());
-			usuarioDTO.setClave(hash);
+			usuarioDTO.setClave(hash);*/
 			
 			usuarioFachada.registrar(usuarioDTO);
 			
@@ -108,15 +106,17 @@ public class UsuarioControlador
 		return entidadRespuesta;
 	}
 	   
-	@DeleteMapping("/{codigo}")
-	public ResponseEntity<Respuesta<UsuarioDTO>> eliminar(@PathVariable int codigo)
+	@DeleteMapping("/{correo}")
+	public ResponseEntity<Respuesta<UsuarioDTO>> eliminar(@PathVariable String correo)
 	{
 	    ResponseEntity<Respuesta<UsuarioDTO>> entidadRespuesta;
 		Respuesta<UsuarioDTO> respuesta = new Respuesta<>();
 			
 		try 
 		{
-			usuarioFachada.eliminar(UsuarioDTO.crear().setCodigo(codigo));
+			List<UsuarioDTO> usuarios = usuarioFachada.consultar(UsuarioDTO.crear().setCorreo(correo));
+			
+			usuarioFachada.eliminar(UsuarioDTO.crear().setCodigo(usuarios.get(0).getCodigo()));
 				
 			respuesta.adicionarMensaje("El usuario se elimino sin problemas");
 			respuesta.setEstado(EstadoRespuestaEnum.EXITOSA);
@@ -181,50 +181,43 @@ public class UsuarioControlador
 		}
 			
 			return entidadRespuesta;
-		}
-		
-	@GetMapping("/{codigo}")
-	public ResponseEntity<Respuesta<UsuarioDTO>> consultar(@PathVariable int codigo) 
+	}
+	
+	@GetMapping("/{correo}")
+	public ResponseEntity<Respuesta<UsuarioDTO>> consultar(@PathVariable String correo)
 	{
 		ResponseEntity<Respuesta<UsuarioDTO>> entidadRespuesta;
 		Respuesta<UsuarioDTO> respuesta = new Respuesta<>();
-
+			
 		try 
 		{
-			List<UsuarioDTO> usuarios = usuarioFachada.consultar(UsuarioDTO.crear().setCodigo(codigo));
-
-			respuesta.setDatos(usuarios);
+			List<UsuarioDTO> usuarios = usuarioFachada.consultar(UsuarioDTO.crear().setCorreo(correo));
 			
-			if (respuesta.getDatos().isEmpty()) 
-			{
-				respuesta.adicionarMensaje("No exite un usuario con codigo " + codigo);
-			} 
-			else 
-			{
-				respuesta.adicionarMensaje("El usuario se consulto de forma exitosa.");
-			}
-
+			respuesta.setDatos(usuarios);
+			respuesta.adicionarMensaje("Los usuarios se consultaron de forma exitosa.");
 			respuesta.setEstado(EstadoRespuestaEnum.EXITOSA);
-
+				
 			entidadRespuesta = new ResponseEntity<>(respuesta, HttpStatus.ACCEPTED);
-		} catch (RuntimeException excepcion) 
+		} 
+		catch (RuntimeException excepcion) 
 		{
 			respuesta.adicionarMensaje(excepcion.getMessage());
 			respuesta.setEstado(EstadoRespuestaEnum.NO_EXITOSA);
-
+				
 			entidadRespuesta = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
-
-			excepcion.printStackTrace();
-		} catch (Exception excepcion) 
-		{
-			respuesta.adicionarMensaje("Se ha presentado un problema inesperado tratando de consultar la información del usuario " + codigo);
-			respuesta.setEstado(EstadoRespuestaEnum.NO_EXITOSA);
-
-			entidadRespuesta = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
-
+				
 			excepcion.printStackTrace();
 		}
-
-		return entidadRespuesta;
+		catch (Exception excepcion) 
+		{
+			respuesta.adicionarMensaje("Se ha presentado un problema inesperado tratando de consultar la información de los usuarios");
+			respuesta.setEstado(EstadoRespuestaEnum.NO_EXITOSA);
+				
+			entidadRespuesta = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
+				
+			excepcion.printStackTrace();
+		}
+			
+			return entidadRespuesta;
 	}
 }

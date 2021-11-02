@@ -18,11 +18,11 @@
                 </li>
                 <li class="nav-item dropdown"> 
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Esteban
+                      {{nombre}}
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                       <li><a class="dropdown-item">Perfil</a></li>
-                      <li><a class="dropdown-item" routerLink="/registratienda">¿Tienes una Tienda?</a></li>
+                      <li><a class="dropdown-item" href="#checkin" data-bs-toggle="modal" data-bs-target="#checkin" data-bs-dismiss="modal">¿Tienes una Tienda?</a></li>
                       <li><a class="dropdown-item">Ajustes</a></li>
                       <li><hr class="dropdown-divider"></li>
                       <li><a class="dropdown-item" routerLink="/home">Cerrar Sesión</a></li>
@@ -32,3 +32,82 @@
         </div>
     </div>
 </nav>
+<div class="modal fade" id="checkin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Registra Tienda</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" [formGroup]="formularioRegistro">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="nombre" placeholder="nombre" formControlName="registroNombre" required>
+                <label for="floatingInput">Nombre</label>
+            </div>
+            <div class="alert alert-warning d-flex align-items-center" role="alert" *ngIf="campoRequeridoNombre">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                <div>
+                  Este campo es obligatorio
+                </div>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="direccion" placeholder="direccion" formControlName="registroDireccion" required>
+                <label for="floatingInput">Dirección</label>
+            </div>
+            <div class="alert alert-warning d-flex align-items-center" role="alert" *ngIf="campoRequeridoDireccion">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                <div>
+                  Este campo es obligatorio
+                </div>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="ciudad" placeholder="ciudad" formControlName="registroCiudad" required>
+                <label for="floatingInput">Ciudad</label>
+            </div>
+            <div class="alert alert-warning d-flex align-items-center" role="alert" *ngIf="campoRequeridoCiudad">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                <div>
+                  Este campo es obligatorio
+                </div>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="departamento" placeholder="departamento" formControlName="registroDepartamento" required>
+                <label for="floatingInput">Departamento</label>
+            </div>
+            <div class="alert alert-warning d-flex align-items-center" role="alert" *ngIf="campoRequeridoDepartamento">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                <div>
+                  Este campo es obligatorio
+                </div>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control" id="telefono" placeholder="telefono" formControlName="registroTelefono" required>
+                <label for="floatingInput">Telefono</label>
+            </div>
+            <div class="alert alert-warning d-flex align-items-center" role="alert" *ngIf="campoRequeridotelefono">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                <div>
+                  Este campo es obligatorio
+                </div>
+            </div>
+            <div class="alert alert-danger d-flex align-items-center" role="alert" *ngIf="confirmacionCampos">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                <div>
+                    Faltan Campos por Rellenar
+                </div>
+            </div>
+            <div class="alert alert-success d-flex align-items-center" role="alert" *ngIf="confirmacionRegistro">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                <div>
+                  Se ha registrado correctamente
+                </div>
+              </div>
+            <button type="submit" class="btn btn-danger mt-2" (click)="onRegistrarTienda()">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="confirmacionLoading"></span>
+                <span class="visually-hidden">Loading...</span>
+                Registrar
+            </button>
+        </div>
+      </div>
+    </div>
+</div>

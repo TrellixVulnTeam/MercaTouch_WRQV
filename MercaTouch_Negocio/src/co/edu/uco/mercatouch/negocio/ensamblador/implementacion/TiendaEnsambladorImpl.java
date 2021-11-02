@@ -31,7 +31,7 @@ public class TiendaEnsambladorImpl implements TiendaEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar un Dominio de Tienda a partir de una entidad de una Tienda que esta nulo");
 		}
 		
-		return TiendaDominio.crear(entidad.getCodigo(), entidad.getNombre(), entidad.getRutaLogo(), entidad.getDireccion(), entidad.getCiudad(), entidad.getDepartamento(), entidad.getTelefono(), entidad.getCalificacion());
+		return TiendaDominio.crear(entidad.getCodigo(), entidad.getNombre(), entidad.getDireccion(), entidad.getCiudad(), entidad.getDepartamento(), entidad.getTelefono(), entidad.getCalificacion());
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class TiendaEnsambladorImpl implements TiendaEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar una Entidad de Tienda a partir de un dominio de una Tienda que esta nulo");
 		}
 		
-		return TiendaEntidad.crear(dominio.getCodigo(), dominio.getNombre(), dominio.getRutaLogo(), dominio.getDireccion(), dominio.getCiudad(), dominio.getDepartamento(), dominio.getTelefono(), dominio.getCalificacion());
+		return TiendaEntidad.crear(dominio.getCodigo(), dominio.getNombre(), dominio.getDireccion(), dominio.getCiudad(), dominio.getDepartamento(), dominio.getTelefono(), dominio.getCalificacion());
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class TiendaEnsambladorImpl implements TiendaEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar un Dominio de Tienda a partir de un DTO de una Tienda que esta nulo");
 		}
 		
-		return TiendaDominio.crear(dto.getCodigo(), dto.getNombre(), dto.getRutaLogo(), dto.getDireccion(), dto.getCiudad(), dto.getDepartamento(), dto.getTelefono(), dto.getCalificacion());
+		return TiendaDominio.crear(dto.getCodigo(), dto.getNombre(), dto.getDireccion(), dto.getCiudad(), dto.getDepartamento(), dto.getTelefono(), dto.getCalificacion());
 	}
 
 	@Override
@@ -82,7 +82,7 @@ public class TiendaEnsambladorImpl implements TiendaEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar un DTO de Tienda a partir de un Dominio de una Tienda que esta nulo");
 		}
 		
-		return TiendaDTO.crear(dominio.getCodigo(), dominio.getNombre(), dominio.getRutaLogo(), dominio.getDireccion(), dominio.getCiudad(), dominio.getDepartamento(), dominio.getTelefono(), dominio.getCalificacion());
+		return TiendaDTO.crear(dominio.getCodigo(), dominio.getNombre(), dominio.getDireccion(), dominio.getCiudad(), dominio.getDepartamento(), dominio.getTelefono(), dominio.getCalificacion());
 	}
 
 	@Override
