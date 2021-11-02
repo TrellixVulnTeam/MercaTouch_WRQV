@@ -140,11 +140,13 @@ export class HomeComponent implements OnInit
       {
         window.location.href= '/homeuser';
         this.confirmacionLoading = false;
+        localStorage.setItem('abcd', this.usuarioAuth.correo);
       }
       else if(resp.mensajes[0] === 'OK ADMIN')
       {
         window.location.href= '/homeadmin';
         this.confirmacionLoading = false;
+        localStorage.setItem('abcd', this.usuarioAuth.correo);
       }
       else
       {

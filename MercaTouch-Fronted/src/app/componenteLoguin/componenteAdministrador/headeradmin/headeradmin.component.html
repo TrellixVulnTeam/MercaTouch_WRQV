@@ -1,1 +1,34 @@
-<p>headeradmin works!</p>
+<nav class="navbar navbar-expand-sm navbar-light fixed-top bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" routerLink="/home"><img src="../../../../assets/images/Logo.png" width="60" height="60" alt="Imagen del Logo de MercaTouch"></a>
+        <a id="ArquiSWTitle">MercaTouch</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" routerLink="/homeadmin">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" routerLink="/tiendasadmin">Tiendas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" routerLink="/pedidosadmin">Pedidos</a>
+                </li>
+                <li class="nav-item dropdown"> 
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      {{nombre}}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                      <li><a class="dropdown-item">Perfil</a></li>
+                      <li><a class="dropdown-item" routerLink="/mitienda">Mi Tienda</a></li>
+                      <li><a class="dropdown-item">Ajustes</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" routerLink="/home">Cerrar Sesión</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
