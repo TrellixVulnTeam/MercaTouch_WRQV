@@ -31,7 +31,7 @@ public class PedidoEnsambladorImpl implements PedidoEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar un Dominio de Pedido a partir de una entidad de un Pedido que esta nulo");
 		}
 		
-		return PedidoDominio.crear(entidad.getCodigo(), entidad.getPagoTotal(), entidad.getDescuento(), TiendaEnsambladorImpl.obtenerTiendaEnsamblador().ensamblarDominioDesdeEntidad(entidad.getTienda()), MetodoPagoEnsambladorImpl.obtenerMetodoPagoEnsamblador().ensamblarDominioDesdeEntidad(entidad.getMetodoPago()), ProductoEnsambladorImpl.obtenerProductoEnsamblador().ensamblarDominiosDesdeEntidad(entidad.getProductosPedidos()));
+		return PedidoDominio.crear(entidad.getCodigo(), entidad.getPagoTotal(), entidad.getDescuento(), entidad.getFecha(), entidad.isIncluyeDomicilio(), MetodoPagoEnsambladorImpl.obtenerMetodoPagoEnsamblador().ensamblarDominioDesdeEntidad(entidad.getMetodoPago()), DetallePedidoEnsambladorImpl.obtenerDetallePedidoEnsamblador().ensamblarDominiosDesdeEntidad(entidad.getDetallesPedido()));
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class PedidoEnsambladorImpl implements PedidoEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar una Entidad de Pedido a partir de un dominio de un Pedido que esta nulo");
 		}
 		
-		return PedidoEntidad.crear(dominio.getCodigo(), dominio.getPagoTotal(), dominio.getDescuento(), TiendaEnsambladorImpl.obtenerTiendaEnsamblador().ensamblarEntidadDesdeDominio(dominio.getTienda()), MetodoPagoEnsambladorImpl.obtenerMetodoPagoEnsamblador().ensamblarEntidadDesdeDominio(dominio.getMetodoPago()), ProductoEnsambladorImpl.obtenerProductoEnsamblador().ensamblarEntidadesDesdeDominio(dominio.getProductosPedidos()));
+		return PedidoEntidad.crear(dominio.getCodigo(), dominio.getPagoTotal(), dominio.getDescuento(), dominio.getFecha(), dominio.isIncluyeDomicilio(), MetodoPagoEnsambladorImpl.obtenerMetodoPagoEnsamblador().ensamblarEntidadDesdeDominio(dominio.getMetodoPago()), DetallePedidoEnsambladorImpl.obtenerDetallePedidoEnsamblador().ensamblarEntidadesDesdeDominio(dominio.getDetallesPedido()));
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class PedidoEnsambladorImpl implements PedidoEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar un Dominio de Pedido a partir de un DTO de un Pedido que esta nulo");
 		}
 		
-		return PedidoDominio.crear(dto.getCodigo(), dto.getPagoTotal(), dto.getDescuento(), TiendaEnsambladorImpl.obtenerTiendaEnsamblador().ensamblarDominioDesdeDTO(dto.getTienda()), MetodoPagoEnsambladorImpl.obtenerMetodoPagoEnsamblador().ensamblarDominioDesdeDTO(dto.getMetodoPago()), ProductoEnsambladorImpl.obtenerProductoEnsamblador().ensamblarDominiosDesdeDTO(dto.getProductosPedidos()));
+		return PedidoDominio.crear(dto.getCodigo(), dto.getPagoTotal(), dto.getDescuento(), dto.getFecha(), dto.isIncluyeDomicilio(), MetodoPagoEnsambladorImpl.obtenerMetodoPagoEnsamblador().ensamblarDominioDesdeDTO(dto.getMetodoPago()), DetallePedidoEnsambladorImpl.obtenerDetallePedidoEnsamblador().ensamblarDominiosDesdeDTO(dto.getDetallesPedido()));
 	}
 
 	@Override
@@ -82,7 +82,7 @@ public class PedidoEnsambladorImpl implements PedidoEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar un DTO de Pedido a partir de un Dominio de un Pedido que esta nulo");
 		}
 		
-		return PedidoDTO.crear(dominio.getCodigo(), dominio.getPagoTotal(), dominio.getDescuento(), TiendaEnsambladorImpl.obtenerTiendaEnsamblador().ensamblarDTODesdeDominio(dominio.getTienda()), MetodoPagoEnsambladorImpl.obtenerMetodoPagoEnsamblador().ensamblarDTODesdeDominio(dominio.getMetodoPago()), ProductoEnsambladorImpl.obtenerProductoEnsamblador().ensamblarDTOsDesdeDominio(dominio.getProductosPedidos()));
+		return PedidoDTO.crear(dominio.getCodigo(), dominio.getPagoTotal(), dominio.getDescuento(), dominio.getFecha(), dominio.isIncluyeDomicilio(), MetodoPagoEnsambladorImpl.obtenerMetodoPagoEnsamblador().ensamblarDTODesdeDominio(dominio.getMetodoPago()), DetallePedidoEnsambladorImpl.obtenerDetallePedidoEnsamblador().ensamblarDTOsDesdeDominio(dominio.getDetallesPedido()));
 	}
 
 	@Override

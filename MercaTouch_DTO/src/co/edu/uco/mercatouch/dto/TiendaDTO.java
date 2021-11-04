@@ -4,38 +4,40 @@ import co.edu.uco.mercatouch.transversal.utilitario.UtilTexto;
 
 public class TiendaDTO 
 {
-	int codigo;
-	String nombre;
-	String direccion;
-	String ciudad;
-	String departamento;
-	long telefono;
-	int calificacion;
+	private int codigo;
+	private String nombre;
+	private String rutaLogo;
+	private String direccion;
+	private long telefono;
+	private CiudadDTO ciudad;
+	private UsuarioTiendaDTO administrador;
+	private PlanSuscripcionDTO planSuscripcion;
 	
 	public TiendaDTO()
 	{
 		
 	}
 	
-	private TiendaDTO(int codigo, String nombre, String direccion, String ciudad, String departamento, long telefono, int calificacion) 
+	private TiendaDTO(int codigo, String nombre, String rutaLogo, String direccion, long telefono, CiudadDTO ciudad, UsuarioTiendaDTO administrador, PlanSuscripcionDTO planSuscripcion) 
 	{
 		setCodigo(codigo);
 		setNombre(nombre);
+		setRutaLogo(rutaLogo);
 		setDireccion(direccion);
-		setCiudad(ciudad);
-		setDepartamento(departamento);
 		setTelefono(telefono);
-		setCalificacion(calificacion);
+		setCiudad(ciudad);
+		setAdministrador(administrador);
+		setPlanSuscripcion(planSuscripcion);
 	}
 	
-	public static TiendaDTO crear(int codigo, String nombre, String direccion, String ciudad, String departamento, long telefono, int calificacion)
+	public static TiendaDTO crear(int codigo, String nombre, String rutaLogo, String direccion, long telefono, CiudadDTO ciudad, UsuarioTiendaDTO administrador, PlanSuscripcionDTO planSuscripcion)
 	{
-		return new TiendaDTO(codigo, nombre, direccion, ciudad, departamento, telefono, calificacion);
+		return new TiendaDTO(codigo, nombre, rutaLogo, direccion, telefono, ciudad, administrador, planSuscripcion);
 	}
 	
 	public static TiendaDTO crear()
 	{
-		return new TiendaDTO(0, UtilTexto.BLANCO, UtilTexto.BLANCO, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, 0);
+		return new TiendaDTO(0, UtilTexto.BLANCO, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, CiudadDTO.crear(), UsuarioTiendaDTO.crear(), PlanSuscripcionDTO.crear());
 	}
 
 	public int getCodigo() 
@@ -43,7 +45,7 @@ public class TiendaDTO
 		return codigo;
 	}
 
-	public TiendaDTO setCodigo(int codigo)
+	public TiendaDTO setCodigo(int codigo) 
 	{
 		this.codigo = codigo;
 		return this;
@@ -60,6 +62,17 @@ public class TiendaDTO
 		return this;
 	}
 
+	public String getRutaLogo() 
+	{
+		return rutaLogo;
+	}
+
+	public TiendaDTO setRutaLogo(String rutaLogo) 
+	{
+		this.rutaLogo = UtilTexto.aplicarTrim(rutaLogo);
+		return this;
+	}
+
 	public String getDireccion() 
 	{
 		return direccion;
@@ -68,28 +81,6 @@ public class TiendaDTO
 	public TiendaDTO setDireccion(String direccion) 
 	{
 		this.direccion = UtilTexto.aplicarTrim(direccion);
-		return this;
-	}
-
-	public String getCiudad() 
-	{
-		return ciudad;
-	}
-
-	public TiendaDTO setCiudad(String ciudad) 
-	{
-		this.ciudad = UtilTexto.aplicarTrim(ciudad);
-		return this;
-	}
-
-	public String getDepartamento() 
-	{
-		return departamento;
-	}
-
-	public TiendaDTO setDepartamento(String departamento) 
-	{
-		this.departamento = UtilTexto.aplicarTrim(departamento);
 		return this;
 	}
 
@@ -104,14 +95,36 @@ public class TiendaDTO
 		return this;
 	}
 
-	public int getCalificacion() 
+	public CiudadDTO getCiudad() 
 	{
-		return calificacion;
+		return ciudad;
 	}
 
-	public TiendaDTO setCalificacion(int calificacion) 
+	public TiendaDTO setCiudad(CiudadDTO ciudad) 
 	{
-		this.calificacion = calificacion;
+		this.ciudad = ciudad;
+		return this;
+	}
+
+	public UsuarioTiendaDTO getAdministrador() 
+	{
+		return administrador;
+	}
+
+	public TiendaDTO setAdministrador(UsuarioTiendaDTO administrador) 
+	{
+		this.administrador = administrador;
+		return this;
+	}
+
+	public PlanSuscripcionDTO getPlanSuscripcion() 
+	{
+		return planSuscripcion;
+	}
+
+	public TiendaDTO setPlanSuscripcion(PlanSuscripcionDTO planSuscripcion) 
+	{
+		this.planSuscripcion = planSuscripcion;
 		return this;
 	}
 }

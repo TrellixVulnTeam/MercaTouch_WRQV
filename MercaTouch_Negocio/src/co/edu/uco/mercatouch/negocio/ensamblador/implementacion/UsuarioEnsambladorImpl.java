@@ -31,7 +31,7 @@ public class UsuarioEnsambladorImpl implements UsuarioEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar un Dominio de Usuario a partir de una entidad de un Usuario que esta nulo");
 		}
 		
-		return UsuarioDominio.crear(entidad.getCodigo(), entidad.getNombre(), entidad.getApellidos(), entidad.getNumeroIdentificacion(), entidad.getTelefono(), entidad.getCorreo(), entidad.getClave(), entidad.getPuntuacion());
+		return UsuarioDominio.crear(entidad.getCodigo(), entidad.getNombre(), entidad.getApellidos(), entidad.getNumeroIdentificacion(), entidad.getTelefono(), entidad.getCorreo(), entidad.getClave(), entidad.getPuntuacion(), PerfilEnsambladorImpl.obtenerPerfilEnsamblador().ensamblarDominioDesdeEntidad(entidad.getPerfil()));
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class UsuarioEnsambladorImpl implements UsuarioEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar una Entidad de Usuario a partir de un dominio de un Usuario que esta nulo");
 		}
 		
-		return UsuarioEntidad.crear(dominio.getCodigo(), dominio.getNombre(), dominio.getApellidos(), dominio.getNumeroIdentificacion(), dominio.getTelefono(), dominio.getCorreo(), dominio.getClave(), dominio.getPuntuacion());
+		return UsuarioEntidad.crear(dominio.getCodigo(), dominio.getNombre(), dominio.getApellidos(), dominio.getNumeroIdentificacion(), dominio.getTelefono(), dominio.getCorreo(), dominio.getClave(), dominio.getPuntuacion(), PerfilEnsambladorImpl.obtenerPerfilEnsamblador().ensamblarEntidadDesdeDominio(dominio.getPerfil()));
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class UsuarioEnsambladorImpl implements UsuarioEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar un Dominio de Usuario a partir de un DTO de un Usuario que esta nulo");
 		}
 		
-		return UsuarioDominio.crear(dto.getCodigo(), dto.getNombre(), dto.getApellidos(), dto.getNumeroIdentificacion(), dto.getTelefono(), dto.getCorreo(), dto.getClave(), dto.getPuntuacion());
+		return UsuarioDominio.crear(dto.getCodigo(), dto.getNombre(), dto.getApellidos(), dto.getNumeroIdentificacion(), dto.getTelefono(), dto.getCorreo(), dto.getClave(), dto.getPuntuacion(), PerfilEnsambladorImpl.obtenerPerfilEnsamblador().ensamblarDominioDesdeDTO(dto.getPerfil()));
 	}
 
 	@Override
@@ -82,7 +82,7 @@ public class UsuarioEnsambladorImpl implements UsuarioEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar un DTO de Usuario a partir de un Dominio de un Usuario que esta nulo");
 		}
 		
-		return UsuarioDTO.crear(dominio.getCodigo(), dominio.getNombre(), dominio.getApellidos(), dominio.getNumeroIdentificacion(), dominio.getTelefono(), dominio.getCorreo(), dominio.getClave(), dominio.getPuntuacion());
+		return UsuarioDTO.crear(dominio.getCodigo(), dominio.getNombre(), dominio.getApellidos(), dominio.getNumeroIdentificacion(), dominio.getTelefono(), dominio.getCorreo(), dominio.getClave(), dominio.getPuntuacion(), PerfilEnsambladorImpl.obtenerPerfilEnsamblador().ensamblarDTODesdeDominio(dominio.getPerfil()));
 	}
 
 	@Override

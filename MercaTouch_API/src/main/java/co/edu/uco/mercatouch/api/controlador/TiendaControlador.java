@@ -34,7 +34,7 @@ public class TiendaControlador
 			
 		try 
 		{
-			var tiendaDTO = TiendaDTO.crear().setNombre(tienda.getNombre()).setDireccion(tienda.getDireccion()).setCiudad(tienda.getCiudad()).setDepartamento(tienda.getDepartamento()).setTelefono(tienda.getTelefono());
+			var tiendaDTO = TiendaDTO.crear().setNombre(tienda.getNombre()).setDireccion(tienda.getDireccion()).setCiudad(tienda.getCiudad()).setTelefono(tienda.getTelefono());
 			
 			tiendaFachada.registrar(tiendaDTO);
 			

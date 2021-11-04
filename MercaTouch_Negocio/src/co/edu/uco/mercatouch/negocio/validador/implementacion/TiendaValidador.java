@@ -6,9 +6,7 @@ import java.util.List;
 import co.edu.uco.mercatouch.negocio.dominio.TiendaDominio;
 import co.edu.uco.mercatouch.negocio.validador.Validador;
 import co.edu.uco.mercatouch.negocio.validador.enumerador.TipoValidacion;
-import co.edu.uco.mercatouch.negocio.validador.implementacion.tienda.CiudadValidoTiendaRegla;
 import co.edu.uco.mercatouch.negocio.validador.implementacion.tienda.CodigoValidoTiendaRegla;
-import co.edu.uco.mercatouch.negocio.validador.implementacion.tienda.DepartamentoValidoTiendaRegla;
 import co.edu.uco.mercatouch.negocio.validador.implementacion.tienda.NombreValidoTiendaRegla;
 import co.edu.uco.mercatouch.negocio.validador.implementacion.tienda.TelefonoValidoTiendaRegla;
 import co.edu.uco.mercatouch.negocio.validador.regla.Regla;
@@ -55,8 +53,6 @@ public class TiendaValidador implements Validador<TiendaDominio>
 		List<Regla<TiendaDominio>> listadoReglas = new ArrayList<>();
 		
 		listadoReglas.add(NombreValidoTiendaRegla.obtenerInstancia());
-		listadoReglas.add(CiudadValidoTiendaRegla.obtenerInstancia());
-		listadoReglas.add(DepartamentoValidoTiendaRegla.obtenerInstancia());
 		listadoReglas.add(TelefonoValidoTiendaRegla.obtenerInstancia());
 			
 		return listadoReglas;
@@ -68,8 +64,6 @@ public class TiendaValidador implements Validador<TiendaDominio>
 		
 		listadoReglas.add(CodigoValidoTiendaRegla.obtenerInstancia());
 		listadoReglas.add(NombreValidoTiendaRegla.obtenerInstancia());
-		listadoReglas.add(CiudadValidoTiendaRegla.obtenerInstancia());
-		listadoReglas.add(DepartamentoValidoTiendaRegla.obtenerInstancia());
 		listadoReglas.add(TelefonoValidoTiendaRegla.obtenerInstancia());
 			
 		return listadoReglas;

@@ -6,23 +6,26 @@ public class MetodoPagoDTO
 {
 	int codigo;
 	String nombre;
-	boolean incluyeDomicilio;
 	
-	private MetodoPagoDTO(int codigo, String nombre, boolean incluyeDomicilio) 
+	public MetodoPagoDTO()
+	{
+		
+	}
+	
+	private MetodoPagoDTO(int codigo, String nombre) 
 	{
 		setCodigo(codigo);
 		setNombre(nombre);
-		setIncluyeDomicilio(incluyeDomicilio);
 	}
 	
-	public static MetodoPagoDTO crear(int codigo, String nombre, boolean incluyeDomicilio)
+	public static MetodoPagoDTO crear(int codigo, String nombre)
 	{
-		return new MetodoPagoDTO(codigo, nombre, incluyeDomicilio);
+		return new MetodoPagoDTO(codigo, nombre);
 	}
 	
 	public static MetodoPagoDTO crear()
 	{
-		return new MetodoPagoDTO(0, UtilTexto.BLANCO, false);
+		return new MetodoPagoDTO(0, UtilTexto.BLANCO);
 	}
 
 	public int getCodigo() 
@@ -44,17 +47,6 @@ public class MetodoPagoDTO
 	public MetodoPagoDTO setNombre(String nombre) 
 	{
 		this.nombre = UtilTexto.aplicarTrim(nombre);
-		return this;
-	}
-
-	public boolean isIncluyeDomicilio() 
-	{
-		return incluyeDomicilio;
-	}
-
-	public MetodoPagoDTO setIncluyeDomicilio(boolean incluyeDomicilio) 
-	{
-		this.incluyeDomicilio = incluyeDomicilio;
 		return this;
 	}
 }

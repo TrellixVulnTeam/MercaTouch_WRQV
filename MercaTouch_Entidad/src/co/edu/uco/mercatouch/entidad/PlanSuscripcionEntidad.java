@@ -1,47 +1,35 @@
 package co.edu.uco.mercatouch.entidad;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
+import java.util.Date;
 import co.edu.uco.mercatouch.transversal.utilitario.UtilTexto;
 
-@Entity
-@Table(name = "plansuscripcion")
 public class PlanSuscripcionEntidad 
 {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	int codigo;
-	@Column
-	String nombre;
-	@Column
-	String descripcion;
-	@Column
-	double precio;
-	@Column
-	int tiempoSuscripcion;
+	private int codigo;
+	private String nombre;
+	private String descripcion;
+	private double precio;
+	private int tiempoSuscripcion;
+	private Date fechaRegistro;
 	
-	private PlanSuscripcionEntidad(int codigo, String nombre, String descripcion, double precio, int tiempoSuscripcion) 
+	private PlanSuscripcionEntidad(int codigo, String nombre, String descripcion, double precio, int tiempoSuscripcion, Date fechaRegistro) 
 	{
 		setCodigo(codigo);
 		setNombre(nombre);
 		setDescripcion(descripcion);
 		setPrecio(precio);
 		setTiempoSuscripcion(tiempoSuscripcion);
+		setFechaRegistro(fechaRegistro);
 	}
 	
-	public static PlanSuscripcionEntidad crear(int codigo, String nombre, String descripcion, double precio, int tiempoSuscripcion)
+	public static PlanSuscripcionEntidad crear(int codigo, String nombre, String descripcion, double precio, int tiempoSuscripcion, Date fechaRegistro)
 	{
-		return new PlanSuscripcionEntidad(codigo, nombre, descripcion, precio, tiempoSuscripcion);
+		return new PlanSuscripcionEntidad(codigo, nombre, descripcion, precio, tiempoSuscripcion, fechaRegistro);
 	}
 	
 	public static PlanSuscripcionEntidad crear()
 	{
-		return new PlanSuscripcionEntidad(0, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, 0);
+		return new PlanSuscripcionEntidad(0, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, 0, new Date());
 	}
 
 	public int getCodigo() 
@@ -96,6 +84,17 @@ public class PlanSuscripcionEntidad
 	public PlanSuscripcionEntidad setTiempoSuscripcion(int tiempoSuscripcion) 
 	{
 		this.tiempoSuscripcion = tiempoSuscripcion;
+		return this;
+	}
+
+	public Date getFechaRegistro() 
+	{
+		return fechaRegistro;
+	}
+
+	public PlanSuscripcionEntidad setFechaRegistro(Date fechaRegistro) 
+	{
+		this.fechaRegistro = fechaRegistro;
 		return this;
 	}
 }

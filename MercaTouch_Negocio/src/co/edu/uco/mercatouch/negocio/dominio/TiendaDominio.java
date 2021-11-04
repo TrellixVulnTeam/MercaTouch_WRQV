@@ -4,33 +4,35 @@ import co.edu.uco.mercatouch.transversal.utilitario.UtilTexto;
 
 public class TiendaDominio 
 {
-	int codigo;
-	String nombre;
-	String direccion;
-	String ciudad;
-	String departamento;
-	long telefono;
-	int calificacion;
+	private int codigo;
+	private String nombre;
+	private String rutaLogo;
+	private String direccion;
+	private long telefono;
+	private CiudadDominio ciudad;
+	private UsuarioTiendaDominio administrador;
+	private PlanSuscripcionDominio planSuscripcion;
 	
-	private TiendaDominio(int codigo, String nombre, String direccion, String ciudad, String departamento, long telefono, int calificacion) 
+	private TiendaDominio(int codigo, String nombre, String rutaLogo, String direccion, long telefono, CiudadDominio ciudad, UsuarioTiendaDominio administrador, PlanSuscripcionDominio planSuscripcion) 
 	{
 		setCodigo(codigo);
 		setNombre(nombre);
+		setRutaLogo(rutaLogo);
 		setDireccion(direccion);
-		setCiudad(ciudad);
-		setDepartamento(departamento);
 		setTelefono(telefono);
-		setCalificacion(calificacion);
+		setCiudad(ciudad);
+		setAdministrador(administrador);
+		setPlanSuscripcion(planSuscripcion);
 	}
 	
-	public static TiendaDominio crear(int codigo, String nombre, String direccion, String ciudad, String departamento, long telefono, int calificacion)
+	public static TiendaDominio crear(int codigo, String nombre, String rutaLogo, String direccion, long telefono, CiudadDominio ciudad, UsuarioTiendaDominio administrador, PlanSuscripcionDominio planSuscripcion)
 	{
-		return new TiendaDominio(codigo, nombre, direccion, ciudad, departamento, telefono, calificacion);
+		return new TiendaDominio(codigo, nombre, rutaLogo, direccion, telefono, ciudad, administrador, planSuscripcion);
 	}
 	
 	public static TiendaDominio crear()
 	{
-		return new TiendaDominio(0, UtilTexto.BLANCO, UtilTexto.BLANCO, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, 0);
+		return new TiendaDominio(0, UtilTexto.BLANCO, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, CiudadDominio.crear(), UsuarioTiendaDominio.crear(), PlanSuscripcionDominio.crear());
 	}
 
 	public int getCodigo() 
@@ -38,7 +40,7 @@ public class TiendaDominio
 		return codigo;
 	}
 
-	public TiendaDominio setCodigo(int codigo)
+	public TiendaDominio setCodigo(int codigo) 
 	{
 		this.codigo = codigo;
 		return this;
@@ -55,6 +57,17 @@ public class TiendaDominio
 		return this;
 	}
 
+	public String getRutaLogo() 
+	{
+		return rutaLogo;
+	}
+
+	public TiendaDominio setRutaLogo(String rutaLogo) 
+	{
+		this.rutaLogo = UtilTexto.aplicarTrim(rutaLogo);
+		return this;
+	}
+
 	public String getDireccion() 
 	{
 		return direccion;
@@ -63,28 +76,6 @@ public class TiendaDominio
 	public TiendaDominio setDireccion(String direccion) 
 	{
 		this.direccion = UtilTexto.aplicarTrim(direccion);
-		return this;
-	}
-
-	public String getCiudad() 
-	{
-		return ciudad;
-	}
-
-	public TiendaDominio setCiudad(String ciudad) 
-	{
-		this.ciudad = UtilTexto.aplicarTrim(ciudad);
-		return this;
-	}
-
-	public String getDepartamento() 
-	{
-		return departamento;
-	}
-
-	public TiendaDominio setDepartamento(String departamento) 
-	{
-		this.departamento = UtilTexto.aplicarTrim(departamento);
 		return this;
 	}
 
@@ -99,14 +90,36 @@ public class TiendaDominio
 		return this;
 	}
 
-	public int getCalificacion() 
+	public CiudadDominio getCiudad() 
 	{
-		return calificacion;
+		return ciudad;
 	}
 
-	public TiendaDominio setCalificacion(int calificacion) 
+	public TiendaDominio setCiudad(CiudadDominio ciudad) 
 	{
-		this.calificacion = calificacion;
+		this.ciudad = ciudad;
+		return this;
+	}
+
+	public UsuarioTiendaDominio getAdministrador() 
+	{
+		return administrador;
+	}
+
+	public TiendaDominio setAdministrador(UsuarioTiendaDominio administrador) 
+	{
+		this.administrador = administrador;
+		return this;
+	}
+
+	public PlanSuscripcionDominio getPlanSuscripcion() 
+	{
+		return planSuscripcion;
+	}
+
+	public TiendaDominio setPlanSuscripcion(PlanSuscripcionDominio planSuscripcion) 
+	{
+		this.planSuscripcion = planSuscripcion;
 		return this;
 	}
 }

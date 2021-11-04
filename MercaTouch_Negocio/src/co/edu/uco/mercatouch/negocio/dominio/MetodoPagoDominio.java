@@ -6,23 +6,21 @@ public class MetodoPagoDominio
 {
 	int codigo;
 	String nombre;
-	boolean incluyeDomicilio;
 	
-	private MetodoPagoDominio(int codigo, String nombre, boolean incluyeDomicilio) 
+	private MetodoPagoDominio(int codigo, String nombre) 
 	{
 		setCodigo(codigo);
 		setNombre(nombre);
-		setIncluyeDomicilio(incluyeDomicilio);
 	}
 	
-	public static MetodoPagoDominio crear(int codigo, String nombre, boolean incluyeDomicilio)
+	public static MetodoPagoDominio crear(int codigo, String nombre)
 	{
-		return new MetodoPagoDominio(codigo, nombre, incluyeDomicilio);
+		return new MetodoPagoDominio(codigo, nombre);
 	}
 	
 	public static MetodoPagoDominio crear()
 	{
-		return new MetodoPagoDominio(0, UtilTexto.BLANCO, false);
+		return new MetodoPagoDominio(0, UtilTexto.BLANCO);
 	}
 
 	public int getCodigo() 
@@ -44,17 +42,6 @@ public class MetodoPagoDominio
 	public MetodoPagoDominio setNombre(String nombre) 
 	{
 		this.nombre = UtilTexto.aplicarTrim(nombre);
-		return this;
-	}
-
-	public boolean isIncluyeDomicilio() 
-	{
-		return incluyeDomicilio;
-	}
-
-	public MetodoPagoDominio setIncluyeDomicilio(boolean incluyeDomicilio) 
-	{
-		this.incluyeDomicilio = incluyeDomicilio;
 		return this;
 	}
 }

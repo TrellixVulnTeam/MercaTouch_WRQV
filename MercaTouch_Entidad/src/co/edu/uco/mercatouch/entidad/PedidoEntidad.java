@@ -1,53 +1,38 @@
 package co.edu.uco.mercatouch.entidad;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "pedido")
 public class PedidoEntidad 
 {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	int codigo;
-	@Column
-	double pagoTotal;
-	@Column
-	double descuento;
-	@OneToOne
-	TiendaEntidad tienda;
-	@OneToOne
-	MetodoPagoEntidad metodoPago;
-	@OneToMany
-	List<ProductoEntidad> productosPedidos;
+	private int codigo;
+	private double pagoTotal;
+	private double descuento;
+	private Date fecha;
+	private boolean incluyeDomicilio;
+	private MetodoPagoEntidad metodoPago;
+	private List<DetallePedidoEntidad> detallesPedido;
 	
-	private PedidoEntidad(int codigo, double pagoTotal, double descuento, TiendaEntidad tienda, MetodoPagoEntidad metodoPago, List<ProductoEntidad> productosPedidos) 
+	private PedidoEntidad(int codigo, double pagoTotal, double descuento, Date fecha, boolean incluyeDomicilio, MetodoPagoEntidad metodoPago, List<DetallePedidoEntidad> detallesPedido) 
 	{
 		setCodigo(codigo);
 		setPagoTotal(pagoTotal);
 		setDescuento(descuento);
-		setTienda(tienda);
+		setFecha(fecha);
+		setIncluyeDomicilio(incluyeDomicilio);
 		setMetodoPago(metodoPago);
-		setProductosPedidos(productosPedidos);
+		setDetallesPedido(detallesPedido);
 	}
 	
-	public static PedidoEntidad crear(int codigo, double pagoTotal, double descuento, TiendaEntidad tienda, MetodoPagoEntidad metodoPago, List<ProductoEntidad> productosPedidos)
+	public static PedidoEntidad crear(int codigo, double pagoTotal, double descuento, Date fecha, boolean incluyeDomicilio, MetodoPagoEntidad metodoPago, List<DetallePedidoEntidad> detallesPedido)
 	{
-		return new PedidoEntidad(codigo, pagoTotal, descuento, tienda, metodoPago, productosPedidos);
+		return new PedidoEntidad(codigo, pagoTotal, descuento, fecha, incluyeDomicilio, metodoPago, detallesPedido);
 	}
 	
 	public static PedidoEntidad crear()
 	{
-		return new PedidoEntidad(0, 0, 0, null, MetodoPagoEntidad.crear(), new ArrayList<>());
+		return new PedidoEntidad(0, 0, 0, new Date(), false, MetodoPagoEntidad.crear(), new ArrayList<>());
 	}
 
 	public int getCodigo() 
@@ -83,14 +68,25 @@ public class PedidoEntidad
 		return this;
 	}
 
-	public TiendaEntidad getTienda() 
+	public Date getFecha() 
 	{
-		return tienda;
+		return fecha;
 	}
 
-	public PedidoEntidad setTienda(TiendaEntidad tienda) 
+	public PedidoEntidad setFecha(Date fecha) 
 	{
-		this.tienda = tienda;
+		this.fecha = fecha;
+		return this;
+	}
+
+	public boolean isIncluyeDomicilio() 
+	{
+		return incluyeDomicilio;
+	}
+
+	public PedidoEntidad setIncluyeDomicilio(boolean incluyeDomicilio) 
+	{
+		this.incluyeDomicilio = incluyeDomicilio;
 		return this;
 	}
 
@@ -105,14 +101,14 @@ public class PedidoEntidad
 		return this;
 	}
 
-	public List<ProductoEntidad> getProductosPedidos() 
+	public List<DetallePedidoEntidad> getDetallesPedido() 
 	{
-		return productosPedidos;
+		return detallesPedido;
 	}
 
-	public PedidoEntidad setProductosPedidos(List<ProductoEntidad> productosPedidos) 
+	public PedidoEntidad setDetallesPedido(List<DetallePedidoEntidad> detallesPedido) 
 	{
-		this.productosPedidos = productosPedidos;
+		this.detallesPedido = detallesPedido;
 		return this;
 	}
 }

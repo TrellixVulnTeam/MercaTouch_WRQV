@@ -8,6 +8,11 @@ public class CategoriaDTO
 	String nombre;
 	String descripcion;
 	
+	public CategoriaDTO()
+	{
+		
+	}
+	
 	private CategoriaDTO(int codigo, String nombre, String descripcion) 
 	{
 		setCodigo(codigo);

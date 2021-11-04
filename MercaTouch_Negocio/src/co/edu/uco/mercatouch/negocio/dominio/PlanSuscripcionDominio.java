@@ -1,32 +1,35 @@
 package co.edu.uco.mercatouch.negocio.dominio;
 
+import java.util.Date;
 import co.edu.uco.mercatouch.transversal.utilitario.UtilTexto;
 
 public class PlanSuscripcionDominio 
 {
-	int codigo;
-	String nombre;
-	String descripcion;
-	double precio;
-	int tiempoSuscripcion;
+	private int codigo;
+	private String nombre;
+	private String descripcion;
+	private double precio;
+	private int tiempoSuscripcion;
+	private Date fechaRegistro;
 	
-	private PlanSuscripcionDominio(int codigo, String nombre, String descripcion, double precio, int tiempoSuscripcion) 
+	private PlanSuscripcionDominio(int codigo, String nombre, String descripcion, double precio, int tiempoSuscripcion, Date fechaRegistro) 
 	{
 		setCodigo(codigo);
 		setNombre(nombre);
 		setDescripcion(descripcion);
 		setPrecio(precio);
 		setTiempoSuscripcion(tiempoSuscripcion);
+		setFechaRegistro(fechaRegistro);
 	}
 	
-	public static PlanSuscripcionDominio crear(int codigo, String nombre, String descripcion, double precio, int tiempoSuscripcion)
+	public static PlanSuscripcionDominio crear(int codigo, String nombre, String descripcion, double precio, int tiempoSuscripcion, Date fechaRegistro)
 	{
-		return new PlanSuscripcionDominio(codigo, nombre, descripcion, precio, tiempoSuscripcion);
+		return new PlanSuscripcionDominio(codigo, nombre, descripcion, precio, tiempoSuscripcion, fechaRegistro);
 	}
 	
 	public static PlanSuscripcionDominio crear()
 	{
-		return new PlanSuscripcionDominio(0, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, 0);
+		return new PlanSuscripcionDominio(0, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, 0, new Date());
 	}
 
 	public int getCodigo() 
@@ -81,6 +84,17 @@ public class PlanSuscripcionDominio
 	public PlanSuscripcionDominio setTiempoSuscripcion(int tiempoSuscripcion) 
 	{
 		this.tiempoSuscripcion = tiempoSuscripcion;
+		return this;
+	}
+
+	public Date getFechaRegistro() 
+	{
+		return fechaRegistro;
+	}
+
+	public PlanSuscripcionDominio setFechaRegistro(Date fechaRegistro) 
+	{
+		this.fechaRegistro = fechaRegistro;
 		return this;
 	}
 }

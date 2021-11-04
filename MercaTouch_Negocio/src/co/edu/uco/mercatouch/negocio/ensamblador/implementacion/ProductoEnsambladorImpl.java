@@ -31,7 +31,7 @@ public class ProductoEnsambladorImpl implements ProductoEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar un Dominio de Producto a partir de una entidad de un Producto que esta nulo");
 		}
 		
-		return ProductoDominio.crear(entidad.getCodigo(), entidad.getNombre(), entidad.getDescripcion(), entidad.getPrecio(), CategoriaEnsambladorImpl.obtenerCategoriaEnsamblador().ensamblarDominioDesdeEntidad(entidad.getCategoria()));
+		return ProductoDominio.crear(entidad.getCodigo(), entidad.getNombre(), entidad.getDescripcion(), PrecioEnsambladorImpl.obtenerPrecioEnsamblador().ensamblarDominioDesdeEntidad(entidad.getPrecio()), CategoriaEnsambladorImpl.obtenerCategoriaEnsamblador().ensamblarDominioDesdeEntidad(entidad.getCategoria()), TiendaProductoEnsambladorImpl.obtenerTiendaProductoEnsamblador().ensamblarDominioDesdeEntidad(entidad.getTiendaProducto()));
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class ProductoEnsambladorImpl implements ProductoEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar una Entidad de Producto a partir de un dominio de un Producto que esta nulo");
 		}
 		
-		return ProductoEntidad.crear(dominio.getCodigo(), dominio.getNombre(), dominio.getDescripcion(), dominio.getPrecio(), CategoriaEnsambladorImpl.obtenerCategoriaEnsamblador().ensamblarEntidadDesdeDominio(dominio.getCategoria()));
+		return ProductoEntidad.crear(dominio.getCodigo(), dominio.getNombre(), dominio.getDescripcion(), PrecioEnsambladorImpl.obtenerPrecioEnsamblador().ensamblarEntidadDesdeDominio(dominio.getPrecio()), CategoriaEnsambladorImpl.obtenerCategoriaEnsamblador().ensamblarEntidadDesdeDominio(dominio.getCategoria()), TiendaProductoEnsambladorImpl.obtenerTiendaProductoEnsamblador().ensamblarEntidadDesdeDominio(dominio.getTiendaProducto()));
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class ProductoEnsambladorImpl implements ProductoEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar un Dominio de Producto a partir de un DTO de un Producto que esta nulo");
 		}
 		
-		return ProductoDominio.crear(dto.getCodigo(), dto.getNombre(), dto.getDescripcion(), dto.getPrecio(), CategoriaEnsambladorImpl.obtenerCategoriaEnsamblador().ensamblarDominioDesdeDTO(dto.getCategoria()));
+		return ProductoDominio.crear(dto.getCodigo(), dto.getNombre(), dto.getDescripcion(), PrecioEnsambladorImpl.obtenerPrecioEnsamblador().ensamblarDominioDesdeDTO(dto.getPrecio()), CategoriaEnsambladorImpl.obtenerCategoriaEnsamblador().ensamblarDominioDesdeDTO(dto.getCategoria()), TiendaProductoEnsambladorImpl.obtenerTiendaProductoEnsamblador().ensamblarDominioDesdeDTO(dto.getTiendaProducto()));
 	}
 
 	@Override
@@ -82,7 +82,7 @@ public class ProductoEnsambladorImpl implements ProductoEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar un DTO de Producto a partir de un Dominio de un Producto que esta nulo");
 		}
 		
-		return ProductoDTO.crear(dominio.getCodigo(), dominio.getNombre(), dominio.getDescripcion(), dominio.getPrecio(), CategoriaEnsambladorImpl.obtenerCategoriaEnsamblador().ensamblarDTODesdeDominio(dominio.getCategoria()));
+		return ProductoDTO.crear(dominio.getCodigo(), dominio.getNombre(), dominio.getDescripcion(), PrecioEnsambladorImpl.obtenerPrecioEnsamblador().ensamblarDTODesdeDominio(dominio.getPrecio()), CategoriaEnsambladorImpl.obtenerCategoriaEnsamblador().ensamblarDTODesdeDominio(dominio.getCategoria()), TiendaProductoEnsambladorImpl.obtenerTiendaProductoEnsamblador().ensamblarDTODesdeDominio(dominio.getTiendaProducto()));
 	}
 
 	@Override

@@ -1,35 +1,43 @@
 package co.edu.uco.mercatouch.dto;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class PedidoDTO 
 {
-	int codigo;
-	double pagoTotal;
-	double descuento;
-	TiendaDTO tienda;
-	MetodoPagoDTO metodoPago;
-	List<ProductoDTO> productosPedidos;
+	private int codigo;
+	private double pagoTotal;
+	private double descuento;
+	private Date fecha;
+	private boolean incluyeDomicilio;
+	private MetodoPagoDTO metodoPago;
+	private List<DetallePedidoDTO> detallesPedido;
 	
-	private PedidoDTO(int codigo, double pagoTotal, double descuento, TiendaDTO tienda, MetodoPagoDTO metodoPago, List<ProductoDTO> productosPedidos) 
+	public PedidoDTO()
+	{
+		
+	}
+	
+	private PedidoDTO(int codigo, double pagoTotal, double descuento, Date fecha, boolean incluyeDomicilio, MetodoPagoDTO metodoPago, List<DetallePedidoDTO> detallesPedido) 
 	{
 		setCodigo(codigo);
 		setPagoTotal(pagoTotal);
 		setDescuento(descuento);
-		setTienda(tienda);
+		setFecha(fecha);
+		setIncluyeDomicilio(incluyeDomicilio);
 		setMetodoPago(metodoPago);
-		setProductosPedidos(productosPedidos);
+		setDetallesPedido(detallesPedido);
 	}
 	
-	public static PedidoDTO crear(int codigo, double pagoTotal, double descuento, TiendaDTO tienda, MetodoPagoDTO metodoPago, List<ProductoDTO> productosPedidos)
+	public static PedidoDTO crear(int codigo, double pagoTotal, double descuento, Date fecha, boolean incluyeDomicilio, MetodoPagoDTO metodoPago, List<DetallePedidoDTO> detallesPedido)
 	{
-		return new PedidoDTO(codigo, pagoTotal, descuento, tienda, metodoPago, productosPedidos);
+		return new PedidoDTO(codigo, pagoTotal, descuento, fecha, incluyeDomicilio, metodoPago, detallesPedido);
 	}
 	
 	public static PedidoDTO crear()
 	{
-		return new PedidoDTO(0, 0, 0, null, MetodoPagoDTO.crear(), new ArrayList<>());
+		return new PedidoDTO(0, 0, 0, new Date(), false, MetodoPagoDTO.crear(), new ArrayList<>());
 	}
 
 	public int getCodigo() 
@@ -65,14 +73,25 @@ public class PedidoDTO
 		return this;
 	}
 
-	public TiendaDTO getTienda() 
+	public Date getFecha() 
 	{
-		return tienda;
+		return fecha;
 	}
 
-	public PedidoDTO setTienda(TiendaDTO tienda) 
+	public PedidoDTO setFecha(Date fecha) 
 	{
-		this.tienda = tienda;
+		this.fecha = fecha;
+		return this;
+	}
+
+	public boolean isIncluyeDomicilio() 
+	{
+		return incluyeDomicilio;
+	}
+
+	public PedidoDTO setIncluyeDomicilio(boolean incluyeDomicilio) 
+	{
+		this.incluyeDomicilio = incluyeDomicilio;
 		return this;
 	}
 
@@ -87,14 +106,14 @@ public class PedidoDTO
 		return this;
 	}
 
-	public List<ProductoDTO> getProductosPedidos() 
+	public List<DetallePedidoDTO> getDetallesPedido() 
 	{
-		return productosPedidos;
+		return detallesPedido;
 	}
 
-	public PedidoDTO setProductosPedidos(List<ProductoDTO> productosPedidos) 
+	public PedidoDTO setDetallesPedido(List<DetallePedidoDTO> detallesPedido) 
 	{
-		this.productosPedidos = productosPedidos;
+		this.detallesPedido = detallesPedido;
 		return this;
 	}
 }

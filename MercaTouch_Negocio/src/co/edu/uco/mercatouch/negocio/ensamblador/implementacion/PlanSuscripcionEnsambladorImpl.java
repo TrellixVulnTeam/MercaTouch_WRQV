@@ -31,7 +31,7 @@ public class PlanSuscripcionEnsambladorImpl implements PlanSuscripcionEnsamblado
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar un Dominio de PlanSuscripcion a partir de una entidad de un PlanSuscripcion que esta nulo");
 		}
 		
-		return PlanSuscripcionDominio.crear(entidad.getCodigo(), entidad.getNombre(), entidad.getDescripcion(), entidad.getPrecio(), entidad.getTiempoSuscripcion());
+		return PlanSuscripcionDominio.crear(entidad.getCodigo(), entidad.getNombre(), entidad.getDescripcion(), entidad.getPrecio(), entidad.getTiempoSuscripcion(), entidad.getFechaRegistro());
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class PlanSuscripcionEnsambladorImpl implements PlanSuscripcionEnsamblado
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar una Entidad de PlanSuscripcion a partir de un dominio de un PlanSuscripcion que esta nulo");
 		}
 		
-		return PlanSuscripcionEntidad.crear(dominio.getCodigo(), dominio.getNombre(), dominio.getDescripcion(), dominio.getPrecio(), dominio.getTiempoSuscripcion());
+		return PlanSuscripcionEntidad.crear(dominio.getCodigo(), dominio.getNombre(), dominio.getDescripcion(), dominio.getPrecio(), dominio.getTiempoSuscripcion(), dominio.getFechaRegistro());
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class PlanSuscripcionEnsambladorImpl implements PlanSuscripcionEnsamblado
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar un Dominio de PlanSuscripcion a partir de un DTO de un PlanSuscripcion que esta nulo");
 		}
 		
-		return PlanSuscripcionDominio.crear(dto.getCodigo(), dto.getNombre(), dto.getDescripcion(), dto.getPrecio(), dto.getTiempoSuscripcion());
+		return PlanSuscripcionDominio.crear(dto.getCodigo(), dto.getNombre(), dto.getDescripcion(), dto.getPrecio(), dto.getTiempoSuscripcion(), dto.getFechaRegistro());
 	}
 
 	@Override
@@ -82,7 +82,7 @@ public class PlanSuscripcionEnsambladorImpl implements PlanSuscripcionEnsamblado
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar un DTO de PlanSuscripcion a partir de un Dominio de un PlanSuscripcion que esta nulo");
 		}
 		
-		return PlanSuscripcionDTO.crear(dominio.getCodigo(), dominio.getNombre(), dominio.getDescripcion(), dominio.getPrecio(), dominio.getTiempoSuscripcion());
+		return PlanSuscripcionDTO.crear(dominio.getCodigo(), dominio.getNombre(), dominio.getDescripcion(), dominio.getPrecio(), dominio.getTiempoSuscripcion(), dominio.getFechaRegistro());
 	}
 
 	@Override

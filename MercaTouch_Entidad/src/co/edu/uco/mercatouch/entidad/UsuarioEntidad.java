@@ -5,8 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
 import co.edu.uco.mercatouch.transversal.utilitario.UtilTexto;
 
 @Entity
@@ -16,29 +19,32 @@ public class UsuarioEntidad
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator="usuario_codigo_seq")
 	@SequenceGenerator(name="usuario_codigo_seq", sequenceName="usuario_codigo_seq", allocationSize=1)
-    @Column(name = "codigo")
-	int codigo;
+	@Column(name = "codigo")
+	private int codigo;
 	@Column
-	String nombre;
+	private String nombre;
 	@Column
-	String apellidos;
+	private String apellidos;
 	@Column(name="numeroidentificacion")
-	long numeroIdentificacion;
+	private long numeroIdentificacion;
 	@Column
-	long telefono;
+	private long telefono;
 	@Column
-	String correo;
+	private String correo;
 	@Column
-	String clave;
+	private String clave;
 	@Column
-	int puntuacion;
+	private int puntuacion;
+	@OneToOne
+	@JoinColumn(name="perfil")
+	private PerfilEntidad perfil;
 	
 	public UsuarioEntidad()
 	{
 		
 	}
 	
-	private UsuarioEntidad(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, int puntuacion) 
+	private UsuarioEntidad(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, int puntuacion, PerfilEntidad perfil) 
 	{
 		setCodigo(codigo);
 		setNombre(nombre);
@@ -48,16 +54,17 @@ public class UsuarioEntidad
 		setCorreo(correo);
 		setClave(clave);
 		setPuntuacion(puntuacion);
+		setPerfil(perfil);
 	}
 	
-	public static UsuarioEntidad crear(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, int puntuacion)
+	public static UsuarioEntidad crear(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, int puntuacion, PerfilEntidad perfil)
 	{
-		return new UsuarioEntidad(codigo, nombre, apellidos, numeroIdentificacion, telefono, correo, clave, puntuacion);
+		return new UsuarioEntidad(codigo, nombre, apellidos, numeroIdentificacion, telefono, correo, clave, puntuacion, perfil);
 	}
 	
 	public static UsuarioEntidad crear()
 	{
-		return new UsuarioEntidad(0, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, 0, UtilTexto.BLANCO, UtilTexto.BLANCO, 0);
+		return new UsuarioEntidad(0, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, 0, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, PerfilEntidad.crear());
 	}
 
 	public int getCodigo() 
@@ -145,6 +152,17 @@ public class UsuarioEntidad
 	public UsuarioEntidad setPuntuacion(int puntuacion) 
 	{
 		this.puntuacion = puntuacion;
+		return this;
+	}
+
+	public PerfilEntidad getPerfil() 
+	{
+		return perfil;
+	}
+
+	public UsuarioEntidad setPerfil(PerfilEntidad perfil) 
+	{
+		this.perfil = perfil;
 		return this;
 	}
 }

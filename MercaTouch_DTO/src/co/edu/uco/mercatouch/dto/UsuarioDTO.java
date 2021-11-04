@@ -4,21 +4,22 @@ import co.edu.uco.mercatouch.transversal.utilitario.UtilTexto;
 
 public class UsuarioDTO 
 {
-	int codigo;
-	String nombre;
-	String apellidos;
-	long numeroIdentificacion;
-	long telefono;
-	String correo;
-	String clave;
-	int puntuacion;
+	private int codigo;
+	private String nombre;
+	private String apellidos;
+	private long numeroIdentificacion;
+	private long telefono;
+	private String correo;
+	private String clave;
+	private int puntuacion;
+	private PerfilDTO perfil;
 	
 	public UsuarioDTO()
 	{
 		
 	}
 	
-	private UsuarioDTO(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, int puntuacion) 
+	private UsuarioDTO(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, int puntuacion, PerfilDTO perfil) 
 	{
 		setCodigo(codigo);
 		setNombre(nombre);
@@ -28,16 +29,17 @@ public class UsuarioDTO
 		setCorreo(correo);
 		setClave(clave);
 		setPuntuacion(puntuacion);
+		setPerfil(perfil);
 	}
 	
-	public static UsuarioDTO crear(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, int puntuacion)
+	public static UsuarioDTO crear(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, int puntuacion, PerfilDTO perfil)
 	{
-		return new UsuarioDTO(codigo, nombre, apellidos, numeroIdentificacion, telefono, correo, clave, puntuacion);
+		return new UsuarioDTO(codigo, nombre, apellidos, numeroIdentificacion, telefono, correo, clave, puntuacion, perfil);
 	}
 	
 	public static UsuarioDTO crear()
 	{
-		return new UsuarioDTO(0, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, 0, UtilTexto.BLANCO, UtilTexto.BLANCO, 0);
+		return new UsuarioDTO(0, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, 0, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, PerfilDTO.crear());
 	}
 
 	public int getCodigo() 
@@ -125,6 +127,17 @@ public class UsuarioDTO
 	public UsuarioDTO setPuntuacion(int puntuacion) 
 	{
 		this.puntuacion = puntuacion;
+		return this;
+	}
+
+	public PerfilDTO getPerfil() 
+	{
+		return perfil;
+	}
+
+	public UsuarioDTO setPerfil(PerfilDTO perfil) 
+	{
+		this.perfil = perfil;
 		return this;
 	}
 }

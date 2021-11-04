@@ -31,7 +31,7 @@ public class MetodoPagoEnsambladorImpl implements MetodoPagoEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar un Dominio de MetodoPago a partir de una entidad de un MetodoPago que esta nulo");
 		}
 		
-		return MetodoPagoDominio.crear(entidad.getCodigo(), entidad.getNombre(), entidad.isIncluyeDomicilio());
+		return MetodoPagoDominio.crear(entidad.getCodigo(), entidad.getNombre());
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class MetodoPagoEnsambladorImpl implements MetodoPagoEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar una Entidad de MetodoPago a partir de un dominio de un MetodoPago que esta nulo");
 		}
 		
-		return MetodoPagoEntidad.crear(dominio.getCodigo(), dominio.getNombre(), dominio.isIncluyeDomicilio());
+		return MetodoPagoEntidad.crear(dominio.getCodigo(), dominio.getNombre());
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class MetodoPagoEnsambladorImpl implements MetodoPagoEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar un Dominio de MetodoPago a partir de un DTO de un MetodoPago que esta nulo");
 		}
 		
-		return MetodoPagoDominio.crear(dto.getCodigo(), dto.getNombre(), dto.isIncluyeDomicilio());
+		return MetodoPagoDominio.crear(dto.getCodigo(), dto.getNombre());
 	}
 
 	@Override
@@ -82,7 +82,7 @@ public class MetodoPagoEnsambladorImpl implements MetodoPagoEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar un DTO de MetodoPago a partir de un Dominio de un MetodoPago que esta nulo");
 		}
 		
-		return MetodoPagoDTO.crear(dominio.getCodigo(), dominio.getNombre(), dominio.isIncluyeDomicilio());
+		return MetodoPagoDTO.crear(dominio.getCodigo(), dominio.getNombre());
 	}
 
 	@Override

@@ -4,16 +4,17 @@ import co.edu.uco.mercatouch.transversal.utilitario.UtilTexto;
 
 public class UsuarioDominio 
 {
-	int codigo;
-	String nombre;
-	String apellidos;
-	long numeroIdentificacion;
-	long telefono;
-	String correo;
-	String clave;
-	int puntuacion;
+	private int codigo;
+	private String nombre;
+	private String apellidos;
+	private long numeroIdentificacion;
+	private long telefono;
+	private String correo;
+	private String clave;
+	private int puntuacion;
+	private PerfilDominio perfil;
 	
-	private UsuarioDominio(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, int puntuacion) 
+	private UsuarioDominio(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, int puntuacion, PerfilDominio perfil) 
 	{
 		setCodigo(codigo);
 		setNombre(nombre);
@@ -23,16 +24,17 @@ public class UsuarioDominio
 		setCorreo(correo);
 		setClave(clave);
 		setPuntuacion(puntuacion);
+		setPerfil(perfil);
 	}
 	
-	public static UsuarioDominio crear(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, int puntuacion)
+	public static UsuarioDominio crear(int codigo, String nombre, String apellidos, long numeroIdentificacion, long telefono, String correo, String clave, int puntuacion, PerfilDominio perfil)
 	{
-		return new UsuarioDominio(codigo, nombre, apellidos, numeroIdentificacion, telefono, correo, clave, puntuacion);
+		return new UsuarioDominio(codigo, nombre, apellidos, numeroIdentificacion, telefono, correo, clave, puntuacion, perfil);
 	}
 	
 	public static UsuarioDominio crear()
 	{
-		return new UsuarioDominio(0, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, 0, UtilTexto.BLANCO, UtilTexto.BLANCO, 0);
+		return new UsuarioDominio(0, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, 0, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, PerfilDominio.crear());
 	}
 
 	public int getCodigo() 
@@ -120,6 +122,17 @@ public class UsuarioDominio
 	public UsuarioDominio setPuntuacion(int puntuacion) 
 	{
 		this.puntuacion = puntuacion;
+		return this;
+	}
+
+	public PerfilDominio getPerfil() 
+	{
+		return perfil;
+	}
+
+	public UsuarioDominio setPerfil(PerfilDominio perfil) 
+	{
+		this.perfil = perfil;
 		return this;
 	}
 }

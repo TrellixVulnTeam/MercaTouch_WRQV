@@ -1,35 +1,38 @@
 package co.edu.uco.mercatouch.negocio.dominio;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class PedidoDominio 
 {
-	int codigo;
-	double pagoTotal;
-	double descuento;
-	TiendaDominio tienda;
-	MetodoPagoDominio metodoPago;
-	List<ProductoDominio> productosPedidos;
+	private int codigo;
+	private double pagoTotal;
+	private double descuento;
+	private Date fecha;
+	private boolean incluyeDomicilio;
+	private MetodoPagoDominio metodoPago;
+	private List<DetallePedidoDominio> detallesPedido;
 	
-	private PedidoDominio(int codigo, double pagoTotal, double descuento, TiendaDominio tienda, MetodoPagoDominio metodoPago, List<ProductoDominio> productosPedidos) 
+	private PedidoDominio(int codigo, double pagoTotal, double descuento, Date fecha, boolean incluyeDomicilio, MetodoPagoDominio metodoPago, List<DetallePedidoDominio> detallesPedido) 
 	{
 		setCodigo(codigo);
 		setPagoTotal(pagoTotal);
 		setDescuento(descuento);
-		setTienda(tienda);
+		setFecha(fecha);
+		setIncluyeDomicilio(incluyeDomicilio);
 		setMetodoPago(metodoPago);
-		setProductosPedidos(productosPedidos);
+		setDetallesPedido(detallesPedido);
 	}
 	
-	public static PedidoDominio crear(int codigo, double pagoTotal, double descuento, TiendaDominio tienda, MetodoPagoDominio metodoPago, List<ProductoDominio> productosPedidos)
+	public static PedidoDominio crear(int codigo, double pagoTotal, double descuento, Date fecha, boolean incluyeDomicilio, MetodoPagoDominio metodoPago, List<DetallePedidoDominio> detallesPedido)
 	{
-		return new PedidoDominio(codigo, pagoTotal, descuento, tienda, metodoPago, productosPedidos);
+		return new PedidoDominio(codigo, pagoTotal, descuento, fecha, incluyeDomicilio, metodoPago, detallesPedido);
 	}
 	
 	public static PedidoDominio crear()
 	{
-		return new PedidoDominio(0, 0, 0, null, MetodoPagoDominio.crear(), new ArrayList<>());
+		return new PedidoDominio(0, 0, 0, new Date(), false, MetodoPagoDominio.crear(), new ArrayList<>());
 	}
 
 	public int getCodigo() 
@@ -65,14 +68,25 @@ public class PedidoDominio
 		return this;
 	}
 
-	public TiendaDominio getTienda() 
+	public Date getFecha() 
 	{
-		return tienda;
+		return fecha;
 	}
 
-	public PedidoDominio setTienda(TiendaDominio tienda) 
+	public PedidoDominio setFecha(Date fecha) 
 	{
-		this.tienda = tienda;
+		this.fecha = fecha;
+		return this;
+	}
+
+	public boolean isIncluyeDomicilio() 
+	{
+		return incluyeDomicilio;
+	}
+
+	public PedidoDominio setIncluyeDomicilio(boolean incluyeDomicilio) 
+	{
+		this.incluyeDomicilio = incluyeDomicilio;
 		return this;
 	}
 
@@ -87,14 +101,14 @@ public class PedidoDominio
 		return this;
 	}
 
-	public List<ProductoDominio> getProductosPedidos() 
+	public List<DetallePedidoDominio> getDetallesPedido() 
 	{
-		return productosPedidos;
+		return detallesPedido;
 	}
 
-	public PedidoDominio setProductosPedidos(List<ProductoDominio> productosPedidos) 
+	public PedidoDominio setDetallesPedido(List<DetallePedidoDominio> detallesPedido) 
 	{
-		this.productosPedidos = productosPedidos;
+		this.detallesPedido = detallesPedido;
 		return this;
 	}
 }
