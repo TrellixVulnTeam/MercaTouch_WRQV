@@ -2,17 +2,41 @@ package co.edu.uco.mercatouch.entidad;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
 import co.edu.uco.mercatouch.transversal.utilitario.UtilFecha;
 import co.edu.uco.mercatouch.transversal.utilitario.UtilTexto;
 
+@Entity
+@Table(name = "plansuscripcion", schema = "public")
 public class PlanSuscripcionEntidad 
 {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO, generator="plansuscripcion_codigo_seq")
+	@SequenceGenerator(name="plansuscripcion_codigo_seq", sequenceName="plansuscripcion_codigo_seq", allocationSize=1)
+    @Column(name = "codigo")
 	private int codigo;
+	@Column
 	private String nombre;
+	@Column
 	private String descripcion;
+	@Column
 	private double precio;
+	@Column(name="tiemposuscripcion")
 	private int tiempoSuscripcion;
+	@Column(name="fecharegistro")
 	private Date fechaRegistro;
+	
+	public PlanSuscripcionEntidad()
+	{
+		
+	}
 	
 	private PlanSuscripcionEntidad(int codigo, String nombre, String descripcion, double precio, int tiempoSuscripcion, Date fechaRegistro) 
 	{

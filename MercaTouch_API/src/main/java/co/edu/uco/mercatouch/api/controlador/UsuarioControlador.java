@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import co.edu.uco.mercatouch.api.controlador.respuesta.Respuesta;
 import co.edu.uco.mercatouch.api.controlador.respuesta.enumerador.EstadoRespuestaEnum;
+import co.edu.uco.mercatouch.dto.PerfilDTO;
 import co.edu.uco.mercatouch.dto.UsuarioDTO;
+import co.edu.uco.mercatouch.negocio.fachada.PerfilFachada;
 import co.edu.uco.mercatouch.negocio.fachada.UsuarioFachada;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
@@ -29,6 +31,9 @@ public class UsuarioControlador
 	@Autowired
 	UsuarioFachada usuarioFachada;
 	
+	@Autowired
+	PerfilFachada perfilFachada;
+	
 	@PostMapping
 	public ResponseEntity<Respuesta<UsuarioDTO>> crear(@RequestBody UsuarioDTO usuario)
 	{
@@ -37,13 +42,21 @@ public class UsuarioControlador
 			
 		try 
 		{
-			var usuarioDTO = UsuarioDTO.crear().setNombre(usuario.getNombre()).setApellidos(usuario.getApellidos()).setNumeroIdentificacion(usuario.getNumeroIdentificacion()).setCorreo(usuario.getCorreo()).setClave(usuario.getClave()).setTelefono(usuario.getTelefono());
-			
 			Argon2 argon = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
-			String hash = argon.hash(1, 1024, 1, usuarioDTO.getClave());
-			usuarioDTO.setClave(hash);
+			String hash = argon.hash(1, 1024, 1, usuario.getClave());
+			usuario.setClave(hash);
 			
-			usuarioFachada.registrar(usuarioDTO);
+			List<PerfilDTO> perfiles = perfilFachada.consultar(PerfilDTO.crear());
+			
+			for(int i = 0; i < perfiles.size(); i++)
+			{
+				if(perfiles.get(i).getNombre().equals(usuario.getPerfil().getNombre()))
+				{
+					usuario.setPerfil(perfiles.get(i));
+				}
+			}
+			
+			usuarioFachada.registrar(usuario);
 			
 			respuesta.adicionarMensaje("El usuario se creo sin problemas");
 			respuesta.setEstado(EstadoRespuestaEnum.EXITOSA);

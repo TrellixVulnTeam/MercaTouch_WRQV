@@ -36,7 +36,8 @@ public class PlanSuscripcionControlador
 			
 		try 
 		{
-			planSuscripcionFachada.registrar(planSuscripcion);
+			var planSuscripcionDTO = PlanSuscripcionDTO.crear().setNombre(planSuscripcion.getNombre()).setDescripcion(planSuscripcion.getDescripcion()).setPrecio(planSuscripcion.getPrecio()).setTiempoSuscripcion(planSuscripcion.getTiempoSuscripcion());
+			planSuscripcionFachada.registrar(planSuscripcionDTO);
 			
 			respuesta.adicionarMensaje("El planSuscripcion se creo sin problemas");
 			respuesta.setEstado(EstadoRespuestaEnum.EXITOSA);

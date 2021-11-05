@@ -31,7 +31,7 @@ public class UsuarioTiendaEnsambladorImpl implements UsuarioTiendaEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar un Dominio de UsuarioTienda a partir de una entidad de un UsuarioTienda que esta nulo");
 		}
 		
-		return UsuarioTiendaDominio.crear(entidad.getCodigo(), UsuarioEnsambladorImpl.obtenerUsuarioEnsamblador().ensamblarDominioDesdeEntidad(entidad.getUsuario()), TiendaEnsambladorImpl.obtenerTiendaEnsamblador().ensamblarDominiosDesdeEntidad(entidad.getTiendas()));
+		return UsuarioTiendaDominio.crear(entidad.getCodigo(), UsuarioEnsambladorImpl.obtenerUsuarioEnsamblador().ensamblarDominioDesdeEntidad(entidad.getUsuario()), TiendaEnsambladorImpl.obtenerTiendaEnsamblador().ensamblarDominioDesdeEntidad(entidad.getTienda()));
 	}
 
 	@Override
@@ -49,7 +49,7 @@ public class UsuarioTiendaEnsambladorImpl implements UsuarioTiendaEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar una Entidad de UsuarioTienda a partir de un dominio de un UsuarioTienda que esta nulo");
 		}
 		
-		return UsuarioTiendaEntidad.crear(dominio.getCodigo(), UsuarioEnsambladorImpl.obtenerUsuarioEnsamblador().ensamblarEntidadDesdeDominio(dominio.getUsuario()), TiendaEnsambladorImpl.obtenerTiendaEnsamblador().ensamblarEntidadesDesdeDominio(dominio.getTiendas()));
+		return UsuarioTiendaEntidad.crear(dominio.getCodigo(), UsuarioEnsambladorImpl.obtenerUsuarioEnsamblador().ensamblarEntidadDesdeDominio(dominio.getUsuario()), TiendaEnsambladorImpl.obtenerTiendaEnsamblador().ensamblarEntidadDesdeDominio(dominio.getTienda()));
 	}
 
 	@Override
@@ -66,7 +66,7 @@ public class UsuarioTiendaEnsambladorImpl implements UsuarioTiendaEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar un Dominio de UsuarioTienda a partir de un DTO de un UsuarioTienda que esta nulo");
 		}
 		
-		return UsuarioTiendaDominio.crear(dto.getCodigo(), UsuarioEnsambladorImpl.obtenerUsuarioEnsamblador().ensamblarDominioDesdeDTO(dto.getUsuario()), TiendaEnsambladorImpl.obtenerTiendaEnsamblador().ensamblarDominiosDesdeDTO(dto.getTiendas()));
+		return UsuarioTiendaDominio.crear(dto.getCodigo(), UsuarioEnsambladorImpl.obtenerUsuarioEnsamblador().ensamblarDominioDesdeDTO(dto.getUsuario()), TiendaEnsambladorImpl.obtenerTiendaEnsamblador().ensamblarDominioDesdeDTO(dto.getTienda()));
 	}
 
 	@Override
@@ -83,7 +83,7 @@ public class UsuarioTiendaEnsambladorImpl implements UsuarioTiendaEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar un DTO de UsuarioTienda a partir de un Dominio de un UsuarioTienda que esta nulo");
 		}
 		
-		return UsuarioTiendaDTO.crear(dominio.getCodigo(), UsuarioEnsambladorImpl.obtenerUsuarioEnsamblador().ensamblarDTODesdeDominio(dominio.getUsuario()), TiendaEnsambladorImpl.obtenerTiendaEnsamblador().ensamblarDTOsDesdeDominio(dominio.getTiendas()));
+		return UsuarioTiendaDTO.crear(dominio.getCodigo(), UsuarioEnsambladorImpl.obtenerUsuarioEnsamblador().ensamblarDTODesdeDominio(dominio.getUsuario()), TiendaEnsambladorImpl.obtenerTiendaEnsamblador().ensamblarDTODesdeDominio(dominio.getTienda()));
 	}
 
 	@Override

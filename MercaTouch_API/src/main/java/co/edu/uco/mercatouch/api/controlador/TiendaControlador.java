@@ -15,8 +15,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import co.edu.uco.mercatouch.api.controlador.respuesta.Respuesta;
 import co.edu.uco.mercatouch.api.controlador.respuesta.enumerador.EstadoRespuestaEnum;
+import co.edu.uco.mercatouch.dto.CiudadDTO;
+import co.edu.uco.mercatouch.dto.PlanSuscripcionDTO;
 import co.edu.uco.mercatouch.dto.TiendaDTO;
+import co.edu.uco.mercatouch.dto.UsuarioDTO;
+import co.edu.uco.mercatouch.dto.UsuarioTiendaDTO;
+import co.edu.uco.mercatouch.negocio.fachada.CiudadFachada;
+import co.edu.uco.mercatouch.negocio.fachada.PlanSuscripcionFachada;
 import co.edu.uco.mercatouch.negocio.fachada.TiendaFachada;
+import co.edu.uco.mercatouch.negocio.fachada.UsuarioFachada;
+import co.edu.uco.mercatouch.negocio.fachada.UsuarioTiendaFachada;
 
 @RestController
 @RequestMapping("/api/tienda")
@@ -24,19 +32,72 @@ import co.edu.uco.mercatouch.negocio.fachada.TiendaFachada;
 public class TiendaControlador 
 {
 	@Autowired
+	UsuarioTiendaFachada usuarioTiendaFachada;
+	
+	@Autowired
 	TiendaFachada tiendaFachada;
 	
-	@PostMapping
-	public ResponseEntity<Respuesta<TiendaDTO>> crear(@RequestBody TiendaDTO tienda)
+	@Autowired
+	PlanSuscripcionFachada planSuscripcionFachada;
+	
+	@Autowired
+	CiudadFachada ciudadFachada;
+	
+	@Autowired
+	UsuarioFachada usuarioFachada;
+	
+	@PostMapping("/{correo}")
+	public ResponseEntity<Respuesta<TiendaDTO>> crear(@RequestBody TiendaDTO tienda, @PathVariable String correo)
 	{
 		ResponseEntity<Respuesta<TiendaDTO>> entidadRespuesta;
 		Respuesta<TiendaDTO> respuesta = new Respuesta<>();
 			
 		try 
 		{
-			var tiendaDTO = TiendaDTO.crear().setNombre(tienda.getNombre()).setDireccion(tienda.getDireccion()).setCiudad(tienda.getCiudad()).setTelefono(tienda.getTelefono());
+			var planSuscripcion = PlanSuscripcionDTO.crear().setNombre(tienda.getPlanSuscripcion().getNombre()).setDescripcion(tienda.getPlanSuscripcion().getDescripcion()).setPrecio(tienda.getPlanSuscripcion().getPrecio()).setTiempoSuscripcion(tienda.getPlanSuscripcion().getTiempoSuscripcion());
+			planSuscripcionFachada.registrar(planSuscripcion);
 			
-			tiendaFachada.registrar(tiendaDTO);
+			List<PlanSuscripcionDTO> planesSuscripcion = planSuscripcionFachada.consultar(PlanSuscripcionDTO.crear());
+			
+			var planSuscripcionDTO = planesSuscripcion.get(planesSuscripcion.size() -1);
+			
+			tienda.setPlanSuscripcion(planSuscripcionDTO);
+			
+			List<CiudadDTO> ciudades = ciudadFachada.consultar(CiudadDTO.crear());
+			
+			var ciudad = CiudadDTO.crear();
+			for(int i = 0; i < ciudades.size(); i++)
+			{
+				if(ciudades.get(i).getNombre().equals(tienda.getCiudad().getNombre()) && ciudades.get(i).getDepartamento().getNombre().equals(tienda.getCiudad().getDepartamento().getNombre()))
+				{
+					ciudad = ciudades.get(i);
+					
+				}
+			}
+			
+			tienda.setCiudad(ciudad);
+			
+			tiendaFachada.registrar(tienda);
+			
+			List<UsuarioDTO> usuariosDTO = usuarioFachada.consultar(UsuarioDTO.crear());
+			
+			var usuario = UsuarioDTO.crear();
+			
+			for(int i = 0; i < usuariosDTO.size(); i++)
+			{
+				if(usuariosDTO.get(i).getCorreo().equals(correo))
+				{
+					usuario = usuariosDTO.get(i);
+				}
+			}
+			
+			List<TiendaDTO> tiendasDTO = tiendaFachada.consultar(TiendaDTO.crear());
+			
+			var tiendaDTO = tiendasDTO.get(tiendasDTO.size() -1);
+			
+			var usuarioTienda = UsuarioTiendaDTO.crear().setUsuario(usuario).setTienda(tiendaDTO);
+			
+			usuarioTiendaFachada.registrar(usuarioTienda);
 			
 			respuesta.adicionarMensaje("La tienda se creo sin problemas");
 			respuesta.setEstado(EstadoRespuestaEnum.EXITOSA);

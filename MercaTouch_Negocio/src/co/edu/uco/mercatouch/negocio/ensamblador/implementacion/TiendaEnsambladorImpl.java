@@ -31,7 +31,7 @@ public class TiendaEnsambladorImpl implements TiendaEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar un Dominio de Tienda a partir de una entidad de una Tienda que esta nulo");
 		}
 		
-		return TiendaDominio.crear(entidad.getCodigo(), entidad.getNombre(), entidad.getRutaLogo(), entidad.getDireccion(), entidad.getTelefono(), CiudadEnsambladorImpl.obtenerCiudadEnsamblador().ensamblarDominioDesdeEntidad(entidad.getCiudad()), UsuarioTiendaEnsambladorImpl.obtenerUsuarioTiendaEnsamblador().ensamblarDominioDesdeEntidad(entidad.getAdministrador()), PlanSuscripcionEnsambladorImpl.obtenerPlanSuscripcionEnsamblador().ensamblarDominioDesdeEntidad(entidad.getPlanSuscripcion()));
+		return TiendaDominio.crear(entidad.getCodigo(), entidad.getNombre(), entidad.getRutaLogo(), entidad.getDireccion(), entidad.getTelefono(), CiudadEnsambladorImpl.obtenerCiudadEnsamblador().ensamblarDominioDesdeEntidad(entidad.getCiudad()), PlanSuscripcionEnsambladorImpl.obtenerPlanSuscripcionEnsamblador().ensamblarDominioDesdeEntidad(entidad.getPlanSuscripcion()));
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class TiendaEnsambladorImpl implements TiendaEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar una Entidad de Tienda a partir de un dominio de una Tienda que esta nulo");
 		}
 		
-		return TiendaEntidad.crear(dominio.getCodigo(), dominio.getNombre(), dominio.getRutaLogo(), dominio.getDireccion(), dominio.getTelefono(), CiudadEnsambladorImpl.obtenerCiudadEnsamblador().ensamblarEntidadDesdeDominio(dominio.getCiudad()), UsuarioTiendaEnsambladorImpl.obtenerUsuarioTiendaEnsamblador().ensamblarEntidadDesdeDominio(dominio.getAdministrador()), PlanSuscripcionEnsambladorImpl.obtenerPlanSuscripcionEnsamblador().ensamblarEntidadDesdeDominio(dominio.getPlanSuscripcion()));
+		return TiendaEntidad.crear(dominio.getCodigo(), dominio.getNombre(), dominio.getRutaLogo(), dominio.getDireccion(), dominio.getTelefono(), CiudadEnsambladorImpl.obtenerCiudadEnsamblador().ensamblarEntidadDesdeDominio(dominio.getCiudad()), PlanSuscripcionEnsambladorImpl.obtenerPlanSuscripcionEnsamblador().ensamblarEntidadDesdeDominio(dominio.getPlanSuscripcion()));
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class TiendaEnsambladorImpl implements TiendaEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar un Dominio de Tienda a partir de un DTO de una Tienda que esta nulo");
 		}
 		
-		return TiendaDominio.crear(dto.getCodigo(), dto.getNombre(), dto.getRutaLogo(), dto.getDireccion(), dto.getTelefono(), CiudadEnsambladorImpl.obtenerCiudadEnsamblador().ensamblarDominioDesdeDTO(dto.getCiudad()), UsuarioTiendaEnsambladorImpl.obtenerUsuarioTiendaEnsamblador().ensamblarDominioDesdeDTO(dto.getAdministrador()), PlanSuscripcionEnsambladorImpl.obtenerPlanSuscripcionEnsamblador().ensamblarDominioDesdeDTO(dto.getPlanSuscripcion()));
+		return TiendaDominio.crear(dto.getCodigo(), dto.getNombre(), dto.getRutaLogo(), dto.getDireccion(), dto.getTelefono(), CiudadEnsambladorImpl.obtenerCiudadEnsamblador().ensamblarDominioDesdeDTO(dto.getCiudad()), PlanSuscripcionEnsambladorImpl.obtenerPlanSuscripcionEnsamblador().ensamblarDominioDesdeDTO(dto.getPlanSuscripcion()));
 	}
 
 	@Override
@@ -82,7 +82,7 @@ public class TiendaEnsambladorImpl implements TiendaEnsamblador
 			throw new MercaTouchNegocioExcepcion("No es posible ensamblar un DTO de Tienda a partir de un Dominio de una Tienda que esta nulo");
 		}
 		
-		return TiendaDTO.crear(dominio.getCodigo(), dominio.getNombre(), dominio.getRutaLogo(), dominio.getDireccion(), dominio.getTelefono(), CiudadEnsambladorImpl.obtenerCiudadEnsamblador().ensamblarDTODesdeDominio(dominio.getCiudad()), UsuarioTiendaEnsambladorImpl.obtenerUsuarioTiendaEnsamblador().ensamblarDTODesdeDominio(dominio.getAdministrador()), PlanSuscripcionEnsambladorImpl.obtenerPlanSuscripcionEnsamblador().ensamblarDTODesdeDominio(dominio.getPlanSuscripcion()));
+		return TiendaDTO.crear(dominio.getCodigo(), dominio.getNombre(), dominio.getRutaLogo(), dominio.getDireccion(), dominio.getTelefono(), CiudadEnsambladorImpl.obtenerCiudadEnsamblador().ensamblarDTODesdeDominio(dominio.getCiudad()), PlanSuscripcionEnsambladorImpl.obtenerPlanSuscripcionEnsamblador().ensamblarDTODesdeDominio(dominio.getPlanSuscripcion()));
 	}
 
 	@Override

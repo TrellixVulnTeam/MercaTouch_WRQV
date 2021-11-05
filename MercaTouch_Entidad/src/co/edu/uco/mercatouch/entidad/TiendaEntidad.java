@@ -23,7 +23,7 @@ public class TiendaEntidad
 	private int codigo;
 	@Column
 	private String nombre;
-	@Column
+	@Column(name="rutalogo")
 	private String rutaLogo;
 	@Column
 	private String direccion;
@@ -33,9 +33,6 @@ public class TiendaEntidad
 	@JoinColumn(name="ciudad")
 	private CiudadEntidad ciudad;
 	@OneToOne
-	@JoinColumn(name="usuariotienda")
-	private UsuarioTiendaEntidad administrador;
-	@OneToOne
 	@JoinColumn(name="plansuscripcion")
 	private PlanSuscripcionEntidad planSuscripcion;
 	
@@ -44,7 +41,7 @@ public class TiendaEntidad
 		
 	}
 	
-	private TiendaEntidad(int codigo, String nombre, String rutaLogo, String direccion, long telefono, CiudadEntidad ciudad, UsuarioTiendaEntidad administrador, PlanSuscripcionEntidad planSuscripcion) 
+	private TiendaEntidad(int codigo, String nombre, String rutaLogo, String direccion, long telefono, CiudadEntidad ciudad, PlanSuscripcionEntidad planSuscripcion) 
 	{
 		setCodigo(codigo);
 		setNombre(nombre);
@@ -52,18 +49,17 @@ public class TiendaEntidad
 		setDireccion(direccion);
 		setTelefono(telefono);
 		setCiudad(ciudad);
-		setAdministrador(administrador);
 		setPlanSuscripcion(planSuscripcion);
 	}
 	
-	public static TiendaEntidad crear(int codigo, String nombre, String rutaLogo, String direccion, long telefono, CiudadEntidad ciudad, UsuarioTiendaEntidad administrador, PlanSuscripcionEntidad planSuscripcion)
+	public static TiendaEntidad crear(int codigo, String nombre, String rutaLogo, String direccion, long telefono, CiudadEntidad ciudad, PlanSuscripcionEntidad planSuscripcion)
 	{
-		return new TiendaEntidad(codigo, nombre, rutaLogo, direccion, telefono, ciudad, administrador, planSuscripcion);
+		return new TiendaEntidad(codigo, nombre, rutaLogo, direccion, telefono, ciudad, planSuscripcion);
 	}
 	
 	public static TiendaEntidad crear()
 	{
-		return new TiendaEntidad(0, UtilTexto.BLANCO, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, CiudadEntidad.crear(), UsuarioTiendaEntidad.crear(), PlanSuscripcionEntidad.crear());
+		return new TiendaEntidad(0, UtilTexto.BLANCO, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, CiudadEntidad.crear(), PlanSuscripcionEntidad.crear());
 	}
 
 	public int getCodigo() 
@@ -129,17 +125,6 @@ public class TiendaEntidad
 	public TiendaEntidad setCiudad(CiudadEntidad ciudad) 
 	{
 		this.ciudad = ciudad;
-		return this;
-	}
-
-	public UsuarioTiendaEntidad getAdministrador() 
-	{
-		return administrador;
-	}
-
-	public TiendaEntidad setAdministrador(UsuarioTiendaEntidad administrador) 
-	{
-		this.administrador = administrador;
 		return this;
 	}
 

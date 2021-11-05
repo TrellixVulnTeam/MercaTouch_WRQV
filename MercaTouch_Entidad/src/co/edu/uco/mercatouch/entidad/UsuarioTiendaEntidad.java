@@ -1,29 +1,51 @@
 package co.edu.uco.mercatouch.entidad;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "usuariotienda", schema = "public")
 public class UsuarioTiendaEntidad 
 {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO, generator="usuariotienda_codigo_seq")
+	@SequenceGenerator(name="usuariotienda_codigo_seq", sequenceName="usuariotienda_codigo_seq", allocationSize=1)
+    @Column(name = "codigo")
 	private int codigo;
+	@OneToOne
+	@JoinColumn(name="usuario")
 	private UsuarioEntidad usuario;
-	private List<TiendaEntidad> tiendas;
+	@OneToOne
+	@JoinColumn(name="tienda")
+	private TiendaEntidad tienda;
 	
-	private UsuarioTiendaEntidad(int codigo, UsuarioEntidad usuario, List<TiendaEntidad> tiendas) 
+	public UsuarioTiendaEntidad()
 	{
-		this.codigo = codigo;
-		this.usuario = usuario;
-		this.tiendas = tiendas;
+		
 	}
 	
-	public static UsuarioTiendaEntidad crear(int codigo, UsuarioEntidad usuario, List<TiendaEntidad> tiendas)
+	private UsuarioTiendaEntidad(int codigo, UsuarioEntidad usuario, TiendaEntidad tienda) 
 	{
-		return new UsuarioTiendaEntidad(codigo, usuario, tiendas);
+		setCodigo(codigo);
+		setUsuario(usuario);
+		setTienda(tienda);
+	}
+	
+	public static UsuarioTiendaEntidad crear(int codigo, UsuarioEntidad usuario, TiendaEntidad tienda)
+	{
+		return new UsuarioTiendaEntidad(codigo, usuario, tienda);
 	}
 	
 	public static UsuarioTiendaEntidad crear()
 	{
-		return new UsuarioTiendaEntidad(0, UsuarioEntidad.crear(), new ArrayList<>());
+		return new UsuarioTiendaEntidad(0, UsuarioEntidad.crear(), TiendaEntidad.crear());
 	}
 
 	public int getCodigo() 
@@ -48,14 +70,14 @@ public class UsuarioTiendaEntidad
 		return this;
 	}
 
-	public List<TiendaEntidad> getTiendas() 
+	public TiendaEntidad getTienda() 
 	{
-		return tiendas;
+		return tienda;
 	}
 
-	public UsuarioTiendaEntidad setTiendas(List<TiendaEntidad> tiendas) 
+	public UsuarioTiendaEntidad setTienda(TiendaEntidad tienda) 
 	{
-		this.tiendas = tiendas;
+		this.tienda = tienda;
 		return this;
 	}
 }

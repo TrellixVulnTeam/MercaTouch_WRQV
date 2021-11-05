@@ -2,6 +2,8 @@ package co.edu.uco.mercatouch.negocio.negocio.implementacion;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import co.edu.uco.mercatouch.datos.dao.PlanSuscripcionDAO;
 import co.edu.uco.mercatouch.entidad.PlanSuscripcionEntidad;
 import co.edu.uco.mercatouch.negocio.dominio.PlanSuscripcionDominio;
@@ -10,6 +12,7 @@ import co.edu.uco.mercatouch.negocio.negocio.PlanSuscripcionNegocio;
 import co.edu.uco.mercatouch.negocio.validador.enumerador.TipoValidacion;
 import co.edu.uco.mercatouch.negocio.validador.implementacion.PlanSuscripcionValidador;
 
+@Service
 public class PlanSuscripcionNegocioImpl implements PlanSuscripcionNegocio 
 {
 	@Autowired

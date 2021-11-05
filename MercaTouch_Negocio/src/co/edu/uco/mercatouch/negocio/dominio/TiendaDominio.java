@@ -10,10 +10,9 @@ public class TiendaDominio
 	private String direccion;
 	private long telefono;
 	private CiudadDominio ciudad;
-	private UsuarioTiendaDominio administrador;
 	private PlanSuscripcionDominio planSuscripcion;
 	
-	private TiendaDominio(int codigo, String nombre, String rutaLogo, String direccion, long telefono, CiudadDominio ciudad, UsuarioTiendaDominio administrador, PlanSuscripcionDominio planSuscripcion) 
+	private TiendaDominio(int codigo, String nombre, String rutaLogo, String direccion, long telefono, CiudadDominio ciudad, PlanSuscripcionDominio planSuscripcion) 
 	{
 		setCodigo(codigo);
 		setNombre(nombre);
@@ -21,18 +20,17 @@ public class TiendaDominio
 		setDireccion(direccion);
 		setTelefono(telefono);
 		setCiudad(ciudad);
-		setAdministrador(administrador);
 		setPlanSuscripcion(planSuscripcion);
 	}
 	
-	public static TiendaDominio crear(int codigo, String nombre, String rutaLogo, String direccion, long telefono, CiudadDominio ciudad, UsuarioTiendaDominio administrador, PlanSuscripcionDominio planSuscripcion)
+	public static TiendaDominio crear(int codigo, String nombre, String rutaLogo, String direccion, long telefono, CiudadDominio ciudad, PlanSuscripcionDominio planSuscripcion)
 	{
-		return new TiendaDominio(codigo, nombre, rutaLogo, direccion, telefono, ciudad, administrador, planSuscripcion);
+		return new TiendaDominio(codigo, nombre, rutaLogo, direccion, telefono, ciudad, planSuscripcion);
 	}
 	
 	public static TiendaDominio crear()
 	{
-		return new TiendaDominio(0, UtilTexto.BLANCO, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, CiudadDominio.crear(), UsuarioTiendaDominio.crear(), PlanSuscripcionDominio.crear());
+		return new TiendaDominio(0, UtilTexto.BLANCO, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, CiudadDominio.crear(), PlanSuscripcionDominio.crear());
 	}
 
 	public int getCodigo() 
@@ -98,17 +96,6 @@ public class TiendaDominio
 	public TiendaDominio setCiudad(CiudadDominio ciudad) 
 	{
 		this.ciudad = ciudad;
-		return this;
-	}
-
-	public UsuarioTiendaDominio getAdministrador() 
-	{
-		return administrador;
-	}
-
-	public TiendaDominio setAdministrador(UsuarioTiendaDominio administrador) 
-	{
-		this.administrador = administrador;
 		return this;
 	}
 

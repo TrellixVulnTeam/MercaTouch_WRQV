@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 import co.edu.uco.mercatouch.api.controlador.respuesta.Respuesta;
 import co.edu.uco.mercatouch.api.controlador.respuesta.enumerador.EstadoRespuestaEnum;
 import co.edu.uco.mercatouch.dto.UsuarioTiendaDTO;
+import co.edu.uco.mercatouch.negocio.fachada.CiudadFachada;
+import co.edu.uco.mercatouch.negocio.fachada.DepartamentoFachada;
+import co.edu.uco.mercatouch.negocio.fachada.PlanSuscripcionFachada;
+import co.edu.uco.mercatouch.negocio.fachada.TiendaFachada;
 import co.edu.uco.mercatouch.negocio.fachada.UsuarioTiendaFachada;
 
 @RestController
@@ -25,6 +29,18 @@ public class UsuarioTiendaControlador
 {
 	@Autowired
 	UsuarioTiendaFachada usuarioTiendaFachada;
+	
+	@Autowired
+	TiendaFachada tiendaFachada;
+	
+	@Autowired
+	PlanSuscripcionFachada planSuscripcionFachada;
+	
+	@Autowired
+	CiudadFachada ciudadFachada;
+	
+	@Autowired
+	DepartamentoFachada departamentoFachada;
 	
 	@PostMapping
 	public ResponseEntity<Respuesta<UsuarioTiendaDTO>> crear(@RequestBody UsuarioTiendaDTO usuarioTienda)

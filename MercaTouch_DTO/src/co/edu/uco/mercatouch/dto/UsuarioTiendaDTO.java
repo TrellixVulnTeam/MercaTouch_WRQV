@@ -1,34 +1,31 @@
 package co.edu.uco.mercatouch.dto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class UsuarioTiendaDTO 
 {
 	private int codigo;
 	private UsuarioDTO usuario;
-	private List<TiendaDTO> tiendas;
+	TiendaDTO tienda;
 	
 	public UsuarioTiendaDTO()
 	{
 		
 	}
 	
-	private UsuarioTiendaDTO(int codigo, UsuarioDTO usuario, List<TiendaDTO> tiendas) 
+	private UsuarioTiendaDTO(int codigo, UsuarioDTO usuario, TiendaDTO tienda) 
 	{
-		this.codigo = codigo;
-		this.usuario = usuario;
-		this.tiendas = tiendas;
+		setCodigo(codigo);
+		setUsuario(usuario);
+		setTienda(tienda);
 	}
 	
-	public static UsuarioTiendaDTO crear(int codigo, UsuarioDTO usuario, List<TiendaDTO> tiendas)
+	public static UsuarioTiendaDTO crear(int codigo, UsuarioDTO usuario, TiendaDTO tienda)
 	{
-		return new UsuarioTiendaDTO(codigo, usuario, tiendas);
+		return new UsuarioTiendaDTO(codigo, usuario, tienda);
 	}
 	
 	public static UsuarioTiendaDTO crear()
 	{
-		return new UsuarioTiendaDTO(0, UsuarioDTO.crear(), new ArrayList<>());
+		return new UsuarioTiendaDTO(0, UsuarioDTO.crear(), TiendaDTO.crear());
 	}
 
 	public int getCodigo() 
@@ -53,14 +50,14 @@ public class UsuarioTiendaDTO
 		return this;
 	}
 
-	public List<TiendaDTO> getTiendas() 
+	public TiendaDTO getTienda() 
 	{
-		return tiendas;
+		return tienda;
 	}
 
-	public UsuarioTiendaDTO setTiendas(List<TiendaDTO> tiendas) 
+	public UsuarioTiendaDTO setTienda(TiendaDTO tienda) 
 	{
-		this.tiendas = tiendas;
+		this.tienda = tienda;
 		return this;
 	}
 }

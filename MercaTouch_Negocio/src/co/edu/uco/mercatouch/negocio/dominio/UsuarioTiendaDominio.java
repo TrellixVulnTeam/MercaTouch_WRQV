@@ -1,29 +1,26 @@
 package co.edu.uco.mercatouch.negocio.dominio;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class UsuarioTiendaDominio 
 {
 	private int codigo;
 	private UsuarioDominio usuario;
-	private List<TiendaDominio> tiendas;
+	private TiendaDominio tienda;
 	
-	private UsuarioTiendaDominio(int codigo, UsuarioDominio usuario, List<TiendaDominio> tiendas) 
+	private UsuarioTiendaDominio(int codigo, UsuarioDominio usuario, TiendaDominio tienda) 
 	{
 		this.codigo = codigo;
 		this.usuario = usuario;
-		this.tiendas = tiendas;
+		this.tienda = tienda;
 	}
 	
-	public static UsuarioTiendaDominio crear(int codigo, UsuarioDominio usuario, List<TiendaDominio> tiendas)
+	public static UsuarioTiendaDominio crear(int codigo, UsuarioDominio usuario, TiendaDominio tienda)
 	{
-		return new UsuarioTiendaDominio(codigo, usuario, tiendas);
+		return new UsuarioTiendaDominio(codigo, usuario, tienda);
 	}
 	
 	public static UsuarioTiendaDominio crear()
 	{
-		return new UsuarioTiendaDominio(0, UsuarioDominio.crear(), new ArrayList<>());
+		return new UsuarioTiendaDominio(0, UsuarioDominio.crear(), TiendaDominio.crear());
 	}
 
 	public int getCodigo() 
@@ -48,14 +45,14 @@ public class UsuarioTiendaDominio
 		return this;
 	}
 
-	public List<TiendaDominio> getTiendas() 
+	public TiendaDominio getTienda() 
 	{
-		return tiendas;
+		return tienda;
 	}
 
-	public UsuarioTiendaDominio setTiendas(List<TiendaDominio> tiendas) 
+	public UsuarioTiendaDominio setTienda(TiendaDominio tienda) 
 	{
-		this.tiendas = tiendas;
+		this.tienda = tienda;
 		return this;
 	}
 }

@@ -10,7 +10,6 @@ public class TiendaDTO
 	private String direccion;
 	private long telefono;
 	private CiudadDTO ciudad;
-	private UsuarioTiendaDTO administrador;
 	private PlanSuscripcionDTO planSuscripcion;
 	
 	public TiendaDTO()
@@ -18,7 +17,7 @@ public class TiendaDTO
 		
 	}
 	
-	private TiendaDTO(int codigo, String nombre, String rutaLogo, String direccion, long telefono, CiudadDTO ciudad, UsuarioTiendaDTO administrador, PlanSuscripcionDTO planSuscripcion) 
+	private TiendaDTO(int codigo, String nombre, String rutaLogo, String direccion, long telefono, CiudadDTO ciudad, PlanSuscripcionDTO planSuscripcion) 
 	{
 		setCodigo(codigo);
 		setNombre(nombre);
@@ -26,18 +25,17 @@ public class TiendaDTO
 		setDireccion(direccion);
 		setTelefono(telefono);
 		setCiudad(ciudad);
-		setAdministrador(administrador);
 		setPlanSuscripcion(planSuscripcion);
 	}
 	
-	public static TiendaDTO crear(int codigo, String nombre, String rutaLogo, String direccion, long telefono, CiudadDTO ciudad, UsuarioTiendaDTO administrador, PlanSuscripcionDTO planSuscripcion)
+	public static TiendaDTO crear(int codigo, String nombre, String rutaLogo, String direccion, long telefono, CiudadDTO ciudad, PlanSuscripcionDTO planSuscripcion)
 	{
-		return new TiendaDTO(codigo, nombre, rutaLogo, direccion, telefono, ciudad, administrador, planSuscripcion);
+		return new TiendaDTO(codigo, nombre, rutaLogo, direccion, telefono, ciudad, planSuscripcion);
 	}
 	
 	public static TiendaDTO crear()
 	{
-		return new TiendaDTO(0, UtilTexto.BLANCO, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, CiudadDTO.crear(), UsuarioTiendaDTO.crear(), PlanSuscripcionDTO.crear());
+		return new TiendaDTO(0, UtilTexto.BLANCO, UtilTexto.BLANCO, UtilTexto.BLANCO, 0, CiudadDTO.crear(), PlanSuscripcionDTO.crear());
 	}
 
 	public int getCodigo() 
@@ -103,17 +101,6 @@ public class TiendaDTO
 	public TiendaDTO setCiudad(CiudadDTO ciudad) 
 	{
 		this.ciudad = ciudad;
-		return this;
-	}
-
-	public UsuarioTiendaDTO getAdministrador() 
-	{
-		return administrador;
-	}
-
-	public TiendaDTO setAdministrador(UsuarioTiendaDTO administrador) 
-	{
-		this.administrador = administrador;
 		return this;
 	}
 

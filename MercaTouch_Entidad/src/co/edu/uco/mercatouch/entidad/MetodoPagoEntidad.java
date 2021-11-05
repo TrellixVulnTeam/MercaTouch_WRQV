@@ -7,6 +7,11 @@ public class MetodoPagoEntidad
 	int codigo;
 	String nombre;
 	
+	public MetodoPagoEntidad()
+	{
+		
+	}
+	
 	private MetodoPagoEntidad(int codigo, String nombre) 
 	{
 		setCodigo(codigo);
