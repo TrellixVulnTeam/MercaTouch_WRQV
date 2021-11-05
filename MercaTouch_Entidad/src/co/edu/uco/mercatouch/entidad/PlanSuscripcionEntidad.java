@@ -1,6 +1,8 @@
 package co.edu.uco.mercatouch.entidad;
 
 import java.util.Date;
+
+import co.edu.uco.mercatouch.transversal.utilitario.UtilFecha;
 import co.edu.uco.mercatouch.transversal.utilitario.UtilTexto;
 
 public class PlanSuscripcionEntidad 
@@ -94,7 +96,7 @@ public class PlanSuscripcionEntidad
 
 	public PlanSuscripcionEntidad setFechaRegistro(Date fechaRegistro) 
 	{
-		this.fechaRegistro = fechaRegistro;
+		this.fechaRegistro = UtilFecha.obtenerFechaActual();
 		return this;
 	}
 }
