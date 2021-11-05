@@ -1,7 +1,7 @@
 package co.edu.uco.mercatouch.api.controlador;
 
-import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,38 +14,31 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import co.edu.uco.mercatouch.api.controlador.respuesta.Respuesta;
 import co.edu.uco.mercatouch.api.controlador.respuesta.enumerador.EstadoRespuestaEnum;
-import co.edu.uco.mercatouch.dto.UsuarioDTO;
-import co.edu.uco.mercatouch.negocio.fachada.UsuarioFachada;
-import de.mkammerer.argon2.Argon2;
-import de.mkammerer.argon2.Argon2Factory;
+import co.edu.uco.mercatouch.dto.PlanSuscripcionDTO;
+import co.edu.uco.mercatouch.negocio.fachada.PlanSuscripcionFachada;
 
 @RestController
-@RequestMapping("/api/usuario")
+@RequestMapping("/api/plansuscripcion")
 @CrossOrigin(origins = "http://localhost:4200")
-public class UsuarioControlador 
+public class PlanSuscripcionControlador 
 {
 	@Autowired
-	UsuarioFachada usuarioFachada;
+	PlanSuscripcionFachada planSuscripcionFachada;
 	
 	@PostMapping
-	public ResponseEntity<Respuesta<UsuarioDTO>> crear(@RequestBody UsuarioDTO usuario)
+	public ResponseEntity<Respuesta<PlanSuscripcionDTO>> crear(@RequestBody PlanSuscripcionDTO planSuscripcion)
 	{
-		ResponseEntity<Respuesta<UsuarioDTO>> entidadRespuesta;
-		Respuesta<UsuarioDTO> respuesta = new Respuesta<>();
+		ResponseEntity<Respuesta<PlanSuscripcionDTO>> entidadRespuesta;
+		Respuesta<PlanSuscripcionDTO> respuesta = new Respuesta<>();
 			
 		try 
 		{
-			var usuarioDTO = UsuarioDTO.crear().setNombre(usuario.getNombre()).setApellidos(usuario.getApellidos()).setNumeroIdentificacion(usuario.getNumeroIdentificacion()).setCorreo(usuario.getCorreo()).setClave(usuario.getClave()).setTelefono(usuario.getTelefono());
+			planSuscripcionFachada.registrar(planSuscripcion);
 			
-			Argon2 argon = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
-			String hash = argon.hash(1, 1024, 1, usuarioDTO.getClave());
-			usuarioDTO.setClave(hash);
-			
-			usuarioFachada.registrar(usuarioDTO);
-			
-			respuesta.adicionarMensaje("El usuario se creo sin problemas");
+			respuesta.adicionarMensaje("El planSuscripcion se creo sin problemas");
 			respuesta.setEstado(EstadoRespuestaEnum.EXITOSA);
 				
 			entidadRespuesta = new ResponseEntity<>(respuesta, HttpStatus.ACCEPTED);
@@ -61,7 +54,7 @@ public class UsuarioControlador
 		}
 		catch (Exception excepcion) 
 		{
-			respuesta.adicionarMensaje("Se ha presentado un problema inesperado tratando de registrar la información de un nuevo usuario");
+			respuesta.adicionarMensaje("Se ha presentado un problema inesperado tratando de registrar la información de un nuevo planSuscripcion");
 			respuesta.setEstado(EstadoRespuestaEnum.NO_EXITOSA);
 				
 			entidadRespuesta = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
@@ -73,16 +66,16 @@ public class UsuarioControlador
 	}
 		
 	@PutMapping("/{codigo}")
-	public ResponseEntity<Respuesta<UsuarioDTO>> modificar(@RequestBody UsuarioDTO usuario, @PathVariable int codigo)
+	public ResponseEntity<Respuesta<PlanSuscripcionDTO>> modificar(@RequestBody PlanSuscripcionDTO planSuscripcion, @PathVariable int codigo)
 	{
-		ResponseEntity<Respuesta<UsuarioDTO>> entidadRespuesta;
-		Respuesta<UsuarioDTO> respuesta = new Respuesta<>();
+		ResponseEntity<Respuesta<PlanSuscripcionDTO>> entidadRespuesta;
+		Respuesta<PlanSuscripcionDTO> respuesta = new Respuesta<>();
 			
 		try 
 		{
-			usuarioFachada.modificar(usuario.setCodigo(codigo));
+			planSuscripcionFachada.modificar(planSuscripcion.setCodigo(codigo));
 				
-			respuesta.adicionarMensaje("El usuario se Modifico sin problemas");
+			respuesta.adicionarMensaje("El planSuscripcion se Modifico sin problemas");
 			respuesta.setEstado(EstadoRespuestaEnum.EXITOSA);
 				
 			entidadRespuesta = new ResponseEntity<>(respuesta, HttpStatus.ACCEPTED);
@@ -98,7 +91,7 @@ public class UsuarioControlador
 		}
 		catch (Exception excepcion) 
 		{
-			respuesta.adicionarMensaje("Se ha presentado un problema inesperado tratando de modificar la información de un Usuario");
+			respuesta.adicionarMensaje("Se ha presentado un problema inesperado tratando de modificar la información de un planSuscripcion");
 			respuesta.setEstado(EstadoRespuestaEnum.NO_EXITOSA);
 				
 			entidadRespuesta = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
@@ -109,19 +102,17 @@ public class UsuarioControlador
 		return entidadRespuesta;
 	}
 	   
-	@DeleteMapping("/{correo}")
-	public ResponseEntity<Respuesta<UsuarioDTO>> eliminar(@PathVariable String correo)
+	@DeleteMapping("/{codigo}")
+	public ResponseEntity<Respuesta<PlanSuscripcionDTO>> eliminar(@PathVariable int codigo)
 	{
-	    ResponseEntity<Respuesta<UsuarioDTO>> entidadRespuesta;
-		Respuesta<UsuarioDTO> respuesta = new Respuesta<>();
+	    ResponseEntity<Respuesta<PlanSuscripcionDTO>> entidadRespuesta;
+		Respuesta<PlanSuscripcionDTO> respuesta = new Respuesta<>();
 			
 		try 
 		{
-			List<UsuarioDTO> usuarios = usuarioFachada.consultar(UsuarioDTO.crear().setCorreo(correo));
-			
-			usuarioFachada.eliminar(UsuarioDTO.crear().setCodigo(usuarios.get(0).getCodigo()));
+			planSuscripcionFachada.eliminar(PlanSuscripcionDTO.crear().setCodigo(codigo));
 				
-			respuesta.adicionarMensaje("El usuario se elimino sin problemas");
+			respuesta.adicionarMensaje("El planSuscripcion se elimino sin problemas");
 			respuesta.setEstado(EstadoRespuestaEnum.EXITOSA);
 				
 			entidadRespuesta = new ResponseEntity<>(respuesta, HttpStatus.ACCEPTED);
@@ -137,7 +128,7 @@ public class UsuarioControlador
 		}
 		catch (Exception excepcion) 
 		{
-			respuesta.adicionarMensaje("Se ha presentado un problema inesperado tratando de eliminar la información de un usuario");
+			respuesta.adicionarMensaje("Se ha presentado un problema inesperado tratando de eliminar la información de un planSuscripcion");
 			respuesta.setEstado(EstadoRespuestaEnum.NO_EXITOSA);
 				
 			entidadRespuesta = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
@@ -149,17 +140,17 @@ public class UsuarioControlador
 	}
 	    
 	@GetMapping
-	public ResponseEntity<Respuesta<UsuarioDTO>> consultar()
+	public ResponseEntity<Respuesta<PlanSuscripcionDTO>> consultar()
 	{
-		ResponseEntity<Respuesta<UsuarioDTO>> entidadRespuesta;
-		Respuesta<UsuarioDTO> respuesta = new Respuesta<>();
+		ResponseEntity<Respuesta<PlanSuscripcionDTO>> entidadRespuesta;
+		Respuesta<PlanSuscripcionDTO> respuesta = new Respuesta<>();
 			
 		try 
 		{
-			List<UsuarioDTO> usuarios = usuarioFachada.consultar(UsuarioDTO.crear());
+			List<PlanSuscripcionDTO> planesSuscripcion = planSuscripcionFachada.consultar(PlanSuscripcionDTO.crear());
 				
-			respuesta.setDatos(usuarios);
-			respuesta.adicionarMensaje("Los usuarios se consultaron de forma exitosa.");
+			respuesta.setDatos(planesSuscripcion);
+			respuesta.adicionarMensaje("Los planesSuscripcion se consultaron de forma exitosa.");
 			respuesta.setEstado(EstadoRespuestaEnum.EXITOSA);
 				
 			entidadRespuesta = new ResponseEntity<>(respuesta, HttpStatus.ACCEPTED);
@@ -175,7 +166,7 @@ public class UsuarioControlador
 		}
 		catch (Exception excepcion) 
 		{
-			respuesta.adicionarMensaje("Se ha presentado un problema inesperado tratando de consultar la información de los usuarios");
+			respuesta.adicionarMensaje("Se ha presentado un problema inesperado tratando de consultar la información de los planesSuscripcion");
 			respuesta.setEstado(EstadoRespuestaEnum.NO_EXITOSA);
 				
 			entidadRespuesta = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
@@ -184,53 +175,50 @@ public class UsuarioControlador
 		}
 			
 			return entidadRespuesta;
-	}
-	
-	@GetMapping("/{correo}")
-	public ResponseEntity<Respuesta<UsuarioDTO>> consultar(@PathVariable String correo)
+		}
+		
+	@GetMapping("/{codigo}")
+	public ResponseEntity<Respuesta<PlanSuscripcionDTO>> consultar(@PathVariable int codigo) 
 	{
-		ResponseEntity<Respuesta<UsuarioDTO>> entidadRespuesta;
-		Respuesta<UsuarioDTO> respuesta = new Respuesta<>();
-			
+		ResponseEntity<Respuesta<PlanSuscripcionDTO>> entidadRespuesta;
+		Respuesta<PlanSuscripcionDTO> respuesta = new Respuesta<>();
+
 		try 
 		{
-			List<UsuarioDTO> usuariosDTO = usuarioFachada.consultar(UsuarioDTO.crear());
+			List<PlanSuscripcionDTO> planesSuscripcion = planSuscripcionFachada.consultar(PlanSuscripcionDTO.crear().setCodigo(codigo));
+
+			respuesta.setDatos(planesSuscripcion);
 			
-			var usuarios = new ArrayList<UsuarioDTO>();
-			
-			for(int i = 0; i < usuariosDTO.size(); i++)
+			if (respuesta.getDatos().isEmpty()) 
 			{
-				if(usuariosDTO.get(i).getCorreo() == correo)
-				{
-					usuarios.add(usuariosDTO.get(i));
-				}
+				respuesta.adicionarMensaje("No exite un planSuscripcion con codigo " + codigo);
+			} 
+			else 
+			{
+				respuesta.adicionarMensaje("El planSucripcion se consulto de forma exitosa.");
 			}
-			
-			respuesta.setDatos(usuarios);
-			respuesta.adicionarMensaje("Los usuarios se consultaron de forma exitosa.");
+
 			respuesta.setEstado(EstadoRespuestaEnum.EXITOSA);
-				
+
 			entidadRespuesta = new ResponseEntity<>(respuesta, HttpStatus.ACCEPTED);
-		} 
-		catch (RuntimeException excepcion) 
+		} catch (RuntimeException excepcion) 
 		{
 			respuesta.adicionarMensaje(excepcion.getMessage());
 			respuesta.setEstado(EstadoRespuestaEnum.NO_EXITOSA);
-				
+
 			entidadRespuesta = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
-				
+
 			excepcion.printStackTrace();
-		}
-		catch (Exception excepcion) 
+		} catch (Exception excepcion) 
 		{
-			respuesta.adicionarMensaje("Se ha presentado un problema inesperado tratando de consultar la información de los usuarios");
+			respuesta.adicionarMensaje("Se ha presentado un problema inesperado tratando de consultar la información del plan de suscripcion " + codigo);
 			respuesta.setEstado(EstadoRespuestaEnum.NO_EXITOSA);
-				
+
 			entidadRespuesta = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
-				
+
 			excepcion.printStackTrace();
 		}
-			
-			return entidadRespuesta;
+
+		return entidadRespuesta;
 	}
 }

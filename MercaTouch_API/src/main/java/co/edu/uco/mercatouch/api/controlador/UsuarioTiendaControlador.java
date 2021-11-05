@@ -1,6 +1,5 @@
 package co.edu.uco.mercatouch.api.controlador;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,36 +15,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import co.edu.uco.mercatouch.api.controlador.respuesta.Respuesta;
 import co.edu.uco.mercatouch.api.controlador.respuesta.enumerador.EstadoRespuestaEnum;
-import co.edu.uco.mercatouch.dto.UsuarioDTO;
-import co.edu.uco.mercatouch.negocio.fachada.UsuarioFachada;
-import de.mkammerer.argon2.Argon2;
-import de.mkammerer.argon2.Argon2Factory;
+import co.edu.uco.mercatouch.dto.UsuarioTiendaDTO;
+import co.edu.uco.mercatouch.negocio.fachada.UsuarioTiendaFachada;
 
 @RestController
-@RequestMapping("/api/usuario")
+@RequestMapping("/api/usuariotienda")
 @CrossOrigin(origins = "http://localhost:4200")
-public class UsuarioControlador 
+public class UsuarioTiendaControlador 
 {
 	@Autowired
-	UsuarioFachada usuarioFachada;
+	UsuarioTiendaFachada usuarioTiendaFachada;
 	
 	@PostMapping
-	public ResponseEntity<Respuesta<UsuarioDTO>> crear(@RequestBody UsuarioDTO usuario)
+	public ResponseEntity<Respuesta<UsuarioTiendaDTO>> crear(@RequestBody UsuarioTiendaDTO usuarioTienda)
 	{
-		ResponseEntity<Respuesta<UsuarioDTO>> entidadRespuesta;
-		Respuesta<UsuarioDTO> respuesta = new Respuesta<>();
+		ResponseEntity<Respuesta<UsuarioTiendaDTO>> entidadRespuesta;
+		Respuesta<UsuarioTiendaDTO> respuesta = new Respuesta<>();
 			
 		try 
 		{
-			var usuarioDTO = UsuarioDTO.crear().setNombre(usuario.getNombre()).setApellidos(usuario.getApellidos()).setNumeroIdentificacion(usuario.getNumeroIdentificacion()).setCorreo(usuario.getCorreo()).setClave(usuario.getClave()).setTelefono(usuario.getTelefono());
+			usuarioTiendaFachada.registrar(usuarioTienda);
 			
-			Argon2 argon = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
-			String hash = argon.hash(1, 1024, 1, usuarioDTO.getClave());
-			usuarioDTO.setClave(hash);
-			
-			usuarioFachada.registrar(usuarioDTO);
-			
-			respuesta.adicionarMensaje("El usuario se creo sin problemas");
+			respuesta.adicionarMensaje("El UsuarioTienda se creo sin problemas");
 			respuesta.setEstado(EstadoRespuestaEnum.EXITOSA);
 				
 			entidadRespuesta = new ResponseEntity<>(respuesta, HttpStatus.ACCEPTED);
@@ -61,7 +52,7 @@ public class UsuarioControlador
 		}
 		catch (Exception excepcion) 
 		{
-			respuesta.adicionarMensaje("Se ha presentado un problema inesperado tratando de registrar la información de un nuevo usuario");
+			respuesta.adicionarMensaje("Se ha presentado un problema inesperado tratando de registrar la información de un nuevo usuarioTienda");
 			respuesta.setEstado(EstadoRespuestaEnum.NO_EXITOSA);
 				
 			entidadRespuesta = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
@@ -73,16 +64,16 @@ public class UsuarioControlador
 	}
 		
 	@PutMapping("/{codigo}")
-	public ResponseEntity<Respuesta<UsuarioDTO>> modificar(@RequestBody UsuarioDTO usuario, @PathVariable int codigo)
+	public ResponseEntity<Respuesta<UsuarioTiendaDTO>> modificar(@RequestBody UsuarioTiendaDTO usuarioTienda, @PathVariable int codigo)
 	{
-		ResponseEntity<Respuesta<UsuarioDTO>> entidadRespuesta;
-		Respuesta<UsuarioDTO> respuesta = new Respuesta<>();
+		ResponseEntity<Respuesta<UsuarioTiendaDTO>> entidadRespuesta;
+		Respuesta<UsuarioTiendaDTO> respuesta = new Respuesta<>();
 			
 		try 
 		{
-			usuarioFachada.modificar(usuario.setCodigo(codigo));
+			usuarioTiendaFachada.modificar(usuarioTienda.setCodigo(codigo));
 				
-			respuesta.adicionarMensaje("El usuario se Modifico sin problemas");
+			respuesta.adicionarMensaje("El usuarioTienda se Modifico sin problemas");
 			respuesta.setEstado(EstadoRespuestaEnum.EXITOSA);
 				
 			entidadRespuesta = new ResponseEntity<>(respuesta, HttpStatus.ACCEPTED);
@@ -98,7 +89,7 @@ public class UsuarioControlador
 		}
 		catch (Exception excepcion) 
 		{
-			respuesta.adicionarMensaje("Se ha presentado un problema inesperado tratando de modificar la información de un Usuario");
+			respuesta.adicionarMensaje("Se ha presentado un problema inesperado tratando de modificar la información de un UsuarioTienda");
 			respuesta.setEstado(EstadoRespuestaEnum.NO_EXITOSA);
 				
 			entidadRespuesta = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
@@ -109,19 +100,17 @@ public class UsuarioControlador
 		return entidadRespuesta;
 	}
 	   
-	@DeleteMapping("/{correo}")
-	public ResponseEntity<Respuesta<UsuarioDTO>> eliminar(@PathVariable String correo)
+	@DeleteMapping("/{codigo}")
+	public ResponseEntity<Respuesta<UsuarioTiendaDTO>> eliminar(@PathVariable int codigo)
 	{
-	    ResponseEntity<Respuesta<UsuarioDTO>> entidadRespuesta;
-		Respuesta<UsuarioDTO> respuesta = new Respuesta<>();
+	    ResponseEntity<Respuesta<UsuarioTiendaDTO>> entidadRespuesta;
+		Respuesta<UsuarioTiendaDTO> respuesta = new Respuesta<>();
 			
 		try 
 		{
-			List<UsuarioDTO> usuarios = usuarioFachada.consultar(UsuarioDTO.crear().setCorreo(correo));
-			
-			usuarioFachada.eliminar(UsuarioDTO.crear().setCodigo(usuarios.get(0).getCodigo()));
+			usuarioTiendaFachada.eliminar(UsuarioTiendaDTO.crear().setCodigo(codigo));
 				
-			respuesta.adicionarMensaje("El usuario se elimino sin problemas");
+			respuesta.adicionarMensaje("El usuarioTienda se elimino sin problemas");
 			respuesta.setEstado(EstadoRespuestaEnum.EXITOSA);
 				
 			entidadRespuesta = new ResponseEntity<>(respuesta, HttpStatus.ACCEPTED);
@@ -137,7 +126,7 @@ public class UsuarioControlador
 		}
 		catch (Exception excepcion) 
 		{
-			respuesta.adicionarMensaje("Se ha presentado un problema inesperado tratando de eliminar la información de un usuario");
+			respuesta.adicionarMensaje("Se ha presentado un problema inesperado tratando de eliminar la información de un usuarioTienda");
 			respuesta.setEstado(EstadoRespuestaEnum.NO_EXITOSA);
 				
 			entidadRespuesta = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
@@ -149,17 +138,17 @@ public class UsuarioControlador
 	}
 	    
 	@GetMapping
-	public ResponseEntity<Respuesta<UsuarioDTO>> consultar()
+	public ResponseEntity<Respuesta<UsuarioTiendaDTO>> consultar()
 	{
-		ResponseEntity<Respuesta<UsuarioDTO>> entidadRespuesta;
-		Respuesta<UsuarioDTO> respuesta = new Respuesta<>();
+		ResponseEntity<Respuesta<UsuarioTiendaDTO>> entidadRespuesta;
+		Respuesta<UsuarioTiendaDTO> respuesta = new Respuesta<>();
 			
 		try 
 		{
-			List<UsuarioDTO> usuarios = usuarioFachada.consultar(UsuarioDTO.crear());
+			List<UsuarioTiendaDTO> usuariosTienda = usuarioTiendaFachada.consultar(UsuarioTiendaDTO.crear());
 				
-			respuesta.setDatos(usuarios);
-			respuesta.adicionarMensaje("Los usuarios se consultaron de forma exitosa.");
+			respuesta.setDatos(usuariosTienda);
+			respuesta.adicionarMensaje("Los UsuariosTienda se consultaron de forma exitosa.");
 			respuesta.setEstado(EstadoRespuestaEnum.EXITOSA);
 				
 			entidadRespuesta = new ResponseEntity<>(respuesta, HttpStatus.ACCEPTED);
@@ -175,7 +164,7 @@ public class UsuarioControlador
 		}
 		catch (Exception excepcion) 
 		{
-			respuesta.adicionarMensaje("Se ha presentado un problema inesperado tratando de consultar la información de los usuarios");
+			respuesta.adicionarMensaje("Se ha presentado un problema inesperado tratando de consultar la información de los UsuariosTienda");
 			respuesta.setEstado(EstadoRespuestaEnum.NO_EXITOSA);
 				
 			entidadRespuesta = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
@@ -184,53 +173,50 @@ public class UsuarioControlador
 		}
 			
 			return entidadRespuesta;
-	}
-	
-	@GetMapping("/{correo}")
-	public ResponseEntity<Respuesta<UsuarioDTO>> consultar(@PathVariable String correo)
+		}
+		
+	@GetMapping("/{codigo}")
+	public ResponseEntity<Respuesta<UsuarioTiendaDTO>> consultar(@PathVariable int codigo) 
 	{
-		ResponseEntity<Respuesta<UsuarioDTO>> entidadRespuesta;
-		Respuesta<UsuarioDTO> respuesta = new Respuesta<>();
-			
+		ResponseEntity<Respuesta<UsuarioTiendaDTO>> entidadRespuesta;
+		Respuesta<UsuarioTiendaDTO> respuesta = new Respuesta<>();
+
 		try 
 		{
-			List<UsuarioDTO> usuariosDTO = usuarioFachada.consultar(UsuarioDTO.crear());
+			List<UsuarioTiendaDTO> usuariosTienda = usuarioTiendaFachada.consultar(UsuarioTiendaDTO.crear().setCodigo(codigo));
+
+			respuesta.setDatos(usuariosTienda);
 			
-			var usuarios = new ArrayList<UsuarioDTO>();
-			
-			for(int i = 0; i < usuariosDTO.size(); i++)
+			if (respuesta.getDatos().isEmpty()) 
 			{
-				if(usuariosDTO.get(i).getCorreo() == correo)
-				{
-					usuarios.add(usuariosDTO.get(i));
-				}
+				respuesta.adicionarMensaje("No exite un UsuarioTienda con codigo " + codigo);
+			} 
+			else 
+			{
+				respuesta.adicionarMensaje("El UsuarioTiendaDTO se consulto de forma exitosa.");
 			}
-			
-			respuesta.setDatos(usuarios);
-			respuesta.adicionarMensaje("Los usuarios se consultaron de forma exitosa.");
+
 			respuesta.setEstado(EstadoRespuestaEnum.EXITOSA);
-				
+
 			entidadRespuesta = new ResponseEntity<>(respuesta, HttpStatus.ACCEPTED);
-		} 
-		catch (RuntimeException excepcion) 
+		} catch (RuntimeException excepcion) 
 		{
 			respuesta.adicionarMensaje(excepcion.getMessage());
 			respuesta.setEstado(EstadoRespuestaEnum.NO_EXITOSA);
-				
+
 			entidadRespuesta = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
-				
+
 			excepcion.printStackTrace();
-		}
-		catch (Exception excepcion) 
+		} catch (Exception excepcion) 
 		{
-			respuesta.adicionarMensaje("Se ha presentado un problema inesperado tratando de consultar la información de los usuarios");
+			respuesta.adicionarMensaje("Se ha presentado un problema inesperado tratando de consultar la información del UsuarioTienda " + codigo);
 			respuesta.setEstado(EstadoRespuestaEnum.NO_EXITOSA);
-				
+
 			entidadRespuesta = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
-				
+
 			excepcion.printStackTrace();
 		}
-			
-			return entidadRespuesta;
+
+		return entidadRespuesta;
 	}
 }
