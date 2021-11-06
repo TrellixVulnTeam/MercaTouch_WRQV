@@ -2,17 +2,19 @@ package co.edu.uco.mercatouch.api.controlador;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import co.edu.uco.mercatouch.api.controlador.respuesta.Respuesta;
 import co.edu.uco.mercatouch.api.controlador.respuesta.enumerador.EstadoRespuestaEnum;
 import co.edu.uco.mercatouch.dto.CiudadDTO;
-import co.edu.uco.mercatouch.dto.DepartamentoDTO;
 import co.edu.uco.mercatouch.negocio.fachada.CiudadFachada;
 import co.edu.uco.mercatouch.negocio.fachada.DepartamentoFachada;
 
@@ -27,7 +29,7 @@ public class CiudadControlador
 	@Autowired
 	DepartamentoFachada departamentoFachada;
 	
-	/*@GetMapping
+	@GetMapping
 	public ResponseEntity<Respuesta<CiudadDTO>> consultar()
 	{
 		ResponseEntity<Respuesta<CiudadDTO>> entidadRespuesta;
@@ -63,10 +65,10 @@ public class CiudadControlador
 		}
 		
 		return entidadRespuesta;
-	}*/
+	}
 	
-	@GetMapping
-	public ResponseEntity<Respuesta<CiudadDTO>> consultar()
+	@GetMapping("/{departamento}")
+	public ResponseEntity<Respuesta<CiudadDTO>> consultar(@PathVariable String departamento)
 	{
 		ResponseEntity<Respuesta<CiudadDTO>> entidadRespuesta;
 		Respuesta<CiudadDTO> respuesta = new Respuesta<>();
@@ -74,21 +76,15 @@ public class CiudadControlador
 		try 
 		{
 			List<CiudadDTO> ciudades = ciudadFachada.consultar(CiudadDTO.crear());
-			
-			CiudadDTO ciudad = CiudadDTO.crear(0, "Rionegro", DepartamentoDTO.crear(0, "Antioquia"));
-			
+			var ciudadesDTO = new ArrayList<CiudadDTO>();
 			
 			for(int i = 0; i < ciudades.size(); i++)
 			{
-				if(ciudades.get(i).getNombre().equals(ciudad.getNombre()) && ciudades.get(i).getDepartamento().getNombre().equals(ciudad.getDepartamento().getNombre())) 
+				if(ciudades.get(i).getDepartamento().getNombre().equals(departamento)) 
 				{
-					ciudad = ciudades.get(i);
+					ciudadesDTO.add(ciudades.get(i));
 				}
 			}
-			
-			var ciudadesDTO = new ArrayList<CiudadDTO>();
-			
-			ciudadesDTO.add(ciudad);
 				
 			respuesta.setDatos(ciudadesDTO);
 			respuesta.adicionarMensaje("Las Ciudades se consultaron de forma exitosa.");

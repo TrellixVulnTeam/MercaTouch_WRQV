@@ -16,11 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 import co.edu.uco.mercatouch.api.controlador.respuesta.Respuesta;
 import co.edu.uco.mercatouch.api.controlador.respuesta.enumerador.EstadoRespuestaEnum;
 import co.edu.uco.mercatouch.dto.CiudadDTO;
+import co.edu.uco.mercatouch.dto.PerfilDTO;
 import co.edu.uco.mercatouch.dto.PlanSuscripcionDTO;
 import co.edu.uco.mercatouch.dto.TiendaDTO;
 import co.edu.uco.mercatouch.dto.UsuarioDTO;
 import co.edu.uco.mercatouch.dto.UsuarioTiendaDTO;
 import co.edu.uco.mercatouch.negocio.fachada.CiudadFachada;
+import co.edu.uco.mercatouch.negocio.fachada.PerfilFachada;
 import co.edu.uco.mercatouch.negocio.fachada.PlanSuscripcionFachada;
 import co.edu.uco.mercatouch.negocio.fachada.TiendaFachada;
 import co.edu.uco.mercatouch.negocio.fachada.UsuarioFachada;
@@ -45,6 +47,9 @@ public class TiendaControlador
 	
 	@Autowired
 	UsuarioFachada usuarioFachada;
+	
+	@Autowired
+	PerfilFachada perfilFachada;
 	
 	@PostMapping("/{correo}")
 	public ResponseEntity<Respuesta<TiendaDTO>> crear(@RequestBody TiendaDTO tienda, @PathVariable String correo)
@@ -90,6 +95,18 @@ public class TiendaControlador
 					usuario = usuariosDTO.get(i);
 				}
 			}
+			
+			List<PerfilDTO> perfiles = perfilFachada.consultar(PerfilDTO.crear());
+			
+			for(int i = 0; i < perfiles.size(); i++)
+			{
+				if(perfiles.get(i).getNombre().equals("Administrador"))
+				{
+					usuario.setPerfil(perfiles.get(i));
+				}
+			}
+			
+			usuarioFachada.modificar(usuario);
 			
 			List<TiendaDTO> tiendasDTO = tiendaFachada.consultar(TiendaDTO.crear());
 			

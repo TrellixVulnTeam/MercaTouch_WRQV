@@ -213,7 +213,7 @@ public class UsuarioControlador
 			
 			for(int i = 0; i < usuariosDTO.size(); i++)
 			{
-				if(usuariosDTO.get(i).getCorreo() == correo)
+				if(usuariosDTO.get(i).getCorreo().equals(correo))
 				{
 					usuarios.add(usuariosDTO.get(i));
 				}
