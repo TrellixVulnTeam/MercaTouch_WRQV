@@ -46,6 +46,13 @@ export class HomeComponent implements OnInit
 
   onRegistrarUsuario()
   {
+    this.campoRequeridoNombre = false;
+    this.campoRequeridoApellidos = false;
+    this.campoRequeridoIdentificacion = false;
+    this.campoRequeridotelefono = false;
+    this.campoRequeridoCorreo = false;
+    this.campoRequeridoClave = false;
+    this.confirmacionCampos = false;
     this.confirmacionLoading = true;
 
     this.usuario.nombre = this.formularioRegistro.get('registroNombre')?.value;
@@ -55,6 +62,7 @@ export class HomeComponent implements OnInit
     this.usuario.correo = this.formularioRegistro.get('registroCorreo')?.value;
     this.usuario.clave = this.formularioRegistro.get('registroClave')?.value;
     this.usuario.puntuacion = 0;
+    this.usuario.perfil.nombre = 'Usuario';
     this.confirmarClave = this.formularioRegistro.get('registroConfirmarClave')?.value;
 
     if(this.usuario.nombre === '')
@@ -71,16 +79,16 @@ export class HomeComponent implements OnInit
       this.confirmacionCampos = true;
     }
 
-    if(this.usuario.numeroIdentificacion === 0)
+    if(this.usuario.telefono === 0)
     {
-      this.campoRequeridoIdentificacion = true;
+      this.campoRequeridotelefono = true;
       this.confirmacionLoading = false;
       this.confirmacionCampos = true;
     }
 
-    if(this.usuario.telefono === 0)
+    if(this.usuario.numeroIdentificacion === 0)
     {
-      this.campoRequeridotelefono = true;
+      this.campoRequeridoIdentificacion = true;
       this.confirmacionLoading = false;
       this.confirmacionCampos = true;
     }
@@ -119,7 +127,6 @@ export class HomeComponent implements OnInit
 
   crearUsuario(usuario: Usuario) 
   {
-    console.log();
     return this.http.post<Usuario>("http://localhost:8080/api/usuario", usuario);
   }
 
@@ -136,15 +143,9 @@ export class HomeComponent implements OnInit
 
     this.verificarCredencialesUsuario(this.usuarioAuth).subscribe((resp: ResponseReq) => 
     {
-      if(resp.mensajes[0] === 'OK USER')
+      if(resp.mensajes[0] === 'OK')
       {
         window.location.href= '/homeuser';
-        this.confirmacionLoading = false;
-        localStorage.setItem('abcd', this.usuarioAuth.correo);
-      }
-      else if(resp.mensajes[0] === 'OK ADMIN')
-      {
-        window.location.href= '/homeadmin';
         this.confirmacionLoading = false;
         localStorage.setItem('abcd', this.usuarioAuth.correo);
       }
@@ -176,6 +177,19 @@ export class Usuario implements ResponseReq
   correo: string = '';
   clave: string = '';
   puntuacion: number = 0;
+  perfil: Perfil = new Perfil();
+  estado!: string;
+  mensajes!: string[];
+  datos!: Usuario[];
+  constructor() 
+  {
+
+  }
+}
+
+export class Perfil implements ResponseReq
+{
+  nombre: string = '';
   estado!: string;
   mensajes!: string[];
   datos!: Usuario[];

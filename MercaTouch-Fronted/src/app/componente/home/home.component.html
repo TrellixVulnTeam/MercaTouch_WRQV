@@ -108,7 +108,7 @@
                         <input type="password" class="form-control" id="contraseña" placeholder="contraseña" formControlName="registroClave" required>
                         <label for="floatingPassword">Contraseña</label>
                     </div>
-                    <div class="alert alert-warning d-flex align-items-center" role="alert" *ngIf="false">
+                    <div class="alert alert-warning d-flex align-items-center" role="alert" *ngIf="campoRequeridoClave">
                         <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                         <div>
                           Este campo es obligatorio
