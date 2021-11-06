@@ -102,18 +102,22 @@ export class HeaderComponent implements OnInit
     if(this.opcionSeleccionado4.toString() === 'Un Mes')
     {
       this.tienda.planSuscripcion.tiempoSuscripcion = 1;
+      this.tienda.planSuscripcion.precio = 50000;
     }
     else if(this.opcionSeleccionado4.toString() === 'Tres Meses')
     {
       this.tienda.planSuscripcion.tiempoSuscripcion = 3;
+      this.tienda.planSuscripcion.precio = 100000;
     }
     else if(this.opcionSeleccionado4.toString() === 'Seis Meses')
     {
       this.tienda.planSuscripcion.tiempoSuscripcion = 6;
+      this.tienda.planSuscripcion.precio = 200000;
     }
     else if(this.opcionSeleccionado4.toString() === 'Un Año')
     {
       this.tienda.planSuscripcion.tiempoSuscripcion = 12;
+      this.tienda.planSuscripcion.precio = 400000;
     }
 
     this.tienda.planSuscripcion.fechaRegistro = new Date();
@@ -221,7 +225,7 @@ export class PlanSuscripcion implements ResponseReqPlanSuscripcion
 {
   nombre: string = '';
   descripcion: string = '';
-  precio: string = '';
+  precio: number = 0;
   tiempoSuscripcion: number = 0;
   fechaRegistro: Date = new Date();
   
