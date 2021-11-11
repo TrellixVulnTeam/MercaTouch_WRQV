@@ -76,7 +76,7 @@ public class TiendaControlador
 				if(ciudades.get(i).getNombre().equals(tienda.getCiudad().getNombre()) && ciudades.get(i).getDepartamento().getNombre().equals(tienda.getCiudad().getDepartamento().getNombre()))
 				{
 					ciudad = ciudades.get(i);
-					
+
 				}
 			}
 			
